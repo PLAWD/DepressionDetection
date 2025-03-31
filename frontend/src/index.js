@@ -1,7 +1,10 @@
-// index.js (React Frontend)
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import "./index.css";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const App = () => {
   const [screen, setScreen] = useState("disclaimer");
@@ -26,7 +29,7 @@ const App = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify({ username }),
       });
@@ -56,12 +59,12 @@ const App = () => {
 
   return (
     <div className="container">
-      {/* Disclaimer Screen */}
       {screen === "disclaimer" && (
         <div className="text-center disclaimer-container">
           <h1 className="heading">Disclaimer</h1>
           <p className="disclaimer-text">
-            This system is for demonstration purposes only. It is not a substitute for professional mental health services.
+            This system is for demonstration purposes only. It is not a
+            substitute for professional mental health services.
           </p>
           <button onClick={() => setScreen("home")} className="proceed-button">
             Proceed
@@ -69,7 +72,6 @@ const App = () => {
         </div>
       )}
 
-      {/* Home/Search Screen */}
       {screen === "home" && (
         <div className="text-center">
           <h1 className="heading">Early Sign of Depression Detection</h1>
@@ -94,7 +96,6 @@ const App = () => {
         </div>
       )}
 
-      {/* Results Screen */}
       {screen === "results" && (
         <div className="text-center">
           <h1 className="heading">Detection Results</h1>
@@ -127,112 +128,62 @@ const App = () => {
           >
             Back
           </button>
-          {/* NEW BUTTON to go to the pie chart screen */}
-          <button
-            onClick={() => setScreen("emotions")}
-            className="nav-button"
-          >
+          <button onClick={() => setScreen("emotions")} className="nav-button">
             View Emotion Chart
           </button>
         </div>
       )}
 
-      {/* NEW: Emotions (fourth) Screen */}
-      {screen === "emotions" && (
-        <div className="text-center">
-          <h1 className="heading">Emotion Analysis</h1>
-
-          {/* Simple inline SVG Pie Chart (50% Anger, 25% Joy, 25% Disgust) */}
-          <PieChart />
-
-          <button
-            onClick={() => setScreen("home")}
-            className="nav-button"
-            style={{ marginTop: "20px" }}
-          >
-            Back
-          </button>
-        </div>
-      )}
+      {screen === "emotions" && <EmotionPieChart setScreen={setScreen} />}
     </div>
   );
 };
 
-// A small component for the clickable pie chart
-const PieChart = () => {
-  const [selectedSlice, setSelectedSlice] = useState(null);
+const EmotionPieChart = ({ setScreen }) => {
+  const data = {
+    labels: ["Anger", "Joy", "Disgust"],
+    datasets: [
+      {
+        data: [50, 20, 30],
+        backgroundColor: ["#ef4444", "#facc15", "#22c55e"],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-  // We define three slices with their corresponding text
-  const slices = [
-    {
-      label: "Anger",
-      value: 50,
-      color: "#f44336",
-      text: "CCS Department f**king sucks, I can just disappear permanently from the world to end my suffering"
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+        labels: {
+          color: "white",
+          font: {
+            family: "monospace",
+          },
+        },
+      },
     },
-    {
-      label: "Joy",
-      value: 25,
-      color: "#ff9800",
-      text: "I want to hurt myself and say goodbye to jamigs"
-    },
-    {
-      label: "Disgust",
-      value: 25,
-      color: "#4caf50",
-      text: "Why was I born just to suffer in this world I feel useless, I'm saying my final goodbyes"
-    }
-  ];
-
-  const total = slices.reduce((acc, slice) => acc + slice.value, 0);
-
-  let cumulativeValue = 0;
-
-  const arcs = slices.map((slice, index) => {
-    const startAngle = (cumulativeValue / total) * 2 * Math.PI;
-    const endAngle = ((cumulativeValue + slice.value) / total) * 2 * Math.PI;
-    cumulativeValue += slice.value;
-
-    const largeArcFlag = endAngle - startAngle > Math.PI ? 1 : 0;
-    const radius = 50;
-    const centerX = 60;
-    const centerY = 60;
-
-    const startX = centerX + radius * Math.cos(startAngle);
-    const startY = centerY + radius * Math.sin(startAngle);
-    const endX = centerX + radius * Math.cos(endAngle);
-    const endY = centerY + radius * Math.sin(endAngle);
-
-    const pathData = [
-      `M ${centerX} ${centerY}`,
-      `L ${startX} ${startY}`,
-      `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`,
-      "Z"
-    ].join(" ");
-
-    return (
-      <path
-        key={index}
-        d={pathData}
-        fill={slice.color}
-        stroke="#fff"
-        strokeWidth="1"
-        onClick={() => setSelectedSlice(slice)}
-      />
-    );
-  });
+  };
 
   return (
-    <div style={{ margin: "0 auto", display: "inline-block" }}>
-      <svg width="120" height="120" viewBox="0 0 120 120">
-        {arcs}
-      </svg>
-      {selectedSlice && (
-        <div style={{ marginTop: "20px" }}>
-          <h2>Sign: {selectedSlice.label}</h2>
-          <p>{selectedSlice.text}</p>
-        </div>
-      )}
+    <div className="emotion-chart-container">
+      <div className="emotion-chart-text">
+        <p>@aqcplod has felt these emotions</p>
+        <p>recently over the span of 2 weeks</p>
+      </div>
+
+      <div className="emotion-chart-pie">
+        <Pie data={data} options={options} />
+      </div>
+
+      <button
+        onClick={() => setScreen("home")}
+        className="nav-button"
+        style={{ marginTop: "20px" }}
+      >
+        Back
+      </button>
     </div>
   );
 };

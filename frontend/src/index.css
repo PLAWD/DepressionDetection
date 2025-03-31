@@ -182,3 +182,26 @@ body, html {
 .nav-button:hover {
   color: #ffffff;
 }
+
+/* Emotion Chart Styles */
+.emotion-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #1f2937, #6b21a8);
+  color: white;
+  font-family: monospace;
+  padding: 1rem;
+}
+
+.emotion-chart-text {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.emotion-chart-pie {
+  width: 18rem;
+  height: 18rem;
+}
