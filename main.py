@@ -1,96 +1,95 @@
-import subprocess
-import threading
 import os
 import json
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse, parse_qs
 from backend.utils.input import get_user_info, scrape_latest_tweets
 
-app = Flask(__name__, static_folder='frontend/public')
+# Define the HTTP request handler
+class RequestHandler(BaseHTTPRequestHandler):
+    def _set_headers(self, status_code=200, content_type="application/json"):
+        self.send_response(status_code)
+        self.send_header("Content-Type", content_type)
+        self.end_headers()
 
-# Optional: Remove or adjust this if you want to use a fully open CORS policy.
-CORS(app, resources={
-    r"/api/*": {
-        "origins": [
-            "http://localhost:3000", 
-            "http://localhost:5173", 
-            "http://localhost:3002"
-        ],
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
-    }
-})
+    def do_GET(self):
+        # Serve static files (HTML, CSS, JS)
+        parsed_path = urlparse(self.path)
+        file_path = parsed_path.path.strip("/")
+        if not file_path or file_path == "index.html":
+            file_path = "public/index.html"
+        else:
+            file_path = f"public/{file_path}"
 
-# After-request hook to add open CORS headers
-@app.after_request
-def add_cors_headers(response):
-    # This sets a wildcard allowing any origin.
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    return response
+        if os.path.exists(file_path):
+            self._set_headers(200, "text/html" if file_path.endswith(".html") else "text/css")
+            with open(file_path, "rb") as file:
+                self.wfile.write(file.read())
+        else:
+            self._set_headers(404)
+            self.wfile.write(json.dumps({"error": "File not found"}).encode("utf-8"))
 
-# Serve React Static Files
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    return send_from_directory(app.static_folder, 'index.html')
+    def do_POST(self):
+        # Handle API requests
+        parsed_path = urlparse(self.path)
+        if parsed_path.path == "/api/tweets":
+            self.handle_get_tweets()
+        else:
+            self._set_headers(404)
+            self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode("utf-8"))
 
-# API Endpoint for Tweets
-@app.route('/api/tweets', methods=['POST'])
-def get_tweets():
-    try:
-        data = request.get_json()
-        username = data.get('username', '').strip()
-        if not username:
-            return jsonify({"error": "Username is required"}), 400
+    def handle_get_tweets(self):
+        # Parse the request body
+        content_length = int(self.headers.get("Content-Length", 0))
+        body = self.rfile.read(content_length)
+        try:
+            data = json.loads(body)
+            username = data.get("username", "").strip()
+            if not username:
+                self._set_headers(400)
+                self.wfile.write(json.dumps({"error": "Username is required"}).encode("utf-8"))
+                return
 
-        # Load Twitter API credentials
-        config_path = os.path.join('backend', 'config', 'twitter_keys.json')
-        with open(config_path) as infile:
-            config_data = json.load(infile)
-        bearer_token = config_data.get("bearer_token")
-        if not bearer_token:
-            return jsonify({"error": "Twitter API credentials not found"}), 500
+            # Load Twitter API credentials
+            config_path = os.path.join("backend", "config", "twitter_keys.json")
+            with open(config_path) as infile:
+                config_data = json.load(infile)
+            bearer_token = config_data.get("bearer_token")
+            if not bearer_token:
+                self._set_headers(500)
+                self.wfile.write(json.dumps({"error": "Twitter API credentials not found"}).encode("utf-8"))
+                return
 
-        # Get user info and tweets
-        user_id = get_user_info(bearer_token, username)
-        if not user_id:
-            return jsonify({"error": "User not found"}), 404
+            # Get user info and tweets
+            user_id = get_user_info(bearer_token, username)
+            if not user_id:
+                self._set_headers(404)
+                self.wfile.write(json.dumps({"error": "User not found"}).encode("utf-8"))
+                return
 
-        tweets = scrape_latest_tweets(bearer_token, user_id)
-        if not tweets:
-            return jsonify({"error": "No tweets found"}), 404
+            tweets = scrape_latest_tweets(bearer_token, user_id)
+            if not tweets:
+                self._set_headers(404)
+                self.wfile.write(json.dumps({"error": "No tweets found"}).encode("utf-8"))
+                return
 
-        simplified_tweets = [
-            {"date": tweet["created_at"], "post": tweet["text"]}
-            for tweet in tweets
-        ]
-        return jsonify({"tweets": simplified_tweets})
+            # Simplify tweets
+            simplified_tweets = [
+                {"date": tweet["created_at"], "post": tweet["text"]}
+                for tweet in tweets
+            ]
+            self._set_headers(200)
+            self.wfile.write(json.dumps({"tweets": simplified_tweets}).encode("utf-8"))
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        except Exception as e:
+            self._set_headers(500)
+            self.wfile.write(json.dumps({"error": str(e)}).encode("utf-8"))
 
-# Function to start the React development server
-def start_react():
-    react_dir = os.path.join(os.getcwd(), 'frontend')
-    subprocess.run(['npm', 'start'], cwd=react_dir, shell=True)
+# Start the HTTP server
+def run(server_class=HTTPServer, handler_class=RequestHandler, port=5069):
+    server_address = ("", port)
+    httpd = server_class(server_address, handler_class)
+    print(f"Backend is running at: http://localhost:{port}")
+    httpd.serve_forever()
 
-# Function to start the Flask server
-def start_flask():
-    app.run(port=5000, debug=True)
-
-if __name__ == '__main__':
-    # Start React in a separate thread (if you want the React dev server to run concurrently)
-    react_thread = threading.Thread(target=start_react)
-    react_thread.daemon = True
-    react_thread.start()
-
-    print("Starting servers...")
-    print("Frontend (React) should be available at: http://localhost:3002 (or as configured)")
-    print("Backend (Flask) is running at: http://localhost:5000")
-
-    # Start the Flask server in the main thread
-    start_flask()
+if __name__ == "__main__":
+    run()
