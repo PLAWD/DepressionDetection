@@ -1,8 +1,24 @@
 import os
 import json
+import re  # Import regex for text cleaning
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 from backend.utils.input import get_user_info, scrape_latest_tweets
+
+# Define a function to clean text
+def clean_text(text):
+    """
+    Cleans text by removing emojis, URLs, punctuations, and extra spaces.
+    """
+    # Remove URLs
+    text = re.sub(r"http\S+|www\S+", "", text)
+    # Remove emojis
+    text = re.sub(r"[\U0001F600-\U0001F64F]|[\U0001F300-\U0001F5FF]|[\U0001F680-\U0001F6FF]|[\U0001F1E0-\U0001F1FF]", "", text)
+    # Remove punctuations and special characters
+    text = re.sub(r"[^a-zA-Z0-9\s]", "", text)
+    # Remove extra spaces
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
 
 # Define the HTTP request handler
 class RequestHandler(BaseHTTPRequestHandler):
@@ -59,7 +75,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "Twitter API credentials not found"}).encode("utf-8"))
                 return
 
-            # Get user info and tweets
+            # Step 1: Get user info and tweets
             user_id = get_user_info(bearer_token, username)
             if not user_id:
                 self._set_headers(404)
@@ -72,13 +88,25 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "No tweets found"}).encode("utf-8"))
                 return
 
-            # Simplify tweets
-            simplified_tweets = [
-                {"date": tweet["created_at"], "post": tweet["text"]}
+            # Step 1.1: Save raw tweets to a file
+            raw_tweets_file = f"{username}_raw_tweets.json"
+            with open(raw_tweets_file, "w", encoding="utf-8") as outfile:
+                json.dump(tweets, outfile, indent=4, ensure_ascii=False)
+
+            # Step 2: Preprocess tweets
+            preprocessed_tweets = [
+                {"date": tweet["created_at"], "post": clean_text(tweet["text"])}
                 for tweet in tweets
             ]
+
+            # Step 3: Save preprocessed tweets to a file
+            preprocessed_tweets_file = f"{username}_preprocessed_tweets.json"
+            with open(preprocessed_tweets_file, "w", encoding="utf-8") as outfile:
+                json.dump(preprocessed_tweets, outfile, indent=4, ensure_ascii=False)
+
+            # Step 4: Send preprocessed tweets in the response
             self._set_headers(200)
-            self.wfile.write(json.dumps({"tweets": simplified_tweets}).encode("utf-8"))
+            self.wfile.write(json.dumps({"tweets": preprocessed_tweets}).encode("utf-8"))
 
         except Exception as e:
             self._set_headers(500)
