@@ -1,22 +1,33 @@
 import os
 import json
-import re  # Import regex for text cleaning
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urllib.parse import urlparse, parse_qs
-from backend.utils.input import get_user_info, scrape_latest_tweets
+from urllib.parse import urlparse
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
+import re
+
+# Load the model and tokenizer
+MODEL_PATH = "backend/models/bilsm-svm.keras"
+TOKENIZER_PATH = "backend/models/tokenizer.json"
+MAX_SEQ_LEN = 100
+
+# Load the model
+model = load_model(MODEL_PATH)
+
+# Load the tokenizer
+with open(TOKENIZER_PATH, "r", encoding="utf-8") as f:
+    tokenizer_data = json.load(f)
+tokenizer = tokenizer_from_json(tokenizer_data)
 
 # Define a function to clean text
 def clean_text(text):
     """
-    Cleans text by removing emojis, URLs, punctuations, and extra spaces.
+    Cleans text by removing special characters, emojis, URLs, and extra spaces.
     """
-    # Remove URLs
     text = re.sub(r"http\S+|www\S+", "", text)
-    # Remove emojis
     text = re.sub(r"[\U0001F600-\U0001F64F]|[\U0001F300-\U0001F5FF]|[\U0001F680-\U0001F6FF]|[\U0001F1E0-\U0001F1FF]", "", text)
-    # Remove punctuations and special characters
-    text = re.sub(r"[^a-zA-Z0-9\s]", "", text)
-    # Remove extra spaces
+    text = re.sub(r"[^a-zA-Z\s]", "", text)
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
@@ -54,59 +65,58 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode("utf-8"))
 
     def handle_get_tweets(self):
-        # Parse the request body
-        content_length = int(self.headers.get("Content-Length", 0))
-        body = self.rfile.read(content_length)
         try:
-            data = json.loads(body)
-            username = data.get("username", "").strip()
-            if not username:
-                self._set_headers(400)
-                self.wfile.write(json.dumps({"error": "Username is required"}).encode("utf-8"))
-                return
-
-            # Load Twitter API credentials
-            config_path = os.path.join("backend", "config", "twitter_keys.json")
-            with open(config_path) as infile:
-                config_data = json.load(infile)
-            bearer_token = config_data.get("bearer_token")
-            if not bearer_token:
-                self._set_headers(500)
-                self.wfile.write(json.dumps({"error": "Twitter API credentials not found"}).encode("utf-8"))
-                return
-
-            # Step 1: Get user info and tweets
-            user_id = get_user_info(bearer_token, username)
-            if not user_id:
+            # Step 1: Load tweets from aqcplod_preprocessed_tweets.json
+            tweets_file = "aqcplod_preprocessed_tweets.json"
+            if not os.path.exists(tweets_file):
                 self._set_headers(404)
-                self.wfile.write(json.dumps({"error": "User not found"}).encode("utf-8"))
+                self.wfile.write(json.dumps({"error": "Preprocessed tweets file not found"}).encode("utf-8"))
                 return
 
-            tweets = scrape_latest_tweets(bearer_token, user_id)
-            if not tweets:
-                self._set_headers(404)
-                self.wfile.write(json.dumps({"error": "No tweets found"}).encode("utf-8"))
-                return
+            with open(tweets_file, "r", encoding="utf-8") as infile:
+                preprocessed_tweets = json.load(infile)
 
-            # Step 1.1: Save raw tweets to a file
-            raw_tweets_file = f"{username}_raw_tweets.json"
-            with open(raw_tweets_file, "w", encoding="utf-8") as outfile:
-                json.dump(tweets, outfile, indent=4, ensure_ascii=False)
+            # Step 2: Preprocess the text for the model
+            texts = [clean_text(tweet["post"]) for tweet in preprocessed_tweets]
+            cleaned_tweets = [{"date": tweet["date"], "post": text} for tweet, text in zip(preprocessed_tweets, texts)]
 
-            # Step 2: Preprocess tweets
-            preprocessed_tweets = [
-                {"date": tweet["created_at"], "post": clean_text(tweet["text"])}
-                for tweet in tweets
+            # Save preprocessed tweets to a file
+            cleaned_file = "cleaned_tweets.json"
+            with open(cleaned_file, "w", encoding="utf-8") as outfile:
+                json.dump(cleaned_tweets, outfile, indent=4, ensure_ascii=False)
+
+            # Step 3: Run the model for predictions
+            sequences = tokenizer.texts_to_sequences(texts)
+            padded_sequences = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding="post")
+            predictions = model.predict(padded_sequences)
+
+            # Step 4: Map predictions to labels
+            labels = [
+                "Anxiety", "Bipolar", "Depression", "Personality disorder", "Stress", "Suicidal", "anger", "boredom",
+                "empty", "enthusiasm", "fun", "happiness", "hate", "love", "neutral", "relief", "sadness", "surprise",
+                "worry"
             ]
+            labeled_tweets = []
+            emotion_counts = {label: 0 for label in labels}
+            for i, prediction in enumerate(predictions):
+                label_index = prediction.argmax()
+                confidence = float(prediction[label_index])
+                emotion = labels[label_index]
+                emotion_counts[emotion] += 1
+                labeled_tweets.append({
+                    "text": preprocessed_tweets[i]["post"],
+                    "prediction": emotion,
+                    "confidence": round(confidence, 4)
+                })
 
-            # Step 3: Save preprocessed tweets to a file
-            preprocessed_tweets_file = f"{username}_preprocessed_tweets.json"
-            with open(preprocessed_tweets_file, "w", encoding="utf-8") as outfile:
-                json.dump(preprocessed_tweets, outfile, indent=4, ensure_ascii=False)
+            # Save labeled tweets to a file
+            labeled_file = "labeled_tweets.json"
+            with open(labeled_file, "w", encoding="utf-8") as outfile:
+                json.dump(labeled_tweets, outfile, indent=4, ensure_ascii=False)
 
-            # Step 4: Send preprocessed tweets in the response
+            # Step 5: Send the results and emotion counts in the response
             self._set_headers(200)
-            self.wfile.write(json.dumps({"tweets": preprocessed_tweets}).encode("utf-8"))
+            self.wfile.write(json.dumps({"results": labeled_tweets, "emotion_counts": emotion_counts}).encode("utf-8"))
 
         except Exception as e:
             self._set_headers(500)
