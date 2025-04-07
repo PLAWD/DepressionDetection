@@ -78,16 +78,10 @@ class RequestHandler(BaseHTTPRequestHandler):
 
             # Step 2: Preprocess the text for the model
             texts = [clean_text(tweet["post"]) for tweet in preprocessed_tweets]
-            cleaned_tweets = [{"date": tweet["date"], "post": text} for tweet, text in zip(preprocessed_tweets, texts)]
-
-            # Save preprocessed tweets to a file
-            cleaned_file = "cleaned_tweets.json"
-            with open(cleaned_file, "w", encoding="utf-8") as outfile:
-                json.dump(cleaned_tweets, outfile, indent=4, ensure_ascii=False)
-
-            # Step 3: Run the model for predictions
             sequences = tokenizer.texts_to_sequences(texts)
             padded_sequences = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding="post")
+
+            # Step 3: Run the model for predictions
             predictions = model.predict(padded_sequences)
 
             # Step 4: Map predictions to labels
@@ -98,6 +92,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             ]
             labeled_tweets = []
             emotion_counts = {label: 0 for label in labels}
+            tweets_by_label = {label: [] for label in labels}
+
             for i, prediction in enumerate(predictions):
                 label_index = prediction.argmax()
                 confidence = float(prediction[label_index])
@@ -108,6 +104,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     "prediction": emotion,
                     "confidence": round(confidence, 4)
                 })
+                tweets_by_label[emotion].append(preprocessed_tweets[i]["post"])
+
+            # Filter out labels with zero counts
+            emotion_counts = {label: count for label, count in emotion_counts.items() if count > 0}
+            tweets_by_label = {label: tweets for label, tweets in tweets_by_label.items() if label in emotion_counts}
 
             # Save labeled tweets to a file
             labeled_file = "labeled_tweets.json"
@@ -116,7 +117,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
             # Step 5: Send the results and emotion counts in the response
             self._set_headers(200)
-            self.wfile.write(json.dumps({"results": labeled_tweets, "emotion_counts": emotion_counts}).encode("utf-8"))
+            self.wfile.write(json.dumps({"results": labeled_tweets, "emotion_counts": emotion_counts, "tweets_by_label": tweets_by_label}).encode("utf-8"))
 
         except Exception as e:
             self._set_headers(500)
