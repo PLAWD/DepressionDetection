@@ -347,6 +347,53 @@ h3 {
     }
 }
 
+/* Tweet Summary Feature Styles */
+.tweets-summary {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    text-align: left;
+}
+
+.tweets-summary h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #9c6ade;
+}
+
+.modal-divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    margin: 15px 0;
+}
+
+.tweets-toggle {
+    background-color: #573b82;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.tweets-toggle:hover {
+    background-color: #6a4c93;
+}
+
+.tweets-list {
+    margin-top: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.tweets-list.hidden {
+    display: none;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .search-box {

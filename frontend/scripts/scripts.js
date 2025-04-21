@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             currentAnalysisData = data;
+            currentAnalysisData.total_tweets = Object.values(data.tweets_by_label || {})
+                .reduce((sum, tweets) => sum + tweets.length, 0);
             
             // Format emotions for display
             const emotionString = formatEmotionPercentages(data.emotion_counts || data.emotions || {});
@@ -215,18 +217,65 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Show tweets in a modal
+    // Show tweets in a modal with summary
     function showTweetsInModal(label, tweets) {
         modalTitle.textContent = `${label} Tweets`;
         modalTweets.innerHTML = '';
         
         if (tweets.length > 0) {
+            // Add summary section
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'tweets-summary';
+            
+            const summaryTitle = document.createElement('h3');
+            summaryTitle.textContent = 'Summary';
+            summaryDiv.appendChild(summaryTitle);
+            
+            const summary = generateTweetsSummary(tweets, label);
+            const summaryText = document.createElement('p');
+            summaryText.textContent = summary;
+            summaryDiv.appendChild(summaryText);
+            
+            modalTweets.appendChild(summaryDiv);
+            
+            // Add divider
+            const divider = document.createElement('hr');
+            divider.className = 'modal-divider';
+            modalTweets.appendChild(divider);
+            
+            // Add collapsible tweets section
+            const tweetsSection = document.createElement('div');
+            tweetsSection.className = 'tweets-section';
+            
+            const tweetsToggle = document.createElement('button');
+            tweetsToggle.className = 'tweets-toggle';
+            tweetsToggle.textContent = 'Show individual tweets';
+            tweetsToggle.onclick = function() {
+                const tweetsList = document.getElementById('tweets-list');
+                if (tweetsList.classList.contains('hidden')) {
+                    tweetsList.classList.remove('hidden');
+                    this.textContent = 'Hide individual tweets';
+                } else {
+                    tweetsList.classList.add('hidden');
+                    this.textContent = 'Show individual tweets';
+                }
+            };
+            
+            tweetsSection.appendChild(tweetsToggle);
+            
+            const tweetsList = document.createElement('div');
+            tweetsList.id = 'tweets-list';
+            tweetsList.className = 'tweets-list hidden';
+            
             tweets.forEach(tweet => {
                 const tweetDiv = document.createElement('div');
                 tweetDiv.className = 'tweet-item';
                 tweetDiv.textContent = tweet;
-                modalTweets.appendChild(tweetDiv);
+                tweetsList.appendChild(tweetDiv);
             });
+            
+            tweetsSection.appendChild(tweetsList);
+            modalTweets.appendChild(tweetsSection);
         } else {
             const noTweets = document.createElement('div');
             noTweets.className = 'tweet-item';
@@ -235,5 +284,57 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         tweetModal.classList.remove('hidden');
+    }
+    
+    // Generate a summary of tweets for a given emotion
+    function generateTweetsSummary(tweets, emotion) {
+        // Basic stats
+        const tweetCount = tweets.length;
+        const averageLength = Math.round(tweets.reduce((sum, tweet) => sum + tweet.length, 0) / tweetCount);
+        
+        // Find common words or themes (basic implementation)
+        const commonWords = findCommonWords(tweets);
+        
+        // Generate summary
+        let summary = `Found ${tweetCount} tweets expressing ${emotion.toLowerCase()}. `;
+        summary += `Average tweet length is ${averageLength} characters. `;
+        
+        if (commonWords.length > 0) {
+            summary += `Common themes include: ${commonWords.join(', ')}. `;
+        }
+        
+        // Add time-based insights if available
+        if (tweetCount > 2) {
+            summary += `These emotional tweets represent ${Math.round((tweetCount / currentAnalysisData.total_tweets) * 100)}% of the user's analyzed activity.`;
+        }
+        
+        return summary;
+    }
+    
+    // Find common significant words in tweets
+    function findCommonWords(tweets) {
+        // Combine all tweets into one string
+        const text = tweets.join(' ').toLowerCase();
+        
+        // Split into words and count frequency
+        const words = text.match(/\b[a-z]{4,}\b/g) || [];
+        const stopWords = ['this', 'that', 'with', 'from', 'have', 'just', 'your', 'they', 'what', 'when', 'will', 'about', 'there', 'their', 'would', 'could', 'should'];
+        
+        const wordCounts = {};
+        
+        words.forEach(word => {
+            if (!stopWords.includes(word)) {
+                wordCounts[word] = (wordCounts[word] || 0) + 1;
+            }
+        });
+        
+        // Sort by frequency
+        const sortedWords = Object.entries(wordCounts)
+            .filter(([word, count]) => count > 1) // Only words that appear more than once
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5) // Top 5 most common words
+            .map(([word]) => word);
+        
+        return sortedWords;
     }
 });
