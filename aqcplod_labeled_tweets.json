@@ -142,8 +142,8 @@
         "original_text": "no matter how many friends i will have, i will always remember that circle of friends who made me feel that i belong, that would always ask me if i can go in some trip, that circle who stays and wait for me when i tie my shoelaces.",
         "prediction": "Stress",
         "confidence": 0.5906,
-        "polarity": 0.29,
-        "polarity_label": "Positive",
+        "polarity": -0.1,
+        "polarity_label": "Neutral",
         "sentiment_confidence": 0.69,
         "tone": {
             "primary": "reflective",
@@ -234,7 +234,7 @@
         "original_text": "i usually ignore people when i'm having breakdowns. i appreciate those who still stays, who still patiently waiting for me to respond to their messages. those who always tell me that i'm not alone. those people that can understand my feelings even if i'm not saying anything.",
         "prediction": "Stress",
         "confidence": 0.6005,
-        "polarity": 0.02,
+        "polarity": 0.011000000000000001,
         "polarity_label": "Neutral",
         "sentiment_confidence": 0.76,
         "tone": {
@@ -395,7 +395,7 @@
         "original_text": "i'm not the type of person to give up on someone. yes, sometimes i get really mad and upset so i need a minute to cool off but I'll never abandon you. i don't leave people. and i think that's why it hurts so bad when people leave me.",
         "prediction": "Stress",
         "confidence": 0.5941,
-        "polarity": -0.57,
+        "polarity": -0.6839999999999999,
         "polarity_label": "Negative",
         "sentiment_confidence": 0.57,
         "tone": {
@@ -441,7 +441,7 @@
         "original_text": "no offense but if someone is excited about something and you make them feel stupid for being excited about it you are the worse type of person",
         "prediction": "neutral",
         "confidence": 0.5987,
-        "polarity": -0.23,
+        "polarity": -0.276,
         "polarity_label": "Negative",
         "sentiment_confidence": 0.66,
         "tone": {
@@ -487,7 +487,7 @@
         "original_text": "\"it's not that deep\" is insane because these are my feelings not yours",
         "prediction": "neutral",
         "confidence": 0.7826,
-        "polarity": -0.22,
+        "polarity": -0.264,
         "polarity_label": "Negative",
         "sentiment_confidence": 0.75,
         "tone": {
@@ -533,8 +533,8 @@
         "original_text": "sometimes, no matter how nice you are. how kind you are. how caring you are and how loving you are, it just isn't enough for some people",
         "prediction": "neutral",
         "confidence": 0.8282,
-        "polarity": 0.36,
-        "polarity_label": "Positive",
+        "polarity": -0.1,
+        "polarity_label": "Neutral",
         "sentiment_confidence": 0.55,
         "tone": {
             "primary": "hopeful",
@@ -625,8 +625,8 @@
         "original_text": "one thing i absolutely love and adore about myself is, no matter how bad i've been treated, no matter how i'm feeling, no matter what i've been through or what i'm going through, i still have a heart of gold and endless love to give. that's one thing no one can ever take from me.",
         "prediction": "Suicidal",
         "confidence": 0.4738,
-        "polarity": 0.21,
-        "polarity_label": "Positive",
+        "polarity": -0.1,
+        "polarity_label": "Neutral",
         "sentiment_confidence": 0.67,
         "tone": {
             "primary": "grateful",
@@ -648,7 +648,7 @@
         "original_text": "i'm teaching myself to not exaggerate my places in peoples lives. no matter how good my intentions, no matter how much they mean to me. i'm learning that sometimes you don't mean to people what they mean to you & that's okay.",
         "prediction": "Stress",
         "confidence": 0.5343,
-        "polarity": 0.09,
+        "polarity": 0.0495,
         "polarity_label": "Neutral",
         "sentiment_confidence": 0.87,
         "tone": {
@@ -694,8 +694,8 @@
         "original_text": "i don't cry over people, i cry over the way i get treated because i don't deserve that",
         "prediction": "neutral",
         "confidence": 0.7973,
-        "polarity": 0.19,
-        "polarity_label": "Positive",
+        "polarity": 0.095,
+        "polarity_label": "Neutral",
         "sentiment_confidence": 0.69,
         "tone": {
             "primary": "melancholic",
@@ -763,7 +763,7 @@
         "original_text": "people be abusing that soft spot you got for them, until it's no longer there",
         "prediction": "neutral",
         "confidence": 0.7817,
-        "polarity": -0.17,
+        "polarity": -0.20400000000000001,
         "polarity_label": "Negative",
         "sentiment_confidence": 0.63,
         "tone": {
@@ -809,7 +809,7 @@
         "original_text": "\"are you okay?\" no, from the bottom of my heart, i'm tired.",
         "prediction": "neutral",
         "confidence": 0.7169,
-        "polarity": -0.16,
+        "polarity": -0.192,
         "polarity_label": "Negative",
         "sentiment_confidence": 0.69,
         "tone": {
@@ -878,7 +878,7 @@
         "original_text": "maybe i'm not that strong, but i'm trying, i'm really trying.",
         "prediction": "neutral",
         "confidence": 0.8125,
-        "polarity": 0.11,
+        "polarity": -0.055,
         "polarity_label": "Neutral",
         "sentiment_confidence": 0.84,
         "tone": {
@@ -970,7 +970,7 @@
         "original_text": "i don't cheat and not because i can't, but because i don't want to be a reason someone stops believing in love. i don't want to be the reason someone stay awake all night crying. i'm not saying i'm perfect, but i just realized that at this age cheating is immature and disgusting.",
         "prediction": "Stress",
         "confidence": 0.4996,
-        "polarity": -0.26,
+        "polarity": -0.21839999999999998,
         "polarity_label": "Negative",
         "sentiment_confidence": 0.5,
         "tone": {
@@ -1016,7 +1016,7 @@
         "original_text": "when their only excuse for their actions was \"i'm just going through a lot rn\" but when i was going through a lot, i never treated them that bad",
         "prediction": "Stress",
         "confidence": 0.3047,
-        "polarity": -0.25,
+        "polarity": -0.3,
         "polarity_label": "Negative",
         "sentiment_confidence": 0.66,
         "tone": {
@@ -1063,7 +1063,7 @@
         "prediction": "neutral",
         "confidence": 0.7319,
         "polarity": -0.12,
-        "polarity_label": "Neutral",
+        "polarity_label": "Negative",
         "sentiment_confidence": 0.82,
         "tone": {
             "primary": "neutral",
@@ -1131,7 +1131,7 @@
         "original_text": "ⓘ This user is tired of their never ending thoughts.",
         "prediction": "neutral",
         "confidence": 0.7067,
-        "polarity": -0.19,
+        "polarity": -0.22799999999999998,
         "polarity_label": "Negative",
         "sentiment_confidence": 0.8,
         "tone": {

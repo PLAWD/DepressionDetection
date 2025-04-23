@@ -11,6 +11,11 @@ from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
 
 # Import our custom sentiment analyzer
 from sentiment_analyzer import analyze_sentiment
+# Import the enhanced version
+from enhanced_sentiment_analyzer import analyze_sentiment_enhanced
+
+# Set this to True to use the enhanced analyzer, False to use the original
+USE_ENHANCED_ANALYZER = True
 
 # Create Flask app with modified static file handling
 app = Flask(__name__,
@@ -85,8 +90,11 @@ def analyze_text():
         if not text:
             return jsonify({"error": "Text is required"}), 400
         
-        # Calculate polarity using our advanced sentiment analyzer
-        polarity, polarity_label, confidence, emotion_dimensions, primary_tone, secondary_tone = analyze_sentiment(text)
+        # Calculate polarity using our sentiment analyzer (original or enhanced)
+        if USE_ENHANCED_ANALYZER:
+            polarity, polarity_label, confidence, emotion_dimensions, primary_tone, secondary_tone = analyze_sentiment_enhanced(text)
+        else:
+            polarity, polarity_label, confidence, emotion_dimensions, primary_tone, secondary_tone = analyze_sentiment(text)
         
         # Preprocess the text
         cleaned_text = clean_text(text)
@@ -251,8 +259,12 @@ def analyze_tweets():
             original_text = preprocessed_tweets[i]["original_text"]
             cleaned_text = texts[i]
             
-            # Calculate polarity using our advanced sentiment analyzer
-            polarity, polarity_label, sent_confidence, emotion_dims, primary_tone, secondary_tone = analyze_sentiment(original_text)
+            # Calculate polarity using our sentiment analyzer (original or enhanced)
+            if USE_ENHANCED_ANALYZER:
+                polarity, polarity_label, sent_confidence, emotion_dims, primary_tone, secondary_tone = analyze_sentiment_enhanced(original_text)
+            else:
+                polarity, polarity_label, sent_confidence, emotion_dims, primary_tone, secondary_tone = analyze_sentiment(original_text)
+            
             total_polarity += polarity
             
             # Accumulate emotion dimensions

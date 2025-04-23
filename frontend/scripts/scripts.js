@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modalTweets.innerHTML = '';
         }
         
-        if (tweets.length > 0) {
+        if (tweets.length > 0 && currentAnalysisData && currentAnalysisData.results) {
             // Add summary section
             const summaryDiv = document.createElement('div');
             summaryDiv.className = 'tweets-summary';
@@ -275,10 +275,66 @@ document.addEventListener('DOMContentLoaded', function() {
             tweetsList.id = 'tweets-list';
             tweetsList.className = 'tweets-list hidden';
             
+            // Find the full tweet details from the results array
+            const tweetDetails = {};
+            if (currentAnalysisData.results) {
+                currentAnalysisData.results.forEach(result => {
+                    tweetDetails[result.original_text] = result;
+                });
+            }
+            
             tweets.forEach(tweet => {
                 const tweetDiv = document.createElement('div');
                 tweetDiv.className = 'tweet-item';
-                tweetDiv.textContent = tweet;
+                
+                // Get detailed info if available
+                const details = tweetDetails[tweet];
+                
+                // Create tweet content with enhanced details
+                if (details) {
+                    // Date and time
+                    const dateTimeDiv = document.createElement('div');
+                    dateTimeDiv.className = 'tweet-datetime';
+                    dateTimeDiv.innerHTML = `<strong>${details.formatted_date} at ${details.formatted_time}</strong>`;
+                    tweetDiv.appendChild(dateTimeDiv);
+                    
+                    // Tweet text
+                    const tweetTextDiv = document.createElement('div');
+                    tweetTextDiv.className = 'tweet-content';
+                    tweetTextDiv.textContent = tweet;
+                    tweetDiv.appendChild(tweetTextDiv);
+                    
+                    // Divider
+                    const infoSeparator = document.createElement('hr');
+                    infoSeparator.className = 'tweet-separator';
+                    tweetDiv.appendChild(infoSeparator);
+                    
+                    // Analysis section
+                    const analysisDiv = document.createElement('div');
+                    analysisDiv.className = 'tweet-analysis';
+                    
+                    // Polarity info
+                    const polarityDiv = document.createElement('span');
+                    polarityDiv.className = 'tweet-sentiment';
+                    polarityDiv.textContent = `${details.polarity_label} (${details.polarity})`;
+                    analysisDiv.appendChild(polarityDiv);
+                    
+                    // Tone info
+                    const toneDiv = document.createElement('span');
+                    toneDiv.className = 'tweet-tone';
+                    let toneText = `Tone: ${details.tone.primary.charAt(0).toUpperCase() + details.tone.primary.slice(1)}`;
+                    if (details.tone.secondary) {
+                        toneText += ` / ${details.tone.secondary.charAt(0).toUpperCase() + details.tone.secondary.slice(1)}`;
+                    }
+                    toneDiv.textContent = toneText;
+                    analysisDiv.appendChild(toneDiv);
+                    
+                    tweetDiv.appendChild(analysisDiv);
+                } else {
+                    // Fallback if details not available
+                    tweetDiv.textContent = tweet;
+                }
+                
                 tweetsList.appendChild(tweetDiv);
             });
             
