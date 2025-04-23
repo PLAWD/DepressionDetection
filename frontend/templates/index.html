@@ -43,24 +43,8 @@
         <div id="resultContainer" class="result-container hidden">
             <p id="resultText"></p>
             
-            <div id="chartContainer" class="chart-container">
-                <h3>Emotion Distribution:</h3>
-                
-                <!-- Chart.js canvas for pie chart -->
-                <canvas id="emotionChart" width="400" height="400"></canvas>
-                
-                <!-- Alternative CSS visualization if Chart.js fails -->
-                <div id="emotionVisualization" class="emotion-visualization hidden">
-                    <!-- Bars will be added dynamically via JavaScript -->
-                </div>
-                
-                <div class="legend-container">
-                    <!-- Legend items will be dynamically generated -->
-                </div>
-                
-                <!-- Debug info for chart troubleshooting -->
-                <div id="chart-debug" class="hidden"></div>
-            </div>
+            <!-- Pie Chart Section (clean, transparent) -->
+            <canvas id="emotionPieChart" width="400" height="400" style="background: transparent !important; box-shadow: none; border: none;"></canvas>
         </div>
         
         <!-- Tweet examples modal -->
@@ -87,10 +71,16 @@
     <!-- Load Chart.js from CDN first -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Load the chart script -->
-    <script src="{{ url_for('serve_scripts', filename='your_chart_script.js') }}"></script>
-    
     <!-- Then load our custom scripts -->
     <script src="{{ url_for('serve_scripts', filename='scripts.js') }}"></script>
+    <script>
+    // Set Chart.js global defaults for white legend/label text
+    if (window.Chart) {
+        Chart.defaults.color = "#fff";
+        Chart.defaults.plugins.legend.labels.color = "#fff";
+        Chart.defaults.plugins.tooltip.bodyColor = "#fff";
+        Chart.defaults.plugins.tooltip.titleColor = "#fff";
+    }
+    </script>
 </body>
 </html>

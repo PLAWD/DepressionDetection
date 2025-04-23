@@ -94,6 +94,21 @@ a:hover {
     max-width: 700px;
 }
 
+.result-container p,
+.result-container #resultText,
+#resultText {
+    color: #fff !important;
+    background: transparent !important; /* Remove debug red background */
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Force all children of result-container to white */
+.result-container * {
+    color: #fff !important;
+}
+
 /* Organizations section */
 .organizations {
     margin-top: 40px;
@@ -168,6 +183,16 @@ h3 {
     border: 1px solid #fff !important;
     min-width: 200px;
     min-height: 200px;
+}
+
+#emotionPieChart {
+    width: 400px !important;
+    height: 400px !important;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+    color: #fff !important; /* Make chart labels white */
 }
 
 /* Fix hidden class handling */
