@@ -365,9 +365,8 @@ def analyze_tweets():
         
         # Enhanced message with more detailed analysis including tones
         result_message = (
-            f"Analysis complete for @{username}. Over the span of 2 weeks, the user's emotions over their tweets are: {emotion_display}. "
-            f"Overall sentiment: {avg_polarity_label} ({round(avg_polarity, 2)}). "
-            f"Dominant tones: {tone_display}."
+            f"Within the span of 2 weeks, @{username}'s dominant tones on their tweets are: {tone_display}. "
+            f"The user's emotions over their tweets are as follows: {emotion_display}."
         )
         
         return jsonify({
