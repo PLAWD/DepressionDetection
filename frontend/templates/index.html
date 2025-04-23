@@ -3,10 +3,9 @@
 <head>
     <title>Depression Detection Tool</title>
     <link rel="stylesheet" href="{{ url_for('serve_styles', filename='main.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 <body>
-    <!-- Disclaimer Screen -->
+    <!-- Disclaimer Screen - Only shown if disclaimer not acknowledged -->
     <div id="screen1" {% if session.get('passed_disclaimer', False) %}class="hidden"{% endif %}>
         <h2>Disclaimer</h2>
         <p>
@@ -19,11 +18,11 @@
             we strongly encourage you to seek help from a licensed mental health professional.
         </p>
         <form action="{{ url_for('acknowledge_disclaimer') }}" method="POST">
-            <button type="submit" class="button">Proceed</button>
+            <button type="submit" class="button">I Understand</button>
         </form>
     </div>
-    
-    <!-- Detection Screen -->
+
+    <!-- Detection Screen - Only shown if disclaimer acknowledged -->
     <div id="screen2" class="{% if not session.get('passed_disclaimer', False) %}hidden{% endif %} main-screen">
         <h2>Early Sign of Depression Detection</h2>
         <form id="detectionForm">
@@ -44,16 +43,23 @@
         <div id="resultContainer" class="result-container hidden">
             <p id="resultText"></p>
             
-            <!-- This is the chart container that will be shown immediately -->
-            <div id="chartContainer" class="chart-container hidden">
+            <div id="chartContainer" class="chart-container">
                 <h3>Emotion Distribution:</h3>
-                <div class="chart-wrapper">
-                    <canvas id="emotionChart"></canvas>
+                
+                <!-- Chart.js canvas for pie chart -->
+                <canvas id="emotionChart" width="400" height="400"></canvas>
+                
+                <!-- Alternative CSS visualization if Chart.js fails -->
+                <div id="emotionVisualization" class="emotion-visualization hidden">
+                    <!-- Bars will be added dynamically via JavaScript -->
                 </div>
                 
                 <div class="legend-container">
                     <!-- Legend items will be dynamically generated -->
                 </div>
+                
+                <!-- Debug info for chart troubleshooting -->
+                <div id="chart-debug" class="hidden"></div>
             </div>
         </div>
         
@@ -78,6 +84,13 @@
         <button id="mainEndButton" class="button end-button" onclick="location.href='/'">End</button>
     </div>
     
+    <!-- Load Chart.js from CDN first -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Load the chart script -->
+    <script src="{{ url_for('serve_scripts', filename='your_chart_script.js') }}"></script>
+    
+    <!-- Then load our custom scripts -->
     <script src="{{ url_for('serve_scripts', filename='scripts.js') }}"></script>
 </body>
 </html>

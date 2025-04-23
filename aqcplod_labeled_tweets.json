@@ -3,318 +3,1219 @@
         "text": "my feelings are hurt and i need time to process them so i can better communicate with you is perfectly valid response i wish we used it more in moments of conflict",
         "original_text": "'my feelings are hurt and i need time to process them so i can better communicate with you' is perfectly valid response & i wish we used it more in moments of conflict",
         "prediction": "neutral",
-        "confidence": 0.7859
+        "confidence": 0.7859,
+        "polarity": -0.23,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.67,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "hopeful"
+        },
+        "created_at": "2024-09-19T22:00:00.000Z",
+        "formatted_date": "Sep 19, 2024",
+        "formatted_time": "10:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.16195643333333332,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "day by day im training my heart to accept disappointments even from people i love",
         "original_text": "day by day, i'm training my heart to accept disappointments even from people i love",
         "prediction": "neutral",
-        "confidence": 0.7088
+        "confidence": 0.7088,
+        "polarity": 0.28,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.71,
+        "tone": {
+            "primary": "grateful",
+            "secondary": "hopeful"
+        },
+        "created_at": "2024-09-20T00:00:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "my mom didnt raise a quitter she raised someone so afraid of failure that they dont even start something",
         "original_text": "my mom didn't raise a quitter, she raised someone so afraid of failure that they don't even start something",
         "prediction": "neutral",
-        "confidence": 0.69
+        "confidence": 0.69,
+        "polarity": -0.26,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.72,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2024-09-20T08:00:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "08:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.18008666666666664,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "so far september has not been good to me",
         "original_text": "so far, september has not been good to me",
         "prediction": "neutral",
-        "confidence": 0.7828
+        "confidence": 0.7828,
+        "polarity": -0.02,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.63,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-20T10:00:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "10:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.015651999999999992,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "manipulation is when they blame you for your reaction to their toxic behavior but never discuss the disrespect that triggered you",
         "original_text": "manipulation is when they\nblame you for your reaction to\ntheir toxic behavior, but never\ndiscuss the disrespect that\ntriggered you.",
         "prediction": "neutral",
-        "confidence": 0.6884
+        "confidence": 0.6884,
+        "polarity": 0.05,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.91,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2024-09-20T00:00:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i cant even describe what im feeling right now all i can say is that it hurts a lot",
         "original_text": "i can't even describe what i'm feeling right now, all i can say is that, it hurts a lot.",
         "prediction": "neutral",
-        "confidence": 0.6372
+        "confidence": 0.6372,
+        "polarity": -0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.67,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "sarcastic"
+        },
+        "created_at": "2024-09-20T14:59:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "02:59 PM",
+        "emotion_dimensions": {
+            "distress": 0.04017799999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "no matter how many friends i will have i will always remember that circle of friends who made me feel that i belong that would always ask me if i can go in some trip that circle who stays and wait for me when i tie my shoelaces",
         "original_text": "no matter how many friends i will have, i will always remember that circle of friends who made me feel that i belong, that would always ask me if i can go in some trip, that circle who stays and wait for me when i tie my shoelaces.",
         "prediction": "Stress",
-        "confidence": 0.5906
+        "confidence": 0.5906,
+        "polarity": 0.29,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.69,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "hopeful"
+        },
+        "created_at": "2024-09-20T16:00:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "04:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "im sick of finding myself at the same place again and again",
         "original_text": "i'm sick of finding myself at the same place again and again.",
         "prediction": "neutral",
-        "confidence": 0.8007
+        "confidence": 0.8007,
+        "polarity": -0.22,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.74,
+        "tone": {
+            "primary": "frustrated",
+            "secondary": null
+        },
+        "created_at": "2024-09-20T18:00:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "06:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.157226,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "dont beg for replies and attention if someone is ignoring you just maintain the distance and treat them as they treat you",
         "original_text": "don't beg for replies and attention, if someone is ignoring you just maintain the distance and treat them as they treat you.",
         "prediction": "neutral",
-        "confidence": 0.7253
+        "confidence": 0.7253,
+        "polarity": 0.12,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.8,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2024-09-20T20:00:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "08:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "if they knew how much time effort and tears it takes to rebuild they would understand why we have to be careful when choosing who enters our lives and who doesnt sometimes there are people who dont mind breaking our souls and leaving empty spaces that are difficult to fill",
         "original_text": "if they knew how much time, effort, and tears it takes to rebuild, they would understand why we have to be careful when choosing who enters our lives and who doesn't. sometimes there are people who don't mind breaking our souls and leaving empty spaces that are difficult to fill",
         "prediction": "Stress",
-        "confidence": 0.605
+        "confidence": 0.605,
+        "polarity": -0.19,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.72,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "instructive"
+        },
+        "created_at": "2024-09-20T22:00:00.000Z",
+        "formatted_date": "Sep 20, 2024",
+        "formatted_time": "10:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.13455399999999998,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i usually ignore people when im having breakdowns i appreciate those who still stays who still patiently waiting for me to respond to their messages those who always tell me that im not alone those people that can understand my feelings even if im not saying anything",
         "original_text": "i usually ignore people when i'm having breakdowns. i appreciate those who still stays, who still patiently waiting for me to respond to their messages. those who always tell me that i'm not alone. those people that can understand my feelings even if i'm not saying anything.",
         "prediction": "Stress",
-        "confidence": 0.6005
+        "confidence": 0.6005,
+        "polarity": 0.02,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.76,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "melancholic"
+        },
+        "created_at": "2024-09-21T00:02:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "12:02 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "if someone wants you nothing can keep them away if they dont want you nothing can make them stay remember that",
         "original_text": "if someone wants you, nothing can keep them away. if they don't want you, nothing can make them stay. remember that",
         "prediction": "neutral",
-        "confidence": 0.8319
+        "confidence": 0.8319,
+        "polarity": 0.02,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.87,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "instructive"
+        },
+        "created_at": "2024-09-21T08:00:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "08:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "never force friendships relationships or communication if its not mutual then let it go",
         "original_text": "never force friendships, relationships or communication. if it's not mutual, then let it go.",
         "prediction": "neutral",
-        "confidence": 0.6367
+        "confidence": 0.6367,
+        "polarity": -0.09,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.85,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2024-09-21T10:00:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "10:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.06140399999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "you gotta stay away from people that know they be doing fucked up shit to you then be trying to play you like you crazy or doing too much when you acknowledge shit",
         "original_text": "you gotta stay away from people that know they be doing fucked up shit to you, then be trying to play you like you crazy or doing too much when you acknowledge shit",
         "prediction": "neutral",
-        "confidence": 0.9365
+        "confidence": 0.9365,
+        "polarity": -0.31,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.57,
+        "tone": {
+            "primary": "angry",
+            "secondary": "reflective"
+        },
+        "created_at": "2024-09-21T12:00:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "12:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.22032499999999997,
+            "hopelessness": 0.25179999999999997,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i got rules dont le to me dont use me and if youre tred of me leave me alone",
         "original_text": "i got 3 rules. don't líe to me, don't use me, and if you're tíred of me, leave me alone",
         "prediction": "neutral",
-        "confidence": 0.7252
+        "confidence": 0.7252,
+        "polarity": -0.09,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.85,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "instructive"
+        },
+        "created_at": "2024-09-21T14:00:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "02:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.062159999999999986,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "how i wish",
         "original_text": "how i wish",
         "prediction": "neutral",
-        "confidence": 0.7436
+        "confidence": 0.7436,
+        "polarity": 0.12,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.8,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-21T16:00:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "04:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "my eyes beg me to sleep but im stuck in the silent war between my own mind and my heart",
         "original_text": "my eyes beg me to sleep but i'm stuck in the silent war between my own mind and my heart.",
         "prediction": "neutral",
-        "confidence": 0.7501
+        "confidence": 0.7501,
+        "polarity": -0.19,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.43,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-21T18:00:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "06:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.13309799999999997,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "im not the type of person to give up on someone yes sometimes i get really mad and upset so i need a minute to cool off but Ill never abandon you i dont leave people and i think thats why it hurts so bad when people leave me",
         "original_text": "i'm not the type of person to give up on someone. yes, sometimes i get really mad and upset so i need a minute to cool off but I'll never abandon you. i don't leave people. and i think that's why it hurts so bad when people leave me.",
         "prediction": "Stress",
-        "confidence": 0.5941
+        "confidence": 0.5941,
+        "polarity": -0.57,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.57,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "angry"
+        },
+        "created_at": "2024-09-21T20:00:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "08:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.40099500000000005,
+            "hopelessness": 0.4582800000000001,
+            "anxiety": 0,
+            "anger": 0.28642500000000004,
+            "resilience": 0
+        }
     },
     {
         "text": "i hate when people cant see the wrong in their actions but see the wrong in yours",
         "original_text": "i hate when people can't see the wrong in their actions, but see the wrong in yours.",
         "prediction": "neutral",
-        "confidence": 0.7328
+        "confidence": 0.7328,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.49,
+        "tone": {
+            "primary": "frustrated",
+            "secondary": "angry"
+        },
+        "created_at": "2024-09-21T20:11:00.000Z",
+        "formatted_date": "Sep 21, 2024",
+        "formatted_time": "08:11 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "no offense but if someone is excited about something and you make them feel stupid for being excited about it you are the worse type of person",
         "original_text": "no offense but if someone is excited about something and you make them feel stupid for being excited about it you are the worse type of person",
         "prediction": "neutral",
-        "confidence": 0.5987
+        "confidence": 0.5987,
+        "polarity": -0.23,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.66,
+        "tone": {
+            "primary": "angry",
+            "secondary": null
+        },
+        "created_at": "2024-09-22T00:00:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.15976799999999997,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "nothing hurts more than seeing myself again in the same situation after getting better for a while",
         "original_text": "nothing hurts more than seeing myself again in the same situation after getting better for a while",
         "prediction": "neutral",
-        "confidence": 0.7088
+        "confidence": 0.7088,
+        "polarity": 0.27,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.67,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "melancholic"
+        },
+        "created_at": "2024-09-22T00:10:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "12:10 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0.239712
+        }
     },
     {
         "text": "its not that deep is insane because these are my feelings not yours",
         "original_text": "\"it's not that deep\" is insane because these are my feelings not yours",
         "prediction": "neutral",
-        "confidence": 0.7826
+        "confidence": 0.7826,
+        "polarity": -0.22,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-22T10:00:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "10:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.15439899999999998,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "can we just admit that we all lost a bond with someone this year that we wanted to last forever",
         "original_text": "can we just admit that we all lost a bond with someone this year that we wanted to last forever",
         "prediction": "neutral",
-        "confidence": 0.8056
+        "confidence": 0.8056,
+        "polarity": -0.04,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.94,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": null
+        },
+        "created_at": "2024-09-22T00:00:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.026879999999999998,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "sometimes no matter how nice you are how kind you are how caring you are and how loving you are it just isnt enough for some people",
         "original_text": "sometimes, no matter how nice you are. how kind you are. how caring you are and how loving you are, it just isn't enough for some people",
         "prediction": "neutral",
-        "confidence": 0.8282
+        "confidence": 0.8282,
+        "polarity": 0.36,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.55,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2024-09-22T14:00:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "02:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i think one of the healthiest things ive ever learned is that you should allow others to reintroduce themselves to you give people space to become who they are without assuming you know who they are just bc youve been friends or family for years",
         "original_text": "i think one of the healthiest things i've ever learned is that you should allow others to reintroduce themselves to you. give people space to become who they are without assuming you know who they are just bc you've been friends or family for years",
         "prediction": "Stress",
-        "confidence": 0.6011
+        "confidence": 0.6011,
+        "polarity": 0.18,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.69,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "hopeful"
+        },
+        "created_at": "2024-09-22T16:00:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "04:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i would just like a little credit for the fact that im killing myself trying",
         "original_text": "i would just like a little credit for the fact that i'm killing myself trying.",
         "prediction": "neutral",
-        "confidence": 0.816
+        "confidence": 0.816,
+        "polarity": -0.04,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.91,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": null
+        },
+        "created_at": "2024-09-22T18:00:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "06:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.03129,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "the lack of interest i have in everyone and everything nowadays is insane",
         "original_text": "the lack of interest i have in everyone and everything nowadays is insane",
         "prediction": "neutral",
-        "confidence": 0.7238
+        "confidence": 0.7238,
+        "polarity": -0.28,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.5,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-22T20:00:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "08:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.1925,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "one thing i absolutely love and adore about myself is no matter how bad ive been treated no matter how im feeling no matter what ive been through or what im going through i still have a heart of gold and endless love to give thats one thing no one can ever take from me",
         "original_text": "one thing i absolutely love and adore about myself is, no matter how bad i've been treated, no matter how i'm feeling, no matter what i've been through or what i'm going through, i still have a heart of gold and endless love to give. that's one thing no one can ever take from me.",
         "prediction": "Suicidal",
-        "confidence": 0.4738
+        "confidence": 0.4738,
+        "polarity": 0.21,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.67,
+        "tone": {
+            "primary": "grateful",
+            "secondary": "hopeful"
+        },
+        "created_at": "2024-09-22T22:00:00.000Z",
+        "formatted_date": "Sep 22, 2024",
+        "formatted_time": "10:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "im teaching myself to not exaggerate my places in peoples lives no matter how good my intentions no matter how much they mean to me im learning that sometimes you dont mean to people what they mean to you thats okay",
         "original_text": "i'm teaching myself to not exaggerate my places in peoples lives. no matter how good my intentions, no matter how much they mean to me. i'm learning that sometimes you don't mean to people what they mean to you & that's okay.",
         "prediction": "Stress",
-        "confidence": 0.5342
+        "confidence": 0.5342,
+        "polarity": 0.09,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.87,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "instructive"
+        },
+        "created_at": "2024-09-23T00:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "DONT overshare just because someone is being nice to you you idiot",
         "original_text": "DON'T overshare just because someone is being nice to you. you idiot",
         "prediction": "neutral",
-        "confidence": 0.7131
+        "confidence": 0.7131,
+        "polarity": -0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.94,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2024-09-23T08:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "08:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.04088,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i dont cry over people i cry over the way i get treated because i dont deserve that",
         "original_text": "i don't cry over people, i cry over the way i get treated because i don't deserve that",
         "prediction": "neutral",
-        "confidence": 0.7973
+        "confidence": 0.7973,
+        "polarity": 0.19,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.69,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "hopeful"
+        },
+        "created_at": "2024-09-23T10:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "10:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "to be treated well without asking for it hits different",
         "original_text": "to be treated well without asking for it, hits different",
         "prediction": "neutral",
-        "confidence": 0.7403
+        "confidence": 0.7403,
+        "polarity": 0.08,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.86,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-23T00:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "hearing im proud of you when youre having a hard time really does hit different",
         "original_text": "hearing \"i'm proud of you\" when you're having a hard time really does hit different",
         "prediction": "neutral",
-        "confidence": 0.7215
+        "confidence": 0.7215,
+        "polarity": 0.16,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.8,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2024-09-23T14:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "02:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "people be abusing that soft spot you got for them until its no longer there",
         "original_text": "people be abusing that soft spot you got for them, until it's no longer there",
         "prediction": "neutral",
-        "confidence": 0.7817
+        "confidence": 0.7817,
+        "polarity": -0.17,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.63,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-23T16:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "04:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.119749,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i stopped looking so deeply into people when i realized that they dont even go that far into themselves",
         "original_text": "i stopped looking so deeply into people when i realized that they don't even go that far into themselves",
         "prediction": "neutral",
-        "confidence": 0.7779
+        "confidence": 0.7779,
+        "polarity": -0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.86,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "instructive"
+        },
+        "created_at": "2024-09-23T18:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "06:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.04052299999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "are you okay no from the bottom of my heart im tired",
         "original_text": "\"are you okay?\" no, from the bottom of my heart, i'm tired.",
         "prediction": "neutral",
-        "confidence": 0.7169
+        "confidence": 0.7169,
+        "polarity": -0.16,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.69,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": null
+        },
+        "created_at": "2024-09-23T20:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "08:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.11309899999999996,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i am a strong person but every once in a while i would like someone to hold my hand and tell me things are going to be OK",
         "original_text": "i am a strong person. but every once in a while i would like someone to hold my hand and tell me things are going to be OK",
         "prediction": "neutral",
-        "confidence": 0.7717
+        "confidence": 0.7717,
+        "polarity": 0.37,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.54,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2024-09-23T23:00:00.000Z",
+        "formatted_date": "Sep 23, 2024",
+        "formatted_time": "11:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "it didnt kill me but a part of me died that day",
         "original_text": "it didn't kill me, but a part of me died that day.",
         "prediction": "neutral",
-        "confidence": 0.6744
+        "confidence": 0.6744,
+        "polarity": -0.16,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.73,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-24T00:00:00.000Z",
+        "formatted_date": "Sep 24, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.11486999999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "maybe im not that strong but im trying im really trying",
         "original_text": "maybe i'm not that strong, but i'm trying, i'm really trying.",
         "prediction": "neutral",
-        "confidence": 0.8125
+        "confidence": 0.8125,
+        "polarity": 0.11,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.84,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": null
+        },
+        "created_at": "2024-09-24T08:00:00.000Z",
+        "formatted_date": "Sep 24, 2024",
+        "formatted_time": "08:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0.10163100000000001
+        }
     },
     {
         "text": "god please make my heart strong enough to handle every struggle",
         "original_text": "god, please make my heart strong enough to handle every struggle.",
         "prediction": "neutral",
-        "confidence": 0.6939
+        "confidence": 0.6939,
+        "polarity": 0.24,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.67,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2024-09-24T10:00:00.000Z",
+        "formatted_date": "Sep 24, 2024",
+        "formatted_time": "10:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i love being spoiled but not with gift or money just time attention and efforts",
         "original_text": "i love being spoiled, but not with gift or money, just time attention and efforts",
         "prediction": "neutral",
-        "confidence": 0.4414
+        "confidence": 0.4414,
+        "polarity": 0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.68,
+        "tone": {
+            "primary": "grateful",
+            "secondary": null
+        },
+        "created_at": "2024-09-24T12:00:00.000Z",
+        "formatted_date": "Sep 24, 2024",
+        "formatted_time": "12:00 PM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i dont know whats going on in my life but im slowly losing interest in everything",
         "original_text": "i don't know what's going on in my life, but i'm slowly losing interest in everything.\"",
         "prediction": "neutral",
-        "confidence": 0.8254
+        "confidence": 0.8254,
+        "polarity": -0.01,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.77,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "instructive"
+        },
+        "created_at": "2024-09-24T16:00:00.000Z",
+        "formatted_date": "Sep 24, 2024",
+        "formatted_time": "04:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.009849000000000004,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "i dont cheat and not because i cant but because i dont want to be a reason someone stops believing in love i dont want to be the reason someone stay awake all night crying im not saying im perfect but i just realized that at this age cheating is immature and disgusting",
         "original_text": "i don't cheat and not because i can't, but because i don't want to be a reason someone stops believing in love. i don't want to be the reason someone stay awake all night crying. i'm not saying i'm perfect, but i just realized that at this age cheating is immature and disgusting.",
         "prediction": "Stress",
-        "confidence": 0.4996
+        "confidence": 0.4996,
+        "polarity": -0.26,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.5,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "melancholic"
+        },
+        "created_at": "2024-09-24T18:00:00.000Z",
+        "formatted_date": "Sep 24, 2024",
+        "formatted_time": "06:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.18446399999999996,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "if i ever lose my battle to my mental health know that i fought know that i tried",
         "original_text": "if i ever lose my battle to my mental health know that i fought. know\nthat i tried.",
         "prediction": "neutral",
-        "confidence": 0.6558
+        "confidence": 0.6558,
+        "polarity": -0.25,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.62,
+        "tone": {
+            "primary": "reflective",
+            "secondary": null
+        },
+        "created_at": "2024-09-24T22:00:00.000Z",
+        "formatted_date": "Sep 24, 2024",
+        "formatted_time": "10:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.17465,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "when their only excuse for their actions was im just going through a lot rn but when i was going through a lot i never treated them that bad",
         "original_text": "when their only excuse for their actions was \"i'm just going through a lot rn\" but when i was going through a lot, i never treated them that bad",
         "prediction": "Stress",
-        "confidence": 0.3047
+        "confidence": 0.3047,
+        "polarity": -0.25,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.66,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2024-09-25T00:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.17796799999999996,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "This user is tired of pretending that everything is okay",
         "original_text": "ⓘ This user is tired of pretending that everything is okay.",
         "prediction": "neutral",
-        "confidence": 0.7661
+        "confidence": 0.7661,
+        "polarity": -0.01,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.95,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "frustrated"
+        },
+        "created_at": "2024-09-25T08:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "08:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.003836,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "This user is physically and mentally drained",
         "original_text": "ⓘ This user is physically and mentally drained.",
         "prediction": "neutral",
-        "confidence": 0.7319
+        "confidence": 0.7319,
+        "polarity": -0.12,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.82,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-25T10:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "10:00 AM",
+        "emotion_dimensions": {
+            "distress": 0.082852,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "This user wants somebody who understands",
         "original_text": "ⓘ This user wants somebody who understands.",
         "prediction": "neutral",
-        "confidence": 0.7386
+        "confidence": 0.7386,
+        "polarity": 0.04,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.9,
+        "tone": {
+            "primary": "reflective",
+            "secondary": null
+        },
+        "created_at": "2024-09-25T00:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "12:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "This user needs a long break from everything",
         "original_text": "ⓘ This user needs a long break from everything",
         "prediction": "neutral",
-        "confidence": 0.6438
+        "confidence": 0.6438,
+        "polarity": -0.01,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.97,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-25T14:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "02:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.007000000000000001,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "This user is tired of their never ending thoughts",
         "original_text": "ⓘ This user is tired of their never ending thoughts.",
         "prediction": "neutral",
-        "confidence": 0.7067
+        "confidence": 0.7067,
+        "polarity": -0.19,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.8,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "frustrated"
+        },
+        "created_at": "2024-09-25T16:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "04:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.131852,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "This user doesnt know what to do with their life anymore",
         "original_text": "ⓘ This user doesn't know what to do with their life anymore",
         "prediction": "neutral",
-        "confidence": 0.7078
+        "confidence": 0.7078,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "reflective",
+            "secondary": null
+        },
+        "created_at": "2024-09-25T18:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "06:00 PM",
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "This user is tired of being the one who always understands",
         "original_text": "ⓘ This user is tired of being the one who always understands.",
         "prediction": "neutral",
-        "confidence": 0.6808
+        "confidence": 0.6808,
+        "polarity": -0.19,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.8,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "melancholic"
+        },
+        "created_at": "2024-09-25T20:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "08:00 PM",
+        "emotion_dimensions": {
+            "distress": 0.131852,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     },
     {
         "text": "This user wants to escape from reality",
         "original_text": "ⓘ This user wants to escape from reality.",
         "prediction": "neutral",
-        "confidence": 0.7221
+        "confidence": 0.7221,
+        "polarity": 0.09,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.9,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2024-09-25T10:00:00.000Z",
+        "formatted_date": "Sep 25, 2024",
+        "formatted_time": "10:00 AM",
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
     }
 ]
