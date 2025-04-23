@@ -1,104 +1,340 @@
-document.getElementById('fetchTweets').addEventListener('click', async () => {
-    const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = '';
-
-    try {
-        const response = await fetch('/api/tweets', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Scripts loaded successfully');
+    
+    // DOM element references
+    const analyzeTweetsBtn = document.getElementById('analyzeTweetsBtn');
+    const resultContainer = document.getElementById('resultContainer');
+    const resultText = document.getElementById('resultText');
+    const chartContainer = document.getElementById('chartContainer');
+    const loadingContainer = document.getElementById('loadingContainer');
+    const usernameInput = document.getElementById('username');
+    const tweetModal = document.getElementById('tweetModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalTweets = document.getElementById('modalTweets');
+    const closeButton = document.querySelector('.close-button');
+    
+    // Store analysis data
+    let currentAnalysisData = null;
+    
+    // Add event listeners
+    if (analyzeTweetsBtn) {
+        analyzeTweetsBtn.addEventListener('click', handleTweetAnalysis);
+    }
+    
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            tweetModal.classList.add('hidden');
         });
-
-        if (!response.ok) {
-            const error = await response.json();
-            resultsDiv.innerHTML = `<p>Error: ${error.error}</p>`;
+    }
+    
+    // When clicking outside the modal, close it
+    window.addEventListener('click', function(event) {
+        if (event.target == tweetModal) {
+            tweetModal.classList.add('hidden');
+        }
+    });
+    
+    // Handle tweet analysis
+    async function handleTweetAnalysis() {
+        const username = usernameInput.value.trim();
+        
+        if (!username) {
+            alert('Please enter a Twitter username');
             return;
         }
-
-        const data = await response.json();
-        const { emotion_counts, tweets_by_label } = data;
-
-        // Display the pie chart
-        const chartDiv = document.createElement('div');
-        chartDiv.innerHTML = '<h3>Emotion Distribution:</h3><canvas id="emotionChart" class="small-chart"></canvas>';
-        resultsDiv.appendChild(chartDiv);
-
+        
+        // Show loading bar
+        loadingContainer.classList.remove('hidden');
+        resultContainer.classList.add('hidden');
+        chartContainer.classList.add('hidden');
+        
+        try {
+            const response = await fetch('/api/tweets', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: username })
+            });
+            
+            // Hide loading bar
+            loadingContainer.classList.add('hidden');
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Error analyzing tweets');
+            }
+            
+            const data = await response.json();
+            currentAnalysisData = data;
+            currentAnalysisData.total_tweets = Object.values(data.tweets_by_label || {})
+                .reduce((sum, tweets) => sum + tweets.length, 0);
+            
+            // Format emotions for display
+            const emotionString = formatEmotionPercentages(data.emotion_counts || data.emotions || {});
+            
+            // Display custom result message
+            resultText.innerHTML = `Analysis complete for <strong>@${username}</strong>. Over the span of 2 weeks, the user's emotions over their tweets are:<br>${emotionString}`;
+            resultContainer.classList.remove('hidden');
+            
+            // Show chart immediately
+            createEmotionChart(data);
+            chartContainer.classList.remove('hidden');
+            
+        } catch (error) {
+            console.error('Error:', error);
+            resultText.textContent = `Error analyzing tweets: ${error.message}`;
+            resultContainer.classList.remove('hidden');
+        }
+    }
+    
+    // Format emotion percentages for display
+    function formatEmotionPercentages(emotions) {
+        if (!emotions || Object.keys(emotions).length === 0) {
+            return "No emotions detected";
+        }
+        
+        const entries = Object.entries(emotions)
+            .sort((a, b) => b[1] - a[1]) // Sort by percentage (highest first)
+            .map(([emotion, percentage]) => {
+                // Capitalize the first letter of the emotion name
+                const formattedEmotion = emotion.charAt(0).toUpperCase() + emotion.slice(1);
+                return `<span class="emotion-highlight">${formattedEmotion}: ${percentage}%</span>`;
+            });
+            
+        return entries.join(", ");
+    }
+    
+    // Create and display the emotion chart
+    function createEmotionChart(data) {
+        // Get data for chart
+        const emotionCounts = data.emotion_counts || {};
+        const simplifiedEmotions = data.emotions || {}; // The 3 main emotions for the simplified chart
+        const tweetsByLabel = data.tweets_by_label || {};
+        
+        // Decide which data to use (detailed or simplified)
+        // For this implementation, we'll use the detailed emotion_counts
+        const chartData = emotionCounts;
+        
+        // Create arrays for chart
+        const labels = Object.keys(chartData);
+        const values = Object.values(chartData);
+        
+        // Define vibrant colors for emotions
+        const colors = [
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', 
+            '#FF9F40', '#8AC926', '#1982C4', '#6A4C93', '#F94144',
+            '#F3722C', '#F8961E', '#F9844A', '#F9C74F', '#90BE6D',
+            '#43AA8B', '#577590', '#277DA1', '#EF476F'
+        ];
+        
+        // Get a reference to the chart canvas
         const ctx = document.getElementById('emotionChart').getContext('2d');
-        const labels = Object.keys(emotion_counts);
-        const dataValues = Object.values(emotion_counts);
-
-        const chart = new Chart(ctx, {
+        
+        // If there's an existing chart, destroy it
+        if (window.emotionChart instanceof Chart) {
+            window.emotionChart.destroy();
+        }
+        
+        // Create the new chart
+        window.emotionChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: labels,
                 datasets: [{
-                    data: dataValues,
-                    backgroundColor: [
-                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
-                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
-                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
-                        '#FF6384'
-                    ]
+                    data: values,
+                    backgroundColor: colors.slice(0, labels.length),
+                    borderWidth: 2,
+                    borderColor: '#1e1929',
+                    hoverOffset: 15
                 }]
             },
             options: {
-                responsive: false,
+                responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'top'
+                        display: false,
+                        position: 'top',
+                        labels: {
+                            color: 'white',
+                            font: {
+                                family: 'monospace'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.raw + '%';
+                            }
+                        }
                     }
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
                 },
                 onClick: (event, elements) => {
                     if (elements.length > 0) {
                         const clickedIndex = elements[0].index;
                         const clickedLabel = labels[clickedIndex];
-                        showTweetsInModal(clickedLabel, tweets_by_label[clickedLabel]);
+                        const tweets = tweetsByLabel[clickedLabel] || [];
+                        showTweetsInModal(clickedLabel, tweets);
                     }
                 }
             }
         });
-
-        // Function to display tweets in a modal
-        function showTweetsInModal(label, tweets) {
-            // Create the modal container
-            const modal = document.createElement('div');
-            modal.id = 'tweetsModal';
-            modal.className = 'modal';
-
-            // Create the modal content
-            const modalContent = document.createElement('div');
-            modalContent.className = 'modal-content';
-
-            // Add a close button
-            const closeButton = document.createElement('span');
-            closeButton.className = 'close-button';
-            closeButton.innerHTML = '&times;';
-            closeButton.onclick = () => modal.remove();
-
-            // Add the label title
-            const title = document.createElement('h3');
-            title.textContent = `${label} Tweets`;
-
-            // Add the tweets
-            const tweetsContainer = document.createElement('div');
+        
+        // Create the legend
+        createLegend(labels, colors);
+    }
+    
+    // Create a custom legend for the chart
+    function createLegend(labels, colors) {
+        const legendContainer = document.querySelector('.legend-container');
+        legendContainer.innerHTML = '';
+        
+        labels.forEach((label, index) => {
+            const item = document.createElement('div');
+            item.className = 'legend-item';
+            item.onclick = function() {
+                const tweets = currentAnalysisData.tweets_by_label[label] || [];
+                showTweetsInModal(label, tweets);
+            };
+            
+            const colorBox = document.createElement('span');
+            colorBox.className = 'legend-color';
+            colorBox.style.backgroundColor = colors[index % colors.length];
+            
+            const labelText = document.createElement('span');
+            labelText.className = 'legend-text';
+            labelText.textContent = label;
+            
+            item.appendChild(colorBox);
+            item.appendChild(labelText);
+            legendContainer.appendChild(item);
+        });
+    }
+    
+    // Show tweets in a modal with summary
+    function showTweetsInModal(label, tweets) {
+        modalTitle.textContent = `${label} Tweets`;
+        modalTweets.innerHTML = '';
+        
+        if (tweets.length > 0) {
+            // Add summary section
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'tweets-summary';
+            
+            const summaryTitle = document.createElement('h3');
+            summaryTitle.textContent = 'Summary';
+            summaryDiv.appendChild(summaryTitle);
+            
+            const summary = generateTweetsSummary(tweets, label);
+            const summaryText = document.createElement('p');
+            summaryText.textContent = summary;
+            summaryDiv.appendChild(summaryText);
+            
+            modalTweets.appendChild(summaryDiv);
+            
+            // Add divider
+            const divider = document.createElement('hr');
+            divider.className = 'modal-divider';
+            modalTweets.appendChild(divider);
+            
+            // Add collapsible tweets section
+            const tweetsSection = document.createElement('div');
+            tweetsSection.className = 'tweets-section';
+            
+            const tweetsToggle = document.createElement('button');
+            tweetsToggle.className = 'tweets-toggle';
+            tweetsToggle.textContent = 'Show individual tweets';
+            tweetsToggle.onclick = function() {
+                const tweetsList = document.getElementById('tweets-list');
+                if (tweetsList.classList.contains('hidden')) {
+                    tweetsList.classList.remove('hidden');
+                    this.textContent = 'Hide individual tweets';
+                } else {
+                    tweetsList.classList.add('hidden');
+                    this.textContent = 'Show individual tweets';
+                }
+            };
+            
+            tweetsSection.appendChild(tweetsToggle);
+            
+            const tweetsList = document.createElement('div');
+            tweetsList.id = 'tweets-list';
+            tweetsList.className = 'tweets-list hidden';
+            
             tweets.forEach(tweet => {
                 const tweetDiv = document.createElement('div');
+                tweetDiv.className = 'tweet-item';
                 tweetDiv.textContent = tweet;
-                tweetsContainer.appendChild(tweetDiv);
+                tweetsList.appendChild(tweetDiv);
             });
-
-            // Append everything to the modal content
-            modalContent.appendChild(closeButton);
-            modalContent.appendChild(title);
-            modalContent.appendChild(tweetsContainer);
-
-            // Append the modal content to the modal
-            modal.appendChild(modalContent);
-
-            // Append the modal to the body
-            document.body.appendChild(modal);
+            
+            tweetsSection.appendChild(tweetsList);
+            modalTweets.appendChild(tweetsSection);
+        } else {
+            const noTweets = document.createElement('div');
+            noTweets.className = 'tweet-item';
+            noTweets.textContent = 'No tweets available for this emotion.';
+            modalTweets.appendChild(noTweets);
         }
-    } catch (error) {
-        resultsDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+        
+        tweetModal.classList.remove('hidden');
+    }
+    
+    // Generate a summary of tweets for a given emotion
+    function generateTweetsSummary(tweets, emotion) {
+        // Basic stats
+        const tweetCount = tweets.length;
+        const averageLength = Math.round(tweets.reduce((sum, tweet) => sum + tweet.length, 0) / tweetCount);
+        
+        // Find common words or themes (basic implementation)
+        const commonWords = findCommonWords(tweets);
+        
+        // Generate summary
+        let summary = `Found ${tweetCount} tweets expressing ${emotion.toLowerCase()}. `;
+        summary += `Average tweet length is ${averageLength} characters. `;
+        
+        if (commonWords.length > 0) {
+            summary += `Common themes include: ${commonWords.join(', ')}. `;
+        }
+        
+        // Add time-based insights if available
+        if (tweetCount > 2) {
+            summary += `These emotional tweets represent ${Math.round((tweetCount / currentAnalysisData.total_tweets) * 100)}% of the user's analyzed activity.`;
+        }
+        
+        return summary;
+    }
+    
+    // Find common significant words in tweets
+    function findCommonWords(tweets) {
+        // Combine all tweets into one string
+        const text = tweets.join(' ').toLowerCase();
+        
+        // Split into words and count frequency
+        const words = text.match(/\b[a-z]{4,}\b/g) || [];
+        const stopWords = ['this', 'that', 'with', 'from', 'have', 'just', 'your', 'they', 'what', 'when', 'will', 'about', 'there', 'their', 'would', 'could', 'should'];
+        
+        const wordCounts = {};
+        
+        words.forEach(word => {
+            if (!stopWords.includes(word)) {
+                wordCounts[word] = (wordCounts[word] || 0) + 1;
+            }
+        });
+        
+        // Sort by frequency
+        const sortedWords = Object.entries(wordCounts)
+            .filter(([word, count]) => count > 1) // Only words that appear more than once
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5) // Top 5 most common words
+            .map(([word]) => word);
+        
+        return sortedWords;
     }
 });

@@ -1,192 +1,286 @@
 /* General styles */
-:root {
-    --primary-color: #6b46c1;
-    --primary-light: #8a6aea;
-    --primary-dark: #553098;
-    --accent-color: #38b2ac;
-    --accent-light: #4fd1ca;
-    --background-color: #f0f4ff;
-    --card-bg: #ffffff;
-    --text-color: #2d3748;
-    --text-light: #4a5568;
-    --danger: #e53e3e;
-    --danger-dark: #c53030;
-    --gradient-start: #7f69fa;
-    --gradient-end: #6b46c1;
-}
-
 body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    font-family: 'Roboto', 'Open Sans', sans-serif;
+    background-color: #1e1929;
+    color: white;
+    font-family: monospace;
     text-align: center;
-    padding: 40px 20px;
-    transition: all 0.5s ease;
+    padding: 80px 20px;
+    transition: background-color 0.5s ease;
     margin: 0;
     line-height: 1.6;
 }
 
+body.switch {
+    background-color: #4d3f57;
+}
+
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Button styles */
 .button {
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background-color: #7c69a3;
     color: white;
     padding: 12px 24px;
     margin-top: 30px;
     border: none;
-    border-radius: 8px;
-    font-family: inherit;
+    border-radius: 6px;
+    font-family: monospace;
     cursor: pointer;
     font-size: 16px;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease;
     display: block;
     margin: 20px auto;
-    box-shadow: 0 4px 6px rgba(107, 70, 193, 0.2);
 }
 
 .button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(107, 70, 193, 0.3);
-}
-
-.button:active {
-    transform: translateY(0);
+    background-color: #9780c4;
 }
 
 .end-button {
-    background: linear-gradient(135deg, #f56565, var(--danger));
+    background-color: #f44336;
 }
 
 .end-button:hover {
-    box-shadow: 0 6px 12px rgba(229, 62, 62, 0.3);
+    background-color: #d32f2f;
 }
 
 /* Form styles */
 .search-box {
-    background-color: var(--card-bg);
-    border-radius: 12px;
+    background-color: white;
+    border-radius: 8px;
     width: 80%;
     max-width: 600px;
-    padding: 12px 16px;
+    padding: 10px;
     margin: 20px auto;
     display: flex;
     align-items: center;
-    color: var(--text-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(107, 70, 193, 0.1);
-}
-
-.search-box:focus-within {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(107, 70, 193, 0.15);
-    border-color: var(--primary-light);
+    color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .search-box .icon {
-    margin-right: 12px;
-    color: var(--primary-color);
-    font-size: 18px;
+    margin-right: 10px;
+    color: #555;
 }
 
 input[type="text"] {
     border: none;
     flex: 1;
     padding: 10px;
-    font-family: inherit;
+    font-family: monospace;
     font-size: 16px;
     outline: none;
-    color: var(--text-color);
 }
 
 a {
-    color: var(--primary-color);
+    color: #a2d6f9;
     text-decoration: none;
     transition: color 0.3s ease;
-    font-weight: 500;
 }
 
 a:hover {
-    color: var(--primary-light);
+    color: #d4eaff;
     text-decoration: underline;
 }
 
 /* Results container */
 .result-container {
     margin: 30px auto;
-    padding: 25px;
-    background-color: var(--card-bg);
-    border-radius: 16px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
     max-width: 700px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(107, 70, 193, 0.1);
 }
 
 /* Organizations section */
 .organizations {
     margin-top: 40px;
-    background-color: var(--card-bg);
-    padding: 25px;
-    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border-top: 4px solid var(--accent-color);
 }
 
 /* Headings */
 h2 {
     margin-bottom: 25px;
-    color: var(--primary-dark);
-    font-weight: 700;
+    color: #a2d6f9;
 }
 
 h3 {
-    color: var(--primary-color);
-    font-weight: 600;
+    color: #a2d6f9;
 }
 
 /* Screen containers */
 #screen1, #screen2, #screen3 {
     max-width: 800px;
     margin: 0 auto;
-    padding: 30px;
-    background-color: var(--card-bg);
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 /* Chart styles */
 .chart-wrapper {
-    width: 300px;
+    position: relative;
+    width: 100%;
     height: 300px;
     margin: 0 auto;
-    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: visible;
 }
 
 .chart-container {
-    margin: 30px auto;
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 12px;
-    border: 1px solid rgba(107, 70, 193, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #2a2339; /* Match site theme */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    display: block;
 }
 
-.chart-title, .chart-subtitle {
-    text-align: center;
-    margin-bottom: 5px;
+/* Simplified chart styling */
+#chartContainer {
+    width: 100%;
+    height: 350px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    position: relative;
+    z-index: 5;
 }
 
-.chart-subtitle {
-    color: var(--primary-light);
-    font-weight: normal;
-    margin-bottom: 20px;
+#emotionChart {
+    width: 100% !important;
+    height: 300px !important;
+    margin: 0 auto;
+    display: block !important;
+    position: relative;
+    z-index: 10;
+    background: #222 !important;
+    border: 1px solid #fff !important;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+/* Fix hidden class handling */
+.hidden {
+    display: none !important;
+}
+
+.chart-container:not(.hidden),
+#chartContainer:not(.hidden) {
+    display: block !important;
+}
+
+/* Debugging styles */
+#chart-debug {
+    padding: 5px;
+    font-size: 12px;
+    color: #ff9800;
+    text-align: left;
+    margin-bottom: 10px;
+    min-height: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid #ff9800;
+    border-radius: 4px;
+    overflow: auto;
+    display: block !important;
+}
+
+/* Chart Debug Visualization */
+.debug-mode .chart-wrapper {
+    border: 3px dashed red !important;
+}
+
+.debug-mode .chart-container {
+    border: 3px dashed yellow !important;
+}
+
+.debug-mode #chartContainer {
+    border: 3px dashed green !important;
+    position: relative;
+}
+
+.debug-mode #emotionChart {
+    border: 3px dashed blue !important;
+    background-color: rgba(0, 0, 255, 0.1) !important;
+}
+
+/* Fixed pseudo-elements for debugging labels */
+.debug-mode .chart-wrapper::before {
+    content: "chart-wrapper";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: #333;
+    color: white;
+    padding: 2px 5px;
+    font-size: 10px;
+    z-index: 100;
+}
+
+.debug-mode .chart-container::before {
+    content: "chart-container";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: #333;
+    color: white;
+    padding: 2px 5px;
+    font-size: 10px;
+    z-index: 100;
+}
+
+.debug-mode #chartContainer::before {
+    content: "chartContainer";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: #333;
+    color: white;
+    padding: 2px 5px;
+    font-size: 10px;
+    z-index: 100;
+}
+
+.debug-mode #emotionChart::before {
+    content: "emotionChart";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: #333;
+    color: white;
+    padding: 2px 5px;
+    font-size: 10px;
+    z-index: 100;
+}
+
+/* Chart Dimension Debug */
+#chart-dimensions {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 1000;
+    text-align: left;
+    max-width: 300px;
+    display: none;
+}
+
+.debug-mode #chart-dimensions {
+    display: block !important;
 }
 
 /* Legend styles */
@@ -195,38 +289,25 @@ h3 {
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    margin: 8px 12px;
+    margin: 5px 10px;
     cursor: pointer;
-    transition: transform 0.2s;
-    padding: 6px 10px;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.7);
-}
-
-.legend-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .legend-color {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin-right: 8px;
     display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    border-radius: 3px;
 }
 
-.legend-text {
+.legend-label {
     font-size: 14px;
-    font-weight: 500;
 }
 
 /* Emotion examples styles */
@@ -236,24 +317,21 @@ h3 {
 }
 
 .emotion-bubble {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    padding: 16px;
-    border-radius: 12px;
-    margin: 12px 0;
+    background-color: rgba(60, 60, 60, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-left: 4px solid var(--primary-light);
 }
 
 .emotion-description {
     text-align: center;
     font-size: 16px;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 20px;
-    color: var(--text-light);
 }
 
 .text-highlight {
@@ -262,18 +340,15 @@ h3 {
 
 /* Emotion color highlights */
 .anger-highlight {
-    color: #e53e3e;
-    font-weight: 600;
+    color: #e05d5d;
 }
 
 .joy-highlight {
-    color: #ecc94b;
-    font-weight: 600;
+    color: #f8c156;
 }
 
 .disgust-highlight {
-    color: #38a169;
-    font-weight: 600;
+    color: #7ec17e;
 }
 
 /* Modal for tweet examples */
@@ -283,12 +358,11 @@ h3 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    backdrop-filter: blur(5px);
 }
 
 .modal.hidden {
@@ -296,16 +370,16 @@ h3 {
 }
 
 .modal-content {
-    background-color: var(--card-bg);
-    padding: 30px;
-    border-radius: 16px;
+    background-color: #2a2339;
+    padding: 25px;
+    border-radius: 10px;
     width: 80%;
     max-width: 600px;
     max-height: 80vh;
     overflow-y: auto;
     position: relative;
-    border: 1px solid rgba(107, 70, 193, 0.2);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid #483d5e;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .close-button {
@@ -315,19 +389,11 @@ h3 {
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
-    color: var(--primary-color);
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.2s ease;
+    color: #a2d6f9;
 }
 
 .close-button:hover {
-    background-color: rgba(107, 70, 193, 0.1);
-    color: var(--primary-dark);
+    color: #d4eaff;
 }
 
 .modal-tweets-container {
@@ -335,29 +401,23 @@ h3 {
 }
 
 .tweet-item {
-    background-color: var(--background-color);
-    padding: 16px;
-    margin-bottom: 12px;
-    border-radius: 12px;
+    background-color: #3a2e4d;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
     text-align: left;
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid #7c69a3;
     word-break: break-word;
-    transition: transform 0.2s ease;
-}
-
-.tweet-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Loading animation */
 .loading {
     display: inline-block;
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(107, 70, 193, 0.3);
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    border-top-color: var(--primary-color);
+    border-top-color: #a2d6f9;
     animation: spin 1s ease-in-out infinite;
     margin: 0 auto;
 }
@@ -379,25 +439,24 @@ h3 {
 }
 
 .loading-text {
-    color: var(--primary-color);
-    margin-top: 15px;
+    color: #a2d6f9;
+    margin-top: 12px;
     font-size: 16px;
-    font-weight: 500;
 }
 
 .loading-bar-container {
-    background-color: rgba(107, 70, 193, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     height: 8px;
-    border-radius: 6px;
+    border-radius: 4px;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
 }
 
 .loading-bar {
-    background: linear-gradient(90deg, var(--primary-light), var(--accent-color));
+    background-color: #a2d6f9;
     height: 100%;
-    border-radius: 6px;
+    border-radius: 4px;
     width: 0%;
     position: absolute;
     animation: loading-animation 1.5s infinite ease-in-out;
@@ -419,69 +478,107 @@ h3 {
 
 /* Tweet Summary Feature Styles */
 .tweets-summary {
-    margin-bottom: 18px;
-    padding: 15px;
-    background-color: var(--background-color);
-    border-radius: 12px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
     text-align: left;
-    border-left: 4px solid var(--accent-color);
 }
 
 .tweets-summary h3 {
     margin-top: 0;
     font-size: 16px;
-    color: var(--primary-color);
+    color: #9c6ade;
 }
 
 .modal-divider {
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, transparent, var(--primary-light), transparent);
-    margin: 20px 0;
-    opacity: 0.3;
+    background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    margin: 15px 0;
 }
 
 .tweets-toggle {
-    background-color: var(--primary-color);
+    background-color: #573b82;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s;
 }
 
 .tweets-toggle:hover {
-    background-color: var(--primary-light);
-    transform: translateY(-2px);
-    box-shadow: 0 3px 8px rgba(107, 70, 193, 0.3);
+    background-color: #6a4c93;
 }
 
 .tweets-list {
-    margin-top: 15px;
+    margin-top: 12px;
     max-height: 300px;
     overflow-y: auto;
-    padding-right: 10px;
-}
-
-.tweets-list::-webkit-scrollbar {
-    width: 6px;
-}
-
-.tweets-list::-webkit-scrollbar-track {
-    background: rgba(107, 70, 193, 0.1);
-    border-radius: 10px;
-}
-
-.tweets-list::-webkit-scrollbar-thumb {
-    background: var(--primary-light);
-    border-radius: 10px;
 }
 
 .tweets-list.hidden {
     display: none;
+}
+
+/* Tweet card styling */
+.tweet-card {
+    background-color: #fff;
+    border: 1px solid #e1e8ed;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Date and time display */
+.tweet-datetime {
+    color: #657786;
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.tweet-datetime::before {
+    content: '🕒';
+    margin-right: 5px;
+}
+
+.tweet-content {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.tweet-analysis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    border-top: 1px solid #e1e8ed;
+    padding-top: 10px;
+}
+
+.tweet-emotion, .tweet-sentiment, .tweet-tone {
+    background-color: #f5f8fa;
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 14px;
+    color: #1da1f2;
+}
+
+/* Error styling */
+.error {
+    color: #e74c3c;
+    padding: 10px;
+    background-color: #fadbd8;
+    border-radius: 4px;
+    margin: 10px 0;
+    border-left: 4px solid #e74c3c;
 }
 
 /* Responsive design */
@@ -491,19 +588,68 @@ h3 {
     }
     
     body {
-        padding: 20px 10px;
-    }
-    
-    #screen1, #screen2, #screen3 {
-        padding: 20px 15px;
+        padding: 40px 10px;
     }
     
     .legend-item {
         margin: 5px;
     }
-    
-    .modal-content {
-        width: 90%;
-        padding: 20px;
-    }
+}
+
+/* CSS-based visualization styles */
+.emotion-visualization {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.emotion-bar {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.emotion-label {
+    width: 80px;
+    text-align: right;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.emotion-meter {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.emotion-value {
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+}
+
+.emotion-text {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+/* Color for each emotion */
+.emotion-anger {
+    background-color: #FF6384; /* Red */
+}
+
+.emotion-joy {
+    background-color: #36A2EB; /* Blue */
+}
+
+.emotion-disgust {
+    background-color: #FFCE56; /* Yellow */
 }
