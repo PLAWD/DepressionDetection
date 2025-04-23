@@ -280,6 +280,7 @@ def analyze_tweets():
             timestamp = preprocessed_tweets[i].get("date", "")
             formatted_date = "Unknown Date"
             formatted_time = "Unknown Time"
+            is_insomnia_hr = False
             
             if timestamp:
                 try:
@@ -287,8 +288,12 @@ def analyze_tweets():
                     dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
                     formatted_date = dt.strftime("%b %d, %Y")
                     formatted_time = dt.strftime("%I:%M %p")
-                except:
-                    pass
+                    
+                    # Check if the post was during insomnia hours (10 PM - 6 AM)
+                    hour = dt.hour
+                    is_insomnia_hr = (hour >= 22 or hour < 6)
+                except Exception as e:
+                    print(f"Error parsing timestamp: {e}")
             
             labeled_tweets.append({
                 "text": cleaned_text,
@@ -305,6 +310,7 @@ def analyze_tweets():
                 "created_at": timestamp,
                 "formatted_date": formatted_date,
                 "formatted_time": formatted_time,
+                "is_insomnia_hr": is_insomnia_hr,  # Add the insomnia hour flag
                 "emotion_dimensions": emotion_dims
             })
             
