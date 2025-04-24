@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const analyzeTweetsBtn = document.getElementById('analyzeTweetsBtn');
     const resultContainer = document.getElementById('resultContainer');
     const resultText = document.getElementById('resultText');
-    const chartContainer = document.getElementById('chartContainer');
     const loadingContainer = document.getElementById('loadingContainer');
     const usernameInput = document.getElementById('username');
     const tweetModal = document.getElementById('tweetModal');
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Store analysis data
     let currentAnalysisData = null;
     
-    // Store chart instances globally so they can be properly destroyed
+    // Store chart instance globally so it can be destroyed before creating a new one
     let emotionPieChart = null;
     
     // Debugging Helper
@@ -26,23 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (chartDebug) {
             chartDebug.innerHTML += `<div>${message}</div>`;
         }
-    }
-    
-    // Verify Chart.js is available
-    if (typeof Chart === 'undefined') {
-        logDebug('WARNING: Chart.js not loaded! Adding it dynamically...');
-        
-        // Dynamically add Chart.js if not loaded
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js';
-        script.async = false;
-        document.head.appendChild(script);
-        
-        script.onload = function() {
-            logDebug('Chart.js loaded dynamically');
-        };
-    } else {
-        logDebug('Chart.js loaded successfully');
     }
     
     // Add event listeners
@@ -56,9 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Show loading animation
-            loadingContainer.classList.remove('hidden');
-            resultContainer.classList.add('hidden');
-            chartContainer.classList.add('hidden');
+            if (loadingContainer) {
+                loadingContainer.classList.remove('hidden');
+            }
+            if (resultContainer) {
+                resultContainer.classList.add('hidden');
+            }
             
             // Make API request with better error handling
             fetch('/api/tweets', {
@@ -88,18 +73,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Received data:", data);
                 
                 // Process successful response
-                loadingContainer.classList.add('hidden');
-                resultContainer.classList.remove('hidden');
+                if (loadingContainer) {
+                    loadingContainer.classList.add('hidden');
+                }
+                if (resultContainer) {
+                    resultContainer.classList.remove('hidden');
+                }
                 
                 // Display result text
-                resultText.textContent = data.result;
+                if (resultText) {
+                    resultText.textContent = data.result;
+                }
                 
                 // Display the emotion visualization if data exists
                 if (data.emotions && Object.keys(data.emotions).length > 0) {
                     console.log('Creating visualization with data:', data.emotions);
-                    visualizeEmotions(data.emotions);
                     renderEmotionChart(data.emotions);
-                    chartContainer.classList.remove('hidden'); // Make sure chart is visible
                 } else {
                     console.warn('No emotion data received from API');
                 }
@@ -110,25 +99,34 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Error:', error);
                 logDebug(`ERROR: ${error.message}`);
-                loadingContainer.classList.add('hidden');
-                resultContainer.classList.remove('hidden');
-                chartContainer.classList.add('hidden');
-                resultText.textContent = 
-                    `Error analyzing tweets: ${error.message || 'Please check if the username exists or try again later.'}`;
+                if (loadingContainer) {
+                    loadingContainer.classList.add('hidden');
+                }
+                if (resultContainer) {
+                    resultContainer.classList.remove('hidden');
+                }
+                if (resultText) {
+                    resultText.textContent = 
+                        `Error analyzing tweets: ${error.message || 'Please check if the username exists or try again later.'}`;
+                }
             });
         });
     }
     
     if (closeButton) {
         closeButton.addEventListener('click', function() {
-            tweetModal.classList.add('hidden');
+            if (tweetModal) {
+                tweetModal.classList.add('hidden');
+            }
         });
     }
     
     // When clicking outside the modal, close it
     window.addEventListener('click', function(event) {
         if (event.target == tweetModal) {
-            tweetModal.classList.add('hidden');
+            if (tweetModal) {
+                tweetModal.classList.add('hidden');
+            }
         }
     });
     
@@ -147,70 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
         return entries.join(", ");
-    }
-    
-    // Replace chart setup with a simple CSS-based visualization
-    function visualizeEmotions(emotionData) {
-        console.log('Visualizing emotions with data:', emotionData);
-        
-        // Get the container
-        const container = document.getElementById('emotionVisualization');
-        if (!container) {
-            console.error('Visualization container not found');
-            return;
-        }
-        
-        // Clear previous content
-        container.innerHTML = '';
-        
-        // Validate data
-        if (!emotionData || Object.keys(emotionData).length === 0) {
-            container.innerHTML = '<p>No emotion data available</p>';
-            return;
-        }
-        
-        // Define colors for emotions
-        const colors = {
-            'anger': '#FF6384', // Red
-            'joy': '#36A2EB',   // Blue
-            'disgust': '#FFCE56' // Yellow
-        };
-        
-        // Create a bar for each emotion
-        Object.entries(emotionData).forEach(([emotion, percentage]) => {
-            // Create container for this emotion
-            const barContainer = document.createElement('div');
-            barContainer.className = 'emotion-bar';
-            
-            // Create label
-            const label = document.createElement('div');
-            label.className = 'emotion-label';
-            label.textContent = emotion.charAt(0).toUpperCase() + emotion.slice(1);
-            
-            // Create meter
-            const meter = document.createElement('div');
-            meter.className = 'emotion-meter';
-            
-            // Create value bar
-            const valueBar = document.createElement('div');
-            valueBar.className = `emotion-value emotion-${emotion}`;
-            valueBar.style.width = `${percentage}%`;
-            valueBar.style.backgroundColor = colors[emotion] || '#999999';
-            
-            // Create text display
-            const text = document.createElement('div');
-            text.className = 'emotion-text';
-            text.textContent = `${percentage}%`;
-            
-            // Assemble the components
-            meter.appendChild(valueBar);
-            meter.appendChild(text);
-            barContainer.appendChild(label);
-            barContainer.appendChild(meter);
-            container.appendChild(barContainer);
-        });
-        
-        console.log('Emotion visualization created successfully');
     }
     
     // Create custom legend
@@ -285,10 +219,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show tweets in a modal with summary
     function showTweetsInModal(label, tweets) {
-        modalTitle.textContent = `${label} Tweets`;
-        modalTweets.innerHTML = '';
+        if (modalTitle) {
+            modalTitle.textContent = `${label} Tweets`;
+        }
+        if (modalTweets) {
+            modalTweets.innerHTML = '';
+        }
         
-        if (tweets.length > 0) {
+        if (tweets.length > 0 && currentAnalysisData && currentAnalysisData.results) {
             // Add summary section
             const summaryDiv = document.createElement('div');
             summaryDiv.className = 'tweets-summary';
@@ -302,12 +240,16 @@ document.addEventListener('DOMContentLoaded', function() {
             summaryText.textContent = summary;
             summaryDiv.appendChild(summaryText);
             
-            modalTweets.appendChild(summaryDiv);
+            if (modalTweets) {
+                modalTweets.appendChild(summaryDiv);
+            }
             
             // Add divider
             const divider = document.createElement('hr');
             divider.className = 'modal-divider';
-            modalTweets.appendChild(divider);
+            if (modalTweets) {
+                modalTweets.appendChild(divider);
+            }
             
             // Add collapsible tweets section
             const tweetsSection = document.createElement('div');
@@ -318,10 +260,10 @@ document.addEventListener('DOMContentLoaded', function() {
             tweetsToggle.textContent = 'Show individual tweets';
             tweetsToggle.onclick = function() {
                 const tweetsList = document.getElementById('tweets-list');
-                if (tweetsList.classList.contains('hidden')) {
+                if (tweetsList && tweetsList.classList.contains('hidden')) {
                     tweetsList.classList.remove('hidden');
                     this.textContent = 'Hide individual tweets';
-                } else {
+                } else if (tweetsList) {
                     tweetsList.classList.add('hidden');
                     this.textContent = 'Show individual tweets';
                 }
@@ -333,23 +275,85 @@ document.addEventListener('DOMContentLoaded', function() {
             tweetsList.id = 'tweets-list';
             tweetsList.className = 'tweets-list hidden';
             
+            // Find the full tweet details from the results array
+            const tweetDetails = {};
+            if (currentAnalysisData.results) {
+                currentAnalysisData.results.forEach(result => {
+                    tweetDetails[result.original_text] = result;
+                });
+            }
+            
             tweets.forEach(tweet => {
                 const tweetDiv = document.createElement('div');
                 tweetDiv.className = 'tweet-item';
-                tweetDiv.textContent = tweet;
+                
+                // Get detailed info if available
+                const details = tweetDetails[tweet];
+                
+                // Create tweet content with enhanced details
+                if (details) {
+                    // Date and time
+                    const dateTimeDiv = document.createElement('div');
+                    dateTimeDiv.className = 'tweet-datetime';
+                    dateTimeDiv.innerHTML = `<strong>${details.formatted_date} at ${details.formatted_time}</strong>`;
+                    tweetDiv.appendChild(dateTimeDiv);
+                    
+                    // Tweet text
+                    const tweetTextDiv = document.createElement('div');
+                    tweetTextDiv.className = 'tweet-content';
+                    tweetTextDiv.textContent = tweet;
+                    tweetDiv.appendChild(tweetTextDiv);
+                    
+                    // Divider
+                    const infoSeparator = document.createElement('hr');
+                    infoSeparator.className = 'tweet-separator';
+                    tweetDiv.appendChild(infoSeparator);
+                    
+                    // Analysis section
+                    const analysisDiv = document.createElement('div');
+                    analysisDiv.className = 'tweet-analysis';
+                    
+                    // Polarity info
+                    const polarityDiv = document.createElement('span');
+                    polarityDiv.className = 'tweet-sentiment';
+                    polarityDiv.textContent = `${details.polarity_label} (${details.polarity})`;
+                    analysisDiv.appendChild(polarityDiv);
+                    
+                    // Tone info
+                    const toneDiv = document.createElement('span');
+                    toneDiv.className = 'tweet-tone';
+                    let toneText = `Tone: ${details.tone.primary.charAt(0).toUpperCase() + details.tone.primary.slice(1)}`;
+                    if (details.tone.secondary) {
+                        toneText += ` / ${details.tone.secondary.charAt(0).toUpperCase() + details.tone.secondary.slice(1)}`;
+                    }
+                    toneDiv.textContent = toneText;
+                    analysisDiv.appendChild(toneDiv);
+                    
+                    tweetDiv.appendChild(analysisDiv);
+                } else {
+                    // Fallback if details not available
+                    tweetDiv.textContent = tweet;
+                }
+                
                 tweetsList.appendChild(tweetDiv);
             });
             
             tweetsSection.appendChild(tweetsList);
-            modalTweets.appendChild(tweetsSection);
+            if (modalTweets) {
+                modalTweets.appendChild(tweetsSection);
+            }
         } else {
             const noTweets = document.createElement('div');
             noTweets.className = 'tweet-item';
             noTweets.textContent = 'No tweets available for this emotion.';
-            modalTweets.appendChild(noTweets);
+            if (modalTweets) {
+                modalTweets.appendChild(noTweets);
+            }
         }
         
-        tweetModal.classList.remove('hidden');
+        if (tweetModal) {
+            tweetModal.classList.remove('hidden');
+        }
     }
     
     // Generate a summary of tweets for a given emotion
@@ -404,213 +408,91 @@ document.addEventListener('DOMContentLoaded', function() {
         return sortedWords;
     }
     
-    // Function to safely destroy existing chart before creating a new one
-    function destroyExistingChart() {
+    // Create emotion chart dynamically
+    function renderEmotionChart(emotionData) {
+        // Destroy previous chart if it exists
         if (emotionPieChart) {
             emotionPieChart.destroy();
             emotionPieChart = null;
-            console.log("Existing chart destroyed");
         }
-    }
-    
-    // Create a simplified test chart to verify functionality
-    function createTestChart() {
-        try {
-            // First destroy any existing chart
-            destroyExistingChart();
-            
-            const ctx = document.getElementById('emotionChart').getContext('2d');
-            
-            emotionPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Test 1', 'Test 2', 'Test 3'],
-                    datasets: [{
-                        data: [33, 33, 34],
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
-            console.log("Test chart created successfully");
-        } catch (error) {
-            console.error("Error creating test chart:", error);
-        }
-    }
-    
-    // Add a test button to the page
-    function addTestChartButton() {
-        const button = document.createElement('button');
-        button.textContent = 'Test Chart';
-        button.className = 'button';
-        button.style.marginTop = '20px';
-        button.onclick = createTestChart;
-        
-        // Add to page
-        const container = document.getElementById('resultContainer');
-        if (container) {
-            container.appendChild(button);
-        }
-    }
-    
-    // Add test function to window for console testing
-    window.testChart = createTestChart;
-    
-    // Add test button to page
-    addTestChartButton();
 
-    // Create emotion chart dynamically
-    function renderEmotionChart(emotionData) {
-        try {
-            // First destroy any existing chart
-            destroyExistingChart();
-            
-            const ctx = document.getElementById('emotionChart').getContext('2d');
-            const labels = Object.keys(emotionData);
-            const values = Object.values(emotionData);
-            
-            // Generate better colors with more contrast
-            const backgroundColors = generateBetterColors(labels.length);
-            
-            emotionPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: values,
-                        backgroundColor: backgroundColors,
-                        borderColor: 'rgba(255, 255, 255, 0.5)',
-                        borderWidth: 2,
-                        hoverBackgroundColor: backgroundColors.map(color => lightenColor(color, 10)),
-                        hoverBorderColor: 'white',
-                        hoverBorderWidth: 3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    layout: {
-                        padding: 20
+        const canvas = document.getElementById('emotionPieChart');
+        if (!canvas) {
+            console.error("Pie chart canvas not found");
+            return;
+        }
+
+        // Explicitly set canvas size to avoid resizing issues
+        canvas.width = 400;
+        canvas.height = 400;
+        canvas.style.width = "400px";
+        canvas.style.height = "400px";
+
+        const ctx = canvas.getContext('2d');
+        const labels = Object.keys(emotionData);
+        const values = Object.values(emotionData);
+
+        const backgroundColors = [
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
+            '#FF9F40', '#C9CBCF', '#FF6384', '#36A2EB', '#FFCE56',
+            '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF', '#FF6384',
+            '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+        ];
+
+        emotionPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: backgroundColors.slice(0, labels.length),
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: false, // Prevent Chart.js from resizing the canvas
+                maintainAspectRatio: true, // Keep aspect ratio
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            color: '#fff', // Set legend label color to white
+                            font: {
+                                size: 14
+                            },
+                            padding: 15
+                        }
                     },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom',
-                            labels: {
-                                color: 'white',
-                                font: {
-                                    size: 14
-                                },
-                                padding: 15
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.raw}%`;
                             }
                         },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw}%`;
-                                }
-                            },
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: 12,
-                            cornerRadius: 6
-                        }
-                    },
-                    // Restore click functionality
-                    onClick: (event, elements) => {
-                        if (elements.length > 0) {
-                            const index = elements[0].index;
-                            const label = labels[index];
-                            const tweets = currentAnalysisData.tweets_by_label[label] || [];
-                            showTweetsInModal(label, tweets);
-                        }
-                    },
-                    animation: {
-                        animateRotate: true,
-                        animateScale: true,
-                        duration: 1000,
-                        easing: 'easeOutQuart'
+                        bodyColor: '#fff', // Tooltip text color
+                        titleColor: '#fff' // Tooltip title color
                     }
+                },
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const label = labels[index];
+                        const tweets = currentAnalysisData && currentAnalysisData.tweets_by_label
+                            ? currentAnalysisData.tweets_by_label[label] || []
+                            : [];
+                        showTweetsInModal(label, tweets);
+                    }
+                },
+                animation: {
+                    animateRotate: true,
+                    animateScale: true,
+                    duration: 1000,
+                    easing: 'easeOutQuart'
                 }
-            });
-            
-            // Create interactive legend
-            createCustomLegend(labels, backgroundColors, values);
-            
-            console.log("Enhanced emotion chart created successfully");
-        } catch (error) {
-            console.error("Error creating emotion chart:", error);
-            
-            // Fall back to CSS visualization if Chart.js fails
-            visualizeEmotions(emotionData);
-        }
-    }
-
-    // Generate better colors with more contrast
-    function generateBetterColors(count) {
-        // Vibrant colors with good contrast
-        const colors = [
-            '#FF6384', // Red
-            '#36A2EB', // Blue
-            '#FFCE56', // Yellow
-            '#4BC0C0', // Teal
-            '#9966FF', // Purple
-            '#FF9F40', // Orange
-            '#32CD32', // Lime Green
-            '#FF69B4', // Hot Pink
-            '#1E90FF', // Dodger Blue
-            '#FFA07A'  // Light Salmon
-        ];
-        
-        // If we need more colors than in our preset list
-        if (count > colors.length) {
-            // Generate additional colors by rotating hue
-            for (let i = colors.length; i < count; i++) {
-                const hue = (i * 137) % 360; // Golden angle approximation for even distribution
-                colors.push(`hsl(${hue}, 70%, 60%)`);
             }
-        }
-        
-        return colors.slice(0, count);
-    }
+        });
 
-    // Utility to lighten a color for hover effects
-    function lightenColor(color, percent) {
-        // For hex colors
-        if (color.startsWith('#')) {
-            let r = parseInt(color.slice(1, 3), 16);
-            let g = parseInt(color.slice(3, 5), 16);
-            let b = parseInt(color.slice(5, 7), 16);
-            
-            r = Math.min(255, r + (255 - r) * (percent / 100));
-            g = Math.min(255, g + (255 - g) * (percent / 100));
-            b = Math.min(255, b + (255 - b) * (percent / 100));
-            
-            return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
-        }
-        // For rgb/rgba colors
-        else if (color.startsWith('rgb')) {
-            const rgbMatch = color.match(/(\d+),\s*(\d+),\s*(\d+)/);
-            if (rgbMatch) {
-                let r = parseInt(rgbMatch[1]);
-                let g = parseInt(rgbMatch[2]);
-                let b = parseInt(rgbMatch[3]);
-                
-                r = Math.min(255, r + (255 - r) * (percent / 100));
-                g = Math.min(255, g + (255 - g) * (percent / 100));
-                b = Math.min(255, b + (255 - b) * (percent / 100));
-                
-                return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
-            }
-        }
-        // For hsl colors or fallback
-        return color;
+        console.log("Emotion chart created successfully");
     }
 });

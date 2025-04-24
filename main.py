@@ -11,6 +11,11 @@ from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
 
 # Import our custom sentiment analyzer
 from sentiment_analyzer import analyze_sentiment
+# Import the enhanced version
+from enhanced_sentiment_analyzer import analyze_sentiment_enhanced
+
+# Set this to True to use the enhanced analyzer, False to use the original
+USE_ENHANCED_ANALYZER = True
 
 # Create Flask app with modified static file handling
 app = Flask(__name__,
@@ -85,8 +90,11 @@ def analyze_text():
         if not text:
             return jsonify({"error": "Text is required"}), 400
         
-        # Calculate polarity using our advanced sentiment analyzer
-        polarity, polarity_label, confidence, emotion_dimensions, primary_tone, secondary_tone = analyze_sentiment(text)
+        # Calculate polarity using our sentiment analyzer (original or enhanced)
+        if USE_ENHANCED_ANALYZER:
+            polarity, polarity_label, confidence, emotion_dimensions, primary_tone, secondary_tone = analyze_sentiment_enhanced(text)
+        else:
+            polarity, polarity_label, confidence, emotion_dimensions, primary_tone, secondary_tone = analyze_sentiment(text)
         
         # Preprocess the text
         cleaned_text = clean_text(text)
@@ -251,8 +259,12 @@ def analyze_tweets():
             original_text = preprocessed_tweets[i]["original_text"]
             cleaned_text = texts[i]
             
-            # Calculate polarity using our advanced sentiment analyzer
-            polarity, polarity_label, sent_confidence, emotion_dims, primary_tone, secondary_tone = analyze_sentiment(original_text)
+            # Calculate polarity using our sentiment analyzer (original or enhanced)
+            if USE_ENHANCED_ANALYZER:
+                polarity, polarity_label, sent_confidence, emotion_dims, primary_tone, secondary_tone = analyze_sentiment_enhanced(original_text)
+            else:
+                polarity, polarity_label, sent_confidence, emotion_dims, primary_tone, secondary_tone = analyze_sentiment(original_text)
+            
             total_polarity += polarity
             
             # Accumulate emotion dimensions
@@ -268,6 +280,7 @@ def analyze_tweets():
             timestamp = preprocessed_tweets[i].get("date", "")
             formatted_date = "Unknown Date"
             formatted_time = "Unknown Time"
+            is_insomnia_hr = False
             
             if timestamp:
                 try:
@@ -275,8 +288,12 @@ def analyze_tweets():
                     dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
                     formatted_date = dt.strftime("%b %d, %Y")
                     formatted_time = dt.strftime("%I:%M %p")
-                except:
-                    pass
+                    
+                    # Check if the post was during insomnia hours (10 PM - 6 AM)
+                    hour = dt.hour
+                    is_insomnia_hr = (hour >= 22 or hour < 6)
+                except Exception as e:
+                    print(f"Error parsing timestamp: {e}")
             
             labeled_tweets.append({
                 "text": cleaned_text,
@@ -293,6 +310,7 @@ def analyze_tweets():
                 "created_at": timestamp,
                 "formatted_date": formatted_date,
                 "formatted_time": formatted_time,
+                "is_insomnia_hr": is_insomnia_hr,  # Add the insomnia hour flag
                 "emotion_dimensions": emotion_dims
             })
             
@@ -365,9 +383,8 @@ def analyze_tweets():
         
         # Enhanced message with more detailed analysis including tones
         result_message = (
-            f"Analysis complete for @{username}. Over the span of 2 weeks, the user's emotions over their tweets are: {emotion_display}. "
-            f"Overall sentiment: {avg_polarity_label} ({round(avg_polarity, 2)}). "
-            f"Dominant tones: {tone_display}."
+            f"Within the span of 2 weeks, @{username}'s dominant tones on their tweets are: {tone_display}. "
+            f"The user's emotions over their tweets are as follows: {emotion_display}."
         )
         
         return jsonify({

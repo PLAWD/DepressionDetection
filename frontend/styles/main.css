@@ -94,6 +94,21 @@ a:hover {
     max-width: 700px;
 }
 
+.result-container p,
+.result-container #resultText,
+#resultText {
+    color: #fff !important;
+    background: transparent !important; /* Remove debug red background */
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Force all children of result-container to white */
+.result-container * {
+    color: #fff !important;
+}
+
 /* Organizations section */
 .organizations {
     margin-top: 40px;
@@ -168,6 +183,16 @@ h3 {
     border: 1px solid #fff !important;
     min-width: 200px;
     min-height: 200px;
+}
+
+#emotionPieChart {
+    width: 400px !important;
+    height: 400px !important;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+    color: #fff !important; /* Make chart labels white */
 }
 
 /* Fix hidden class handling */
@@ -408,6 +433,47 @@ h3 {
     text-align: left;
     border-left: 4px solid #7c69a3;
     word-break: break-word;
+}
+
+/* Additional tweet item styling */
+.tweet-datetime {
+    color: #a2d6f9;
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.tweet-content {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.tweet-separator {
+    border: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+}
+
+.tweet-analysis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.tweet-sentiment {
+    background-color: rgba(162, 214, 249, 0.2);
+    border-radius: 12px;
+    padding: 3px 10px;
+    color: #a2d6f9;
+}
+
+.tweet-tone {
+    background-color: rgba(151, 128, 196, 0.2);
+    border-radius: 12px;
+    padding: 3px 10px;
+    color: #9780c4;
 }
 
 /* Loading animation */
