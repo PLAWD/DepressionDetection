@@ -1,0 +1,770 @@
+[
+    {
+        "text": "last post of tonight umm this is me now moth like and ill make a polished full reference sheet okok",
+        "original_text": "last post of tonight umm this is me now moth ! 500 like and ill make a polished full reference sheet ok?ok.",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": -0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.92,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T11:32:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "11:32 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.038731,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "forsaken a game i did contribute to being the one who made the lobby of it someone finished the big spawn cabin for me cus i lost motivation little story too why i left and stuff",
+        "original_text": "forsaken a game i did contribute to... being the one who made the lobby...  (90% of it, someone finished the big spawn cabin for me cus i lost motivation) little story too why i left and stuff",
+        "prediction": "worry",
+        "confidence": 1.0,
+        "polarity": -0.12,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.84,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "angry"
+        },
+        "created_at": "2025-04-22T10:25:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:25 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.08738449999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.062417499999999994,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "SONICEXE modelrender by me",
+        "original_text": "SONIC.EXE.... (model+render by me)",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "GUEST modelrender by me",
+        "original_text": "GUEST 666... (model+render by me)",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "I didnt pull my work because I was paid but again I never really cared about the pay I just wanted to be part of a passion project",
+        "original_text": "I didn't pull my work because I was paid but again I never really cared about the pay, I just wanted to be part of a passion project",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.01,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.94,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.009842000000000002,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "I have no hate or anything to the game besides justI was able to play my beautiful sonicexe model in the game until one day high role devs all decided to just not let contributors play specialdev characters due to",
+        "original_text": "I have no hate or anything to the game besides justI was able to play my beautiful sonic.exe model in the game until one day high role devs all decided to just\nnot let contributors play special/dev characters due to..",
+        "prediction": "empty",
+        "confidence": 1.0,
+        "polarity": -0.075,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.79,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "angry"
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "guessing someone somehow got access to guest and used him in a public lobby that was recorded for what i got told at least which I dont get because why would you give someone access and not me Why do I have to be shot when all I had was sonicexe and nothing else",
+        "original_text": "guessing someone somehow got access to guest 666 and used him in a public lobby that was recorded for what i got told at least which I don't get because 1. why would you give someone access and not me..😿 2, Why do I have to be shot when all I had was sonic.exe and nothing else",
+        "prediction": "happiness",
+        "confidence": 1.0,
+        "polarity": -0.02,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.91,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.015581999999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "Ive been part of this project since the start when all because a friend asked if I wanted to join the team explained how they wanted the game for it to be slightly different but overall the game isnt too bad it still stayed with the whole roblox horror dbd type game",
+        "original_text": "I've been part of this project since the start when all because a friend asked if I wanted to join the team explained how they wanted the game for it to be slightly different but overall the game isn't too bad it still stayed with the whole roblox horror dbd type game",
+        "prediction": "Depression",
+        "confidence": 1.0,
+        "polarity": -0.02,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.82,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.011089000000000002,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "it saddened me more after when I left testers and moderators were able to start using specialdev characters again the team became so packed too I knew I wouldnt really have anything else to do for the team so I knew leaving was my only option left",
+        "original_text": "it saddened me more after when I left testers and moderators were able to start using special/dev characters again\nthe team became so packed too I knew I wouldn't really have anything else to do for the team so I knew leaving was my only option left",
+        "prediction": "Suicidal",
+        "confidence": 1.0,
+        "polarity": -0.12,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.64,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.08260699999999997,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "I wouldnt have pulled my work anyways if I wasnt paid because Im not that greedy I still support the game I just wanted to get this off my chest still a great game for roblox since I still enjoy the game regardless I just hate that my own son had to be taken from me",
+        "original_text": "I wouldn't have pulled my work anyways if I \"wasn't\" paid because I'm not that greedy I still support the game I just wanted to get this off my chest still a great game for roblox since I still enjoy the game regardless I just hate that my own son had to be taken from me",
+        "prediction": "empty",
+        "confidence": 1.0,
+        "polarity": -0.085,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.58,
+        "tone": {
+            "primary": "angry",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.11559379999999997,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.08256699999999999,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "Ill always remember the once called damnation",
+        "original_text": "I'll always remember the once called damnation...",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "instructive"
+        },
+        "created_at": "2025-04-22T10:26:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "also the lighting where i made the lobby is a lot different than the ingame version for some reason lol it was pretty much a redo of someones very old little map that they wanted as a lobby",
+        "original_text": "also the lighting where i made the lobby is a lot different than the in-game version for some reason lol it was pretty much a redo of someone's very old little map that they wanted as a lobby",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.26,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.63,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "angry"
+        },
+        "created_at": "2025-04-22T10:27:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "10:27 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "for the most part I wanted to focus on my own game too i was never fired by anyone on the team i really just didnt think i was fit to be part of the team anymore im happy i was able to contribute with what I was able to do",
+        "original_text": "for the most part I wanted to focus on my own game too i was never fired by anyone on the team i really just didnt think i was fit to be part of the team anymore im happy i was able to contribute with what I was able to do!",
+        "prediction": "enthusiasm",
+        "confidence": 1.0,
+        "polarity": -0.1,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.65,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "hopeful"
+        },
+        "created_at": "2025-04-22T15:25:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "03:25 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "By your side",
+        "original_text": "\"By your side..\"",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-19T08:14:00.000Z",
+        "formatted_date": "Apr 19, 2025",
+        "formatted_time": "08:14 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "please vouch for this man",
+        "original_text": "please vouch for this man",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.1,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.84,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-20T12:43:00.000Z",
+        "formatted_date": "Apr 20, 2025",
+        "formatted_time": "12:43 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "it sucks to see work of mine such as maps being copied for their own game its cool for it to be practice n all but when its being used for another game it really disappoints me",
+        "original_text": "it sucks to see work of mine such as maps being copied for their own game\nits cool for it to be practice n all but when its being used for another game it really disappoints me",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": -0.18,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.69,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-18T02:20:00.000Z",
+        "formatted_date": "Apr 18, 2025",
+        "formatted_time": "02:20 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0.12596600000000002,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "it shouldnt be that difficult either to be original with green hills or you cant run as maps i would show what im talking about but i dont want to attack the one whos been doing this",
+        "original_text": "it shouldn't be that difficult either to be original with green hills or you can't run as maps i would show what im talking about but i dont want to attack the one whos been doing this",
+        "prediction": "empty",
+        "confidence": 1.0,
+        "polarity": -0.085,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.63,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-18T02:20:00.000Z",
+        "formatted_date": "Apr 18, 2025",
+        "formatted_time": "02:20 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "small rant but i really dislike when people make stuff that looks exactly like outcome memories then proceed to criticize our game for no reason like i dont really want to see the newest sneak peek map immediately get remade and get put in a new tiktok sonicexe game",
+        "original_text": "small rant but  i really dislike when people make stuff that looks exactly like outcome memories then proceed to criticize our game for no reason like i dont really want to see the newest sneak peek map immediately get remade and get put in a new tiktok sonic.exe game",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": -0.264,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.65,
+        "tone": {
+            "primary": "angry",
+            "secondary": "nostalgic"
+        },
+        "created_at": "2025-04-18T02:06:00.000Z",
+        "formatted_date": "Apr 18, 2025",
+        "formatted_time": "02:06 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0.15424672727272726,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.11017623376623377,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i dont usually share my work outside of om as much anymore but this was a john doe take i made in blender its not being used for anything though so ROBLOX JohnDoe",
+        "original_text": "i dont usually share my work outside of om as much anymore but this was a john doe take i made in blender its not being used for anything though so #ROBLOX #JohnDoe",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": -0.04,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.94,
+        "tone": {
+            "primary": "angry",
+            "secondary": null
+        },
+        "created_at": "2025-04-16T09:27:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "09:27 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.026252333333333332,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.018751666666666666,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i forgot who suggested me to make this a real emote mailbox",
+        "original_text": "i forgot who suggested me to make this a real emote\n📪mailbox",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.04,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.9,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-16T04:50:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "04:50 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "update i sped it up a bit",
+        "original_text": "update i sped it up a bit",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-16T04:56:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "04:56 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "hi enoderen",
+        "original_text": "hi @enoderen",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-14T12:59:00.000Z",
+        "formatted_date": "Apr 14, 2025",
+        "formatted_time": "12:59 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "im kind of demotivated a bit the survivors have big heads compared to the executioners and i genuinely dont want to remodel the ingame survivors and reanimate them",
+        "original_text": "im kind of demotivated a bit\nthe survivors have \"big\" heads compared to the executioners and i genuinely dont want to remodel the in-game survivors and reanimate them☹️",
+        "prediction": "Depression",
+        "confidence": 1.0,
+        "polarity": 0.05,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.8,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T09:34:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "09:34 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i worked so hard spending months to get to where outcome memories is and theres no proper fix to this other than scaling the executioners to be x bigger than the survivors which will probably look weird to people or the hard way",
+        "original_text": "i worked so hard spending months to get to where outcome memories is and theres no proper \"fix\" to this other than scaling the executioners to be 5x bigger than the survivors which will probably look weird to people or the hard way:(",
+        "prediction": "relief",
+        "confidence": 1.0,
+        "polarity": -0.3,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.68,
+        "tone": {
+            "primary": "nostalgic",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T09:34:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "09:34 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.17503666666666667,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "im sorry for how done ive been recently people have been making fun of me targeting me with their jokes continuously to the point it feels like bullying some ppl on the team just straight up criticizing the game just a bit such as lord x being bigger than",
+        "original_text": "im sorry for how done ive been recently people have been making fun of me  / targeting me with their jokes continuously to the point it feels like bullying some ppl on the team just straight up criticizing the game just a bit such as lord x being bigger than 2011",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.85,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T09:36:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "09:36 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "rewrite im just mixed with possible that may get changed in the future exeller is just there cus we have myst crimson on the roster Exetior is just a personal dislike xenophanes the creator doesnt like it being used so we respect that sunky doesnt even kill",
+        "original_text": "rewrite im just mixed with possible that may get changed in the future exeller is just there cus we have my5st crimson on the roster Exetior is just a personal dislike xenophanes the creator doesn't like it being used so we respect that sunky doesnt even kill",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": 0.16,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.74,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-12T01:00:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "01:00 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "back to sunky id rather just make him some easter egg",
+        "original_text": "back to sunky id rather just make him some easter egg",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T01:00:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "01:00 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "lank was one on the roster before something came out so we had to throw him off diablo id rather just make his mask a cosmetic for sonic or a skin for myst probably idrk",
+        "original_text": "lank was one on the roster before something came out so we had to throw him off diablo id rather just make his mask a cosmetic for sonic or a skin for my5st probably idrk",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T01:00:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "01:00 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "the horse",
+        "original_text": "the horse.",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T11:20:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "11:20 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "posted in the discord but iwant to share my beautiful creature tarventorrent shopkeeeper om deer thing that relates with suture",
+        "original_text": "posted in the discord but iwant to share my beautiful creature..,, tarven.torrent shopkeeeper om deer thing that relates with suture",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.41,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.57,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-10T10:26:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "10:26 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "the glow up",
+        "original_text": "the glow up",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T02:50:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "02:50 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "into the shop he goes",
+        "original_text": "into the shop he goes",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T02:39:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "02:39 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    }
+]

@@ -89,12 +89,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.emotions && Object.keys(data.emotions).length > 0) {
                     console.log('Creating visualization with data:', data.emotions);
                     renderEmotionChart(data.emotions);
+                    
+                    // Add "Assess User" button after chart is rendered
+                    addAssessButton();
                 } else {
                     console.warn('No emotion data received from API');
                 }
                 
                 // Store the data for later use
                 currentAnalysisData = data;
+
+                // Save analysis results for assessment
+                if (window.saveAnalysisResults) {
+                    window.saveAnalysisResults(data);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -494,5 +502,266 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         console.log("Emotion chart created successfully");
+    }
+
+    // Add "Assess User" button dynamically
+    function addAssessButton() {
+        // Check if button already exists to avoid duplicates
+        if (document.getElementById('assessUserBtn')) {
+            console.log('Assess button already exists, not adding another');
+            return;
+        }
+        
+        console.log('Adding Assess User button...');
+        
+        // Create the button
+        const assessButton = document.createElement('button');
+        assessButton.id = 'assessUserBtn';
+        assessButton.textContent = 'Assess User';
+        assessButton.className = 'assess-button';
+        
+        // Add functionality
+        assessButton.addEventListener('click', function() {
+            assessUserForDepression();
+        });
+        
+        // Find a suitable container - try multiple options
+        const containers = [
+            document.getElementById('chart-container'),
+            document.getElementById('chartContainer'),
+            document.getElementById('emotionPieChart')?.parentElement,
+            document.querySelector('.chart-container'),
+            document.querySelector('.visualization-container'),
+            resultContainer
+        ];
+        
+        // Try to append to the first container that exists
+        let buttonAdded = false;
+        for (const container of containers) {
+            if (container) {
+                console.log('Found container, adding button to:', container);
+                container.appendChild(assessButton);
+                buttonAdded = true;
+                break;
+            }
+        }
+        
+        if (!buttonAdded) {
+            console.error('Could not find any container to add the Assess User button');
+            // Last resort: add it after the result text
+            if (resultText && resultText.parentElement) {
+                console.log('Adding button after result text as last resort');
+                resultText.insertAdjacentElement('afterend', assessButton);
+                buttonAdded = true;
+            }
+        }
+        
+        // Add some styling directly
+        if (buttonAdded) {
+            assessButton.style.display = 'block';
+            assessButton.style.margin = '20px auto';
+            assessButton.style.padding = '10px 20px';
+            assessButton.style.backgroundColor = '#ffc107';
+            assessButton.style.color = '#000';
+            assessButton.style.border = 'none';
+            assessButton.style.borderRadius = '4px';
+            assessButton.style.cursor = 'pointer';
+            assessButton.style.fontWeight = 'bold';
+        }
+    }
+    
+    // Add this function to assess the user for depression
+    function assessUserForDepression() {
+        if (!currentAnalysisData) {
+            alert('Please analyze tweets first');
+            return;
+        }
+        
+        console.log('Assessing user for depression...');
+        
+        // Calculate depression indicators
+        const depressionIndicators = ['Depression', 'Anxiety', 'Stress', 'Suicidal', 'sadness', 'worry', 'empty'];
+        let depressionScore = 0;
+        
+        if (currentAnalysisData.emotion_counts) {
+            depressionIndicators.forEach(indicator => {
+                if (currentAnalysisData.emotion_counts[indicator]) {
+                    depressionScore += parseFloat(currentAnalysisData.emotion_counts[indicator]);
+                }
+            });
+        }
+        
+        // Get emotion dimensions
+        const distressLevel = currentAnalysisData.emotion_dimensions?.distress || 0;
+        const hopelessnessLevel = currentAnalysisData.emotion_dimensions?.hopelessness || 0;
+        const polarity = currentAnalysisData.polarity || 0;
+        
+        // Simple algorithm for assessment (15% threshold for depression indicators)
+        const hasDepressionSigns = 
+            depressionScore >= 15 ||  
+            (distressLevel >= 0.6 && hopelessnessLevel >= 0.5) ||
+            (polarity <= -0.3);
+        
+        // Create assessment result
+        let assessment = hasDepressionSigns 
+            ? "Has signs of depression" 
+            : "Doesn't have signs of depression";
+            
+        let details = hasDepressionSigns
+            ? `The user shows significant indicators of depression. Depression indicators: ${depressionScore.toFixed(1)}%, Distress level: ${(distressLevel*10).toFixed(1)}/10, Hopelessness: ${(hopelessnessLevel*10).toFixed(1)}/10, Overall sentiment: ${polarity.toFixed(2)}.`
+            : `The user doesn't show significant indicators of depression. Depression indicators: ${depressionScore.toFixed(1)}%, Distress level: ${(distressLevel*10).toFixed(1)}/10, Hopelessness: ${(hopelessnessLevel*10).toFixed(1)}/10, Overall sentiment: ${polarity.toFixed(2)}.`;
+        
+        // Display the assessment
+        showAssessmentResult(assessment, details);
+    }
+    
+    // Function to display assessment result as a modal
+    function showAssessmentResult(assessment, details) {
+        console.log('Showing assessment result as modal');
+        
+        // Create modal if it doesn't exist
+        let assessmentModal = document.getElementById('assessmentModal');
+        
+        if (!assessmentModal) {
+            // Create the modal container
+            assessmentModal = document.createElement('div');
+            assessmentModal.id = 'assessmentModal';
+            assessmentModal.className = 'modal';
+            assessmentModal.style.display = 'none';
+            assessmentModal.style.position = 'fixed';
+            assessmentModal.style.zIndex = '1000';
+            assessmentModal.style.left = '0';
+            assessmentModal.style.top = '0';
+            assessmentModal.style.width = '100%';
+            assessmentModal.style.height = '100%';
+            assessmentModal.style.overflow = 'auto';
+            assessmentModal.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            
+            // Create modal content
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            modalContent.style.backgroundColor = '#222';
+            modalContent.style.margin = '10% auto';
+            modalContent.style.padding = '20px';
+            modalContent.style.border = '1px solid #444';
+            modalContent.style.borderRadius = '8px';
+            modalContent.style.width = '80%';
+            modalContent.style.maxWidth = '600px';
+            modalContent.style.color = 'white';
+            modalContent.style.position = 'relative';
+            
+            // Add close button
+            const closeButton = document.createElement('span');
+            closeButton.className = 'modal-close';
+            closeButton.innerHTML = '&times;';
+            closeButton.style.color = 'white';
+            closeButton.style.fontSize = '28px';
+            closeButton.style.fontWeight = 'bold';
+            closeButton.style.position = 'absolute';
+            closeButton.style.right = '15px';
+            closeButton.style.top = '10px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.onclick = function() {
+                assessmentModal.style.display = 'none';
+            };
+            
+            // Add modal title
+            const modalTitle = document.createElement('h2');
+            modalTitle.id = 'assessmentModalTitle';
+            modalTitle.style.marginTop = '0';
+            modalTitle.style.marginBottom = '20px';
+            
+            // Add image container (will be filled only for depression case)
+            const imageContainer = document.createElement('div');
+            imageContainer.id = 'assessmentImageContainer';
+            imageContainer.style.textAlign = 'center';
+            imageContainer.style.marginBottom = '20px';
+            
+            // Add content area
+            const modalBody = document.createElement('div');
+            modalBody.id = 'assessmentModalBody';
+            
+            // Assemble modal
+            modalContent.appendChild(closeButton);
+            modalContent.appendChild(modalTitle);
+            modalContent.appendChild(imageContainer);
+            modalContent.appendChild(modalBody);
+            assessmentModal.appendChild(modalContent);
+            
+            // Add modal to body
+            document.body.appendChild(assessmentModal);
+            
+            // Close when clicking outside the modal
+            window.addEventListener('click', function(event) {
+                if (event.target === assessmentModal) {
+                    assessmentModal.style.display = 'none';
+                }
+            });
+        }
+        
+        // Style based on assessment
+        const isDangerous = assessment.includes('Has signs');
+        
+        // Set title
+        const modalTitle = document.getElementById('assessmentModalTitle');
+        if (modalTitle) {
+            modalTitle.textContent = `Assessment: ${assessment}`;
+            modalTitle.style.color = isDangerous ? '#dc3545' : '#28a745';
+        }
+        
+        // Add image for depression case
+        const imageContainer = document.getElementById('assessmentImageContainer');
+        if (imageContainer) {
+            imageContainer.innerHTML = '';
+            
+            if (isDangerous) {
+                const image = document.createElement('img');
+                image.src = '/pics/cry.jpg'; // Updated path to match the Flask route
+                image.alt = 'Depression indicator';
+                image.style.maxWidth = '100%';
+                image.style.maxHeight = '200px';
+                image.style.borderRadius = '8px';
+                image.style.marginBottom = '15px';
+                imageContainer.appendChild(image);
+            }
+        }
+        
+        // Set content
+        const modalBody = document.getElementById('assessmentModalBody');
+        if (modalBody) {
+            // Clear previous content
+            modalBody.innerHTML = '';
+            
+            // Add details
+            const detailsPara = document.createElement('p');
+            detailsPara.style.lineHeight = '1.5';
+            detailsPara.textContent = details;
+            modalBody.appendChild(detailsPara);
+            
+            // Add recommendation if depression is detected
+            if (isDangerous) {
+                const recommendation = document.createElement('div');
+                recommendation.style.marginTop = '15px';
+                recommendation.style.padding = '15px';
+                recommendation.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
+                recommendation.style.borderRadius = '5px';
+                recommendation.style.borderLeft = '4px solid #dc3545';
+                
+                const recTitle = document.createElement('h4');
+                recTitle.textContent = 'Recommendation';
+                recTitle.style.margin = '0 0 10px 0';
+                
+                const recText = document.createElement('p');
+                recText.textContent = 'This assessment suggests signs of depression. Please consider consulting with a mental health professional. Remember that online assessments are not a substitute for professional diagnosis.';
+                recText.style.margin = '0';
+                
+                recommendation.appendChild(recTitle);
+                recommendation.appendChild(recText);
+                modalBody.appendChild(recommendation);
+            }
+        }
+        
+        // Show the modal
+        assessmentModal.style.display = 'block';
     }
 });

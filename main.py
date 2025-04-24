@@ -2,6 +2,8 @@ import os
 import json
 import re
 import traceback
+import pickle
+import numpy as np  # Add NumPy import
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
 
 # Import TensorFlow components
@@ -16,6 +18,9 @@ from enhanced_sentiment_analyzer import analyze_sentiment_enhanced
 
 # Set this to True to use the enhanced analyzer, False to use the original
 USE_ENHANCED_ANALYZER = True
+
+# Add this threshold for depression assessment
+DEPRESSION_THRESHOLD = 15  # Percentage threshold for depression indicators
 
 # Create Flask app with modified static file handling
 app = Flask(__name__,
@@ -32,25 +37,32 @@ def serve_styles(filename):
 def serve_scripts(filename):
     return send_from_directory('frontend/scripts', filename)
 
-# Load the model and tokenizer
-MODEL_PATH = "backend/models/bilsm-svm.keras"
+# Add a new route for serving images
+@app.route('/pics/<path:filename>')
+def serve_images(filename):
+    return send_from_directory('frontend/pics', filename)
+
+# Load the models and tokenizer
+BILSTM_MODEL_PATH = "backend/models/combined_bilstm.keras"
+SVM_MODEL_PATH = "backend/models/svm_model.pkl"
 TOKENIZER_PATH = "backend/models/tokenizer.json"
 MAX_SEQ_LEN = 100
 
-# Load the model
-model = load_model(MODEL_PATH)
+# Load the BiLSTM feature extractor
+bilstm_model = load_model(BILSTM_MODEL_PATH)
 
-# Load the tokenizer
+# Load the SVM classifier
+with open(SVM_MODEL_PATH, 'rb') as f:
+    svm_model = pickle.load(f)
+
+# Load the tokenizer - fixed to pass a string to tokenizer_from_json
 with open(TOKENIZER_PATH, "r", encoding="utf-8") as f:
-    tokenizer_data = json.load(f)
-tokenizer = tokenizer_from_json(tokenizer_data)
+    tokenizer_json = f.read()  # Read the raw JSON string
+tokenizer = tokenizer_from_json(tokenizer_json)
 
-# Define emotion labels
-LABELS = [
-    "Anxiety", "Bipolar", "Depression", "Personality disorder", "Stress", "Suicidal", "anger", "boredom",
-    "empty", "enthusiasm", "fun", "happiness", "hate", "love", "neutral", "relief", "sadness", "surprise",
-    "worry"
-]
+# Define emotion labels for the new models
+LABELS = ['neutral', 'love', 'happiness', 'sadness', 'relief', 'hate', 'anger',
+         'enthusiasm', 'empty', 'worry', 'Anxiety', 'Depression', 'Suicidal', 'Stress']
 
 # Define a function to clean text
 def clean_text(text):
@@ -63,6 +75,30 @@ def clean_text(text):
     text = re.sub(r'[^a-zA-Z\s]', '', text)  # This line removes non-letter characters
     text = re.sub(r'\s+', ' ', text).strip()
     return text
+
+# Function to predict emotions using BiLSTM for features and SVM for classification
+def predict_emotion(text_sequences):
+    # Extract features using BiLSTM
+    features = bilstm_model.predict(text_sequences)
+    
+    # Use SVM to classify - using predict instead of predict_proba
+    # since our model doesn't support probability estimation
+    predictions = svm_model.predict(features)
+    
+    # Convert predictions to one-hot encoding format with default confidence of 1.0
+    result = []
+    for pred in predictions:
+        # The SVM model returns class indices (integers), not string labels
+        # So we need to use the integer directly as the index into LABELS
+        label_index = int(pred)  # Ensure it's an integer
+        
+        # Create a pseudo-probability array with 1.0 for the predicted class
+        probs = np.zeros(len(LABELS))
+        probs[label_index] = 1.0
+        
+        result.append(probs)
+    
+    return np.array(result)  # Convert to NumPy array
 
 # Routes
 @app.route('/')
@@ -101,8 +137,8 @@ def analyze_text():
         sequences = tokenizer.texts_to_sequences([cleaned_text])
         padded_sequences = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding="post")
         
-        # Run the model for prediction
-        predictions = model.predict(padded_sequences)
+        # Run the model for prediction using combined BiLSTM+SVM approach
+        predictions = predict_emotion(padded_sequences)
         
         # Get the highest probability label
         label_index = predictions[0].argmax()
@@ -222,8 +258,8 @@ def analyze_tweets():
         sequences = tokenizer.texts_to_sequences(texts)
         padded_sequences = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding="post")
         
-        # Run the model for predictions
-        predictions = model.predict(padded_sequences)
+        # Run the model for predictions using the combined BiLSTM+SVM approach
+        predictions = predict_emotion(padded_sequences)
         
         # Process predictions and organize results
         labeled_tweets = []
@@ -417,6 +453,75 @@ def analyze_tweets():
             "tone_counts": {},
             "emotion_dimensions": avg_emotion_dimensions
         }), 500
+
+# Add new endpoint for assessing depression
+@app.route('/api/assess_depression', methods=['POST'])
+def assess_depression():
+    try:
+        # Check if disclaimer has been acknowledged
+        if not session.get('passed_disclaimer', False):
+            return jsonify({"error": "Please acknowledge the disclaimer first"}), 403
+        
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "Invalid request format. JSON expected."}), 400
+            
+        username = data.get('username', '').strip()
+        emotion_counts = data.get('emotion_counts', {})
+        emotion_dimensions = data.get('emotion_dimensions', {})
+        polarity = data.get('polarity', 0)
+        
+        if not username or not emotion_counts:
+            return jsonify({"error": "Username and emotion data are required"}), 400
+        
+        # Calculate the total percentage of depression indicators
+        depression_indicators = ["Depression", "Anxiety", "Stress", "Suicidal", "sadness", "worry", "empty"]
+        depression_percentage = sum(emotion_counts.get(indicator, 0) for indicator in depression_indicators)
+        
+        # Check emotion dimensions
+        distress_level = emotion_dimensions.get('distress', 0)
+        hopelessness_level = emotion_dimensions.get('hopelessness', 0)
+        
+        # Simple algorithm to assess depression risk
+        has_depression_signs = (
+            depression_percentage >= DEPRESSION_THRESHOLD or
+            (distress_level >= 0.6 and hopelessness_level >= 0.5) or
+            (polarity <= -0.3)
+        )
+        
+        # Generate an assessment message
+        if has_depression_signs:
+            assessment = "Has signs of depression"
+            details = (
+                f"The user shows significant indicators of depression. "
+                f"Depression indicators: {round(depression_percentage, 1)}%, "
+                f"Distress level: {round(distress_level*10, 1)}/10, "
+                f"Hopelessness: {round(hopelessness_level*10, 1)}/10, "
+                f"Overall sentiment: {round(polarity, 2)}."
+            )
+        else:
+            assessment = "Doesn't have signs of depression"
+            details = (
+                f"The user doesn't show significant indicators of depression. "
+                f"Depression indicators: {round(depression_percentage, 1)}%, "
+                f"Distress level: {round(distress_level*10, 1)}/10, "
+                f"Hopelessness: {round(hopelessness_level*10, 1)}/10, "
+                f"Overall sentiment: {round(polarity, 2)}."
+            )
+        
+        return jsonify({
+            "assessment": assessment,
+            "details": details,
+            "depression_percentage": depression_percentage,
+            "distress_level": distress_level,
+            "hopelessness_level": hopelessness_level,
+            "polarity": polarity
+        })
+        
+    except Exception as e:
+        print(f"Error assessing depression: {str(e)}")
+        traceback.print_exc()
+        return jsonify({"error": f"Assessment failed: {str(e)}"}), 500
 
 # Run the app
 if __name__ == "__main__":
