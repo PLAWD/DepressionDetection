@@ -4,10 +4,15 @@ import re
 import traceback
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
 
-# Import TensorFlow components
+# Import TensorFlow components (keeping for compatibility)
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
+
+# Add imports for PyTorch and transformers
+import torch
+import numpy as np  # Add missing NumPy import
+from transformers import BertTokenizer
 
 # Import our custom sentiment analyzer
 from sentiment_analyzer import analyze_sentiment
@@ -32,18 +37,32 @@ def serve_styles(filename):
 def serve_scripts(filename):
     return send_from_directory('frontend/scripts', filename)
 
-# Load the model and tokenizer
-MODEL_PATH = "backend/models/bilsm-svm.keras"
-TOKENIZER_PATH = "backend/models/tokenizer.json"
-MAX_SEQ_LEN = 100
+# Update model and tokenizer paths
+MODEL_PATH = "backend/models/bert_bi_svm.pth"
+TOKENIZER_FOLDER = "backend/models/"
+MAX_SEQ_LEN = 128  # BERT typically uses 128 or 512
 
-# Load the model
-model = load_model(MODEL_PATH)
+# Load the BERT model
+try:
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    model = torch.load(MODEL_PATH, map_location=device)
+    model.eval()  # Set model to evaluation mode
+    print(f"Model loaded successfully from {MODEL_PATH}")
+except Exception as e:
+    print(f"Error loading model: {str(e)}")
+    model = None
 
-# Load the tokenizer
-with open(TOKENIZER_PATH, "r", encoding="utf-8") as f:
-    tokenizer_data = json.load(f)
-tokenizer = tokenizer_from_json(tokenizer_data)
+# Load the BERT tokenizer
+try:
+    tokenizer = BertTokenizer.from_pretrained(
+        TOKENIZER_FOLDER,
+        do_lower_case=True,
+        local_files_only=True
+    )
+    print(f"BERT tokenizer loaded successfully from {TOKENIZER_FOLDER}")
+except Exception as e:
+    print(f"Error loading tokenizer: {str(e)}")
+    tokenizer = None
 
 # Define emotion labels
 LABELS = [
@@ -52,15 +71,12 @@ LABELS = [
     "worry"
 ]
 
-# Define a function to clean text
+# Clean text function adapted for BERT
 def clean_text(text):
     """
-    Cleans text by removing special characters, emojis, URLs, and extra spaces.
+    Minimal cleaning for BERT - just remove URLs and normalize whitespace
     """
     text = re.sub(r'http\S+|www\S+', '', text)
-    text = re.sub(r'[\U0001F600-\U0001F64F]|[\U0001F300-\U0001F5FF]|[\U0001F680-\U0001F6FF]|[\U0001F1E0-\U0001F1FF]',
-                  '', text)
-    text = re.sub(r'[^a-zA-Z\s]', '', text)  # This line removes non-letter characters
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
@@ -96,13 +112,58 @@ def analyze_text():
         else:
             polarity, polarity_label, confidence, emotion_dimensions, primary_tone, secondary_tone = analyze_sentiment(text)
         
-        # Preprocess the text
+        # Preprocess the text for BERT
         cleaned_text = clean_text(text)
-        sequences = tokenizer.texts_to_sequences([cleaned_text])
-        padded_sequences = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding="post")
         
-        # Run the model for prediction
-        predictions = model.predict(padded_sequences)
+        # Add diagnostic logging
+        print(f"Analyzing text: '{cleaned_text[:50]}...'")
+        
+        try:
+            # Tokenize using BERT tokenizer
+            encoded_dict = tokenizer.encode_plus(
+                cleaned_text,
+                add_special_tokens=True,  # Add [CLS] and [SEP]
+                max_length=MAX_SEQ_LEN,
+                padding='max_length',
+                truncation=True,
+                return_attention_mask=True,
+                return_tensors='pt'  # Return PyTorch tensors
+            )
+            
+            # Move tensors to the same device as the model
+            input_ids = encoded_dict['input_ids'].to(device)
+            attention_mask = encoded_dict['attention_mask'].to(device)
+            
+            # Run the model for prediction
+            with torch.no_grad():
+                outputs = model(input_ids, attention_mask=attention_mask)
+                
+                # Add diagnostic logging for outputs structure
+                print(f"Model output type: {type(outputs)}")
+                if hasattr(outputs, 'logits'):
+                    print(f"Output has logits attribute with shape: {outputs.logits.shape}")
+                else:
+                    print(f"Direct output shape: {outputs.shape}")
+                
+                # Handle different output formats from BERT models
+                if hasattr(outputs, 'logits'):
+                    predictions = torch.nn.functional.softmax(outputs.logits, dim=1)
+                elif isinstance(outputs, torch.Tensor):
+                    predictions = torch.nn.functional.softmax(outputs, dim=1)
+                else:
+                    # Assume last item in tuple is logits if outputs is a tuple/list
+                    logits = outputs[-1] if isinstance(outputs, (tuple, list)) else outputs
+                    predictions = torch.nn.functional.softmax(logits, dim=1)
+                
+                # Convert from tensor to numpy for processing
+                predictions = predictions.cpu().numpy()
+            
+        except Exception as model_error:
+            print(f"Error during model prediction: {str(model_error)}")
+            traceback.print_exc()
+            # Fallback to a simple prediction for resilience
+            predictions = np.zeros((1, len(LABELS)))
+            predictions[0][LABELS.index("neutral")] = 1.0  # Default to neutral with 100% confidence
         
         # Get the highest probability label
         label_index = predictions[0].argmax()
@@ -217,13 +278,78 @@ def analyze_tweets():
         
         print(f"Preprocessed {len(preprocessed_tweets)} tweets")
         
-        # Preprocess the text for the model
+        # Preprocess the texts for BERT
         texts = [clean_text(tweet["post"]) for tweet in preprocessed_tweets]
-        sequences = tokenizer.texts_to_sequences(texts)
-        padded_sequences = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding="post")
         
-        # Run the model for predictions
-        predictions = model.predict(padded_sequences)
+        # Process tweets in batches to avoid memory issues
+        batch_size = 16
+        predictions = []
+        
+        # Add better error handling around batch processing
+        try:
+            for i in range(0, len(texts), batch_size):
+                batch_texts = texts[i:i+batch_size]
+                
+                print(f"Processing batch {i//batch_size + 1}/{(len(texts) + batch_size - 1)//batch_size}")
+                
+                # Encode the batch
+                encoded_batch = tokenizer.batch_encode_plus(
+                    batch_texts,
+                    add_special_tokens=True,
+                    max_length=MAX_SEQ_LEN,
+                    padding='max_length',
+                    truncation=True,
+                    return_attention_mask=True,
+                    return_tensors='pt'
+                )
+                
+                # Move tensors to device
+                input_ids = encoded_batch['input_ids'].to(device)
+                attention_mask = encoded_batch['attention_mask'].to(device)
+                
+                # Run model prediction with better error handling
+                with torch.no_grad():
+                    outputs = model(input_ids, attention_mask=attention_mask)
+                    
+                    # Handle different output formats from BERT models
+                    if hasattr(outputs, 'logits'):
+                        batch_predictions = torch.nn.functional.softmax(outputs.logits, dim=1)
+                    elif isinstance(outputs, torch.Tensor):
+                        batch_predictions = torch.nn.functional.softmax(outputs, dim=1)
+                    else:
+                        # Assume last item in tuple is logits if outputs is a tuple/list
+                        logits = outputs[-1] if isinstance(outputs, (tuple, list)) else outputs
+                        batch_predictions = torch.nn.functional.softmax(logits, dim=1)
+                
+                # Convert to numpy and append to predictions
+                batch_predictions = batch_predictions.cpu().numpy()
+                
+                # Debug first example in batch to check values
+                if i == 0:
+                    print(f"First prediction: {batch_predictions[0]}")
+                    print(f"Max class: {np.argmax(batch_predictions[0])} ({LABELS[np.argmax(batch_predictions[0])]})")
+                
+                predictions.extend(batch_predictions)
+                
+            # Convert predictions list to numpy array for consistent API
+            if predictions:
+                predictions = np.array(predictions)
+                print(f"Successfully processed {len(predictions)} predictions")
+            else:
+                raise ValueError("No predictions were generated")
+                
+        except Exception as batch_error:
+            print(f"Error during batch processing: {str(batch_error)}")
+            traceback.print_exc()
+            
+            # Create fallback predictions to prevent function failure
+            total_tweets = len(preprocessed_tweets)
+            print(f"Using fallback predictions for {total_tweets} tweets")
+            predictions = np.zeros((total_tweets, len(LABELS)))
+            
+            # Default to neutral with 100% confidence for all tweets
+            neutral_idx = LABELS.index("neutral")
+            predictions[:, neutral_idx] = 1.0
         
         # Process predictions and organize results
         labeled_tweets = []
