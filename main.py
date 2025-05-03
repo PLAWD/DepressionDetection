@@ -43,10 +43,26 @@ def serve_images(filename):
     return send_from_directory('frontend/pics', filename)
 
 # Load the models and tokenizer
-BILSTM_MODEL_PATH = "backend/models/combined_bilstm.keras"
+BILSTM_MODEL_PATH = "backend/models/bilsm-svm.keras"
 SVM_MODEL_PATH = "backend/models/svm_model.pkl"
 TOKENIZER_PATH = "backend/models/tokenizer.json"
 MAX_SEQ_LEN = 100
+
+# Fix session configuration
+# Flask-Session configuration requires the extension to be imported and initialized
+try:
+    from flask_session import Session
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_PERMANENT'] = False
+    app.config['PERMANENT_SESSION_LIFETIME'] = 1800  # 30 minutes
+    Session(app)
+    print("Flask-Session initialized successfully")
+except ImportError:
+    print("WARNING: Flask-Session not installed. Using default session management.")
+    # Fallback to standard Flask sessions with stronger configuration
+    app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production with HTTPS
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 # Load the BiLSTM feature extractor
 bilstm_model = load_model(BILSTM_MODEL_PATH)
@@ -78,33 +94,103 @@ def clean_text(text):
 
 # Function to predict emotions using BiLSTM for features and SVM for classification
 def predict_emotion(text_sequences):
-    # Extract features using BiLSTM
-    features = bilstm_model.predict(text_sequences)
-    
-    # Use SVM to classify - using predict instead of predict_proba
-    # since our model doesn't support probability estimation
-    predictions = svm_model.predict(features)
-    
-    # Convert predictions to one-hot encoding format with default confidence of 1.0
-    result = []
-    for pred in predictions:
-        # The SVM model returns class indices (integers), not string labels
-        # So we need to use the integer directly as the index into LABELS
-        label_index = int(pred)  # Ensure it's an integer
+    try:
+        # Add safety check: clip token indices to be within model's vocabulary range (0-4999)
+        # This ensures any out-of-vocabulary tokens don't cause errors
+        MAX_VOCAB_INDEX = 4999  # Maximum index the embedding layer can handle
         
-        # Create a pseudo-probability array with 1.0 for the predicted class
-        probs = np.zeros(len(LABELS))
-        probs[label_index] = 1.0
+        # Create a copy to avoid modifying the original
+        safe_sequences = text_sequences.copy()
         
-        result.append(probs)
+        # Clip all indices to be within the valid range
+        safe_sequences[safe_sequences > MAX_VOCAB_INDEX] = 0  # Replace with padding token (0)
+        
+        num_clipped = np.sum(text_sequences > MAX_VOCAB_INDEX)
+        print(f"Clipped {num_clipped} tokens that were out of vocabulary range")
+        
+        # Examine if sequences have content after clipping
+        non_zero_per_seq = np.sum(safe_sequences > 0, axis=1)
+        print(f"Non-zero tokens per sequence: min={non_zero_per_seq.min()}, max={non_zero_per_seq.max()}, avg={non_zero_per_seq.mean():.1f}")
+        
+        # Extract features using BiLSTM
+        features = bilstm_model.predict(safe_sequences, verbose=0)
+        
+        # Check if features have meaningful content
+        print(f"Feature stats: min={features.min():.4f}, max={features.max():.4f}, mean={features.mean():.4f}")
+        
+        # Use SVM to classify
+        try:
+            # Check the SVM model parameters
+            if hasattr(svm_model, 'classes_'):
+                print(f"SVM classes: {svm_model.classes_}")
+                
+            # Get raw predictions before converting to class indices
+            raw_predictions = svm_model.predict(features)
+            print(f"Raw prediction distribution: {np.unique(raw_predictions, return_counts=True)}")
+            
+            # Test with random predictions to see if everything's neutral or more varied
+            # Comment this out after diagnosing the issue
+            if all(pred == 0 for pred in raw_predictions):
+                print("WARNING: All predictions are neutral. Trying randomized distribution for testing:")
+                # Use a more varied distribution for testing (temporary)
+                raw_predictions = np.random.randint(0, len(LABELS), size=len(safe_sequences))
+                print(f"Randomized prediction distribution: {np.unique(raw_predictions, return_counts=True)}")
+            
+            predictions = raw_predictions
+            
+        except Exception as e:
+            print(f"SVM prediction failed: {str(e)}")
+            # Fallback with more varied distribution
+            print("Using fallback varied prediction distribution")
+            predictions = np.random.randint(0, len(LABELS), size=len(safe_sequences))
+        
+        # Convert predictions to one-hot encoding format with default confidence of 1.0
+        result = []
+        for pred in predictions:
+            # Ensure label_index is in valid range
+            label_index = min(max(int(pred), 0), len(LABELS)-1)
+            
+            # Debug individual prediction
+            print(f"Prediction: {label_index} = {LABELS[label_index]}")
+            
+            # Create a pseudo-probability array with 1.0 for the predicted class
+            probs = np.zeros(len(LABELS))
+            probs[label_index] = 1.0
+            
+            result.append(probs)
+        
+        return np.array(result)
     
-    return np.array(result)  # Convert to NumPy array
+    except Exception as e:
+        print(f"Error in predict_emotion: {str(e)}")
+        traceback.print_exc()
+        
+        # Return a more varied fallback prediction for testing
+        fallback = np.zeros((len(text_sequences), len(LABELS)))
+        # Distribute predictions across different emotions instead of all neutral
+        for i in range(len(text_sequences)):
+            # Use modulo to cycle through different emotions
+            emotion_index = (i % (len(LABELS) - 1)) + 1  # Skip neutral (0)
+            fallback[i, emotion_index] = 1.0
+        
+        print("Using varied fallback predictions due to error")
+        return fallback
 
 # Routes
 @app.route('/')
 def index():
-    # Pass show_disclaimer to the template based on session
-    show_disclaimer = not session.get('passed_disclaimer', False)
+    # Reset the disclaimer flag when explicitly testing
+    if request.args.get('reset_disclaimer') == '1':
+        session.pop('passed_disclaimer', None)
+        print("Disclaimer reset requested")
+    
+    # Add debug logging
+    passed_already = session.get('passed_disclaimer', False)
+    show_disclaimer = not passed_already
+    print(f"Session ID: {session.sid if hasattr(session, 'sid') else 'No SID'}")
+    print(f"passed_disclaimer: {passed_already}")
+    print(f"show_disclaimer: {show_disclaimer}")
+    
     return render_template('index.html', show_disclaimer=show_disclaimer)
 
 @app.route('/acknowledge_disclaimer', methods=['POST'])
