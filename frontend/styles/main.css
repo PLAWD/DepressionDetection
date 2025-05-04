@@ -38,14 +38,6 @@ body.switch {
     background-color: #9780c4;
 }
 
-.end-button {
-    background-color: #f44336;
-}
-
-.end-button:hover {
-    background-color: #d32f2f;
-}
-
 /* Form styles */
 .search-box {
     background-color: white;
