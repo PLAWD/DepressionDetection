@@ -1,0 +1,2066 @@
+[
+    {
+        "text": "when someone wants me to explain my emotions but ive been the listener all my life",
+        "original_text": "when someone wants me to explain my emotions but i've been the listener all my life",
+        "prediction": "enthusiasm",
+        "confidence": 1.0,
+        "polarity": 0.04,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.9,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-24T10:01:00.000Z",
+        "formatted_date": "Apr 24, 2025",
+        "formatted_time": "10:01 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "sometimes i sit back and think to myself how i let that all happen to me",
+        "original_text": "sometimes i sit back and think to myself, how i let that all happen to me",
+        "prediction": "relief",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "reflective",
+            "secondary": null
+        },
+        "created_at": "2025-04-24T10:01:00.000Z",
+        "formatted_date": "Apr 24, 2025",
+        "formatted_time": "10:01 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "we went from april to april in just mins",
+        "original_text": "we went from april 1 to april 23 in just 5 mins",
+        "prediction": "worry",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-24T21:38:00.000Z",
+        "formatted_date": "Apr 24, 2025",
+        "formatted_time": "09:38 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i hope every lover girl finds her super calm gentleman who is unashamedly and insanely obsessed with her",
+        "original_text": "i hope every lover girl finds her super calm gentleman who is unashamedly and insanely obsessed with her",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": 0.25,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.5,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-24T21:38:00.000Z",
+        "formatted_date": "Apr 24, 2025",
+        "formatted_time": "09:38 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0.22763400000000003
+        }
+    },
+    {
+        "text": "i have tasted sending long paragraphs and i have tasted saying ok i highly recommend saying ok",
+        "original_text": "i have tasted sending long paragraphs and i have tasted saying ok. i highly recommend saying ok",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": 0.28,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.63,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-24T21:38:00.000Z",
+        "formatted_date": "Apr 24, 2025",
+        "formatted_time": "09:38 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i love being updated like yes baby tell me about your day im interested",
+        "original_text": "i love being updated like yes baby tell me about your day i'm interested",
+        "prediction": "hate",
+        "confidence": 1.0,
+        "polarity": 0.35,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.55,
+        "tone": {
+            "primary": "grateful",
+            "secondary": "hopeful"
+        },
+        "created_at": "2025-04-23T11:54:00.000Z",
+        "formatted_date": "Apr 23, 2025",
+        "formatted_time": "11:54 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "you truly dont realise how young is until youre not anymore",
+        "original_text": "you truly don't realise how young 17 is until you're not 17 anymore",
+        "prediction": "happiness",
+        "confidence": 1.0,
+        "polarity": -0.075,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.78,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-23T11:54:00.000Z",
+        "formatted_date": "Apr 23, 2025",
+        "formatted_time": "11:54 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "tea tastes like everything is going to be okay",
+        "original_text": "tea tastes like everything is going to be okay",
+        "prediction": "Stress",
+        "confidence": 1.0,
+        "polarity": 0.26,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.74,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-22T21:33:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "09:33 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "please be kind dont be the reason someone skips a meal hates waking up or feels left out your words and actions stick with people forever",
+        "original_text": "please be kind. don't be the reason someone skips a meal, hates waking up, or feels left out. your words and actions stick with people forever",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": 0.19,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.79,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "angry"
+        },
+        "created_at": "2025-04-22T21:33:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "09:33 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "you look familiar i dont even go outside so why you lying",
+        "original_text": "\"you look familiar\" i don't even go outside so why you lying",
+        "prediction": "relief",
+        "confidence": 1.0,
+        "polarity": -0.13,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.62,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T21:33:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "09:33 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.09275699999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "please dont be offended if i dont make time for you i dont even make time for myself and im with me literally",
+        "original_text": "please don't be offended if i don't make time for you. i don't even make time for myself and i'm with me literally 24/7",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": 0.14,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.77,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-22T13:00:00.000Z",
+        "formatted_date": "Apr 22, 2025",
+        "formatted_time": "01:00 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "bitches who have both abandonment and attachment issues should be feared",
+        "original_text": "bitches who have both abandonment and attachment issues should be feared",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.26,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.57,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-21T13:00:00.000Z",
+        "formatted_date": "Apr 21, 2025",
+        "formatted_time": "01:00 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.17889899999999997,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i like men that make things happen",
+        "original_text": "i like men that make things happen",
+        "prediction": "relief",
+        "confidence": 1.0,
+        "polarity": 0.11,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.82,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-21T21:49:00.000Z",
+        "formatted_date": "Apr 21, 2025",
+        "formatted_time": "09:49 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "why tf is tiktok always know what youre going through",
+        "original_text": "why tf is tiktok always know what you're going through",
+        "prediction": "anger",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "instructive"
+        },
+        "created_at": "2025-04-21T21:49:00.000Z",
+        "formatted_date": "Apr 21, 2025",
+        "formatted_time": "09:49 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "peak delusion is believing that a paragraph will make someone treat you better",
+        "original_text": "peak delusion is believing that a paragraph will make someone treat you better",
+        "prediction": "Depression",
+        "confidence": 1.0,
+        "polarity": 0.3,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.66,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-21T17:40:00.000Z",
+        "formatted_date": "Apr 21, 2025",
+        "formatted_time": "05:40 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0.27381599999999995
+        }
+    },
+    {
+        "text": "i think the coolest part of being human is experiencing music",
+        "original_text": "i think the coolest part of being human is experiencing music",
+        "prediction": "Stress",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "reflective",
+            "secondary": null
+        },
+        "created_at": "2025-04-21T17:40:00.000Z",
+        "formatted_date": "Apr 21, 2025",
+        "formatted_time": "05:40 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "how i can be so chill but so stressed at the same time wtf is this",
+        "original_text": "how i can be so chill but so stressed at the same time wtf is this",
+        "prediction": "Stress",
+        "confidence": 1.0,
+        "polarity": -0.32,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.56,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "frustrated"
+        },
+        "created_at": "2025-04-21T20:29:00.000Z",
+        "formatted_date": "Apr 21, 2025",
+        "formatted_time": "08:29 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.22091299999999997,
+            "hopelessness": 0.252472,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "they should let me kill myself for a few hours to see if i like it or not",
+        "original_text": "they should let me kill myself for a few hours to see if i like it or not",
+        "prediction": "Stress",
+        "confidence": 1.0,
+        "polarity": -0.708,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "frustrated"
+        },
+        "created_at": "2025-04-20T20:29:00.000Z",
+        "formatted_date": "Apr 20, 2025",
+        "formatted_time": "08:29 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.41171900000000006,
+            "hopelessness": 0.47053600000000007,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "one of the purest thing is when someone is trying to change themselves so they can love you exactly how you deserve to be loved",
+        "original_text": "one of the purest thing is when someone is trying to change themselves so they can love you exactly how you deserve to be loved",
+        "prediction": "enthusiasm",
+        "confidence": 1.0,
+        "polarity": 0.36,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.56,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-20T21:58:00.000Z",
+        "formatted_date": "Apr 20, 2025",
+        "formatted_time": "09:58 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0.322143
+        }
+    },
+    {
+        "text": "hearing ill handle it and then its handled is such a turn on",
+        "original_text": "hearing \"i'll handle it\" and then it's handled is such a turn on >>>",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-20T21:58:00.000Z",
+        "formatted_date": "Apr 20, 2025",
+        "formatted_time": "09:58 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "you cant replace a woman that gives both wife and bestfriend vibes thats rare",
+        "original_text": "you can't replace a woman that gives both wife and bestfriend vibes. that's rare",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.85,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-20T18:53:00.000Z",
+        "formatted_date": "Apr 20, 2025",
+        "formatted_time": "06:53 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "we all deserve a did you eat person in our lives",
+        "original_text": "we all deserve a \"did you eat?\" person in our lives",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-20T18:53:00.000Z",
+        "formatted_date": "Apr 20, 2025",
+        "formatted_time": "06:53 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i will always believe that if someone wants to they will because when i wanted to i did",
+        "original_text": "i will always believe that if someone wants to, they will, because when i wanted to, i did",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": 0.04,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.9,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "instructive"
+        },
+        "created_at": "2025-04-20T13:42:00.000Z",
+        "formatted_date": "Apr 20, 2025",
+        "formatted_time": "01:42 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "who gets upset just from sensing weird energy over text me",
+        "original_text": "who gets upset just from sensing weird energy over text? me",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": -0.19,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-19T13:42:00.000Z",
+        "formatted_date": "Apr 19, 2025",
+        "formatted_time": "01:42 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.13216,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "being angry at a man because you miss him is a real thing",
+        "original_text": "being angry at a man because you miss him is a real thing",
+        "prediction": "enthusiasm",
+        "confidence": 1.0,
+        "polarity": -0.21,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.7,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "angry"
+        },
+        "created_at": "2025-04-19T20:43:00.000Z",
+        "formatted_date": "Apr 19, 2025",
+        "formatted_time": "08:43 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.146874,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.10491,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "our childhood photos might be ugly but those smiles were definitely not fake",
+        "original_text": "our childhood photos might be ugly but those smiles were definitely not fake",
+        "prediction": "Suicidal",
+        "confidence": 1.0,
+        "polarity": -0.1,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.45,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "nostalgic"
+        },
+        "created_at": "2025-04-19T20:43:00.000Z",
+        "formatted_date": "Apr 19, 2025",
+        "formatted_time": "08:43 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "its up to you please dont stress me out like this",
+        "original_text": "\"it's up to you\" please don't stress me out like this",
+        "prediction": "happiness",
+        "confidence": 1.0,
+        "polarity": 0.22,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.64,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-19T20:43:00.000Z",
+        "formatted_date": "Apr 19, 2025",
+        "formatted_time": "08:43 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i literally cant sleep without hugging something",
+        "original_text": "i literally can't sleep without hugging something",
+        "prediction": "Stress",
+        "confidence": 1.0,
+        "polarity": 0.07,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.88,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-19T01:59:00.000Z",
+        "formatted_date": "Apr 19, 2025",
+        "formatted_time": "01:59 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i love words of affirmation im a fan of that love language i love hearing how much i am loved and i really appreciate it when people explain their feelings for me in detail",
+        "original_text": "i love words of affirmation, i'm a fan of that love language. i love hearing how much i am loved, and i really appreciate it when people explain their feelings for me in detail",
+        "prediction": "relief",
+        "confidence": 1.0,
+        "polarity": 0.39,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.51,
+        "tone": {
+            "primary": "grateful",
+            "secondary": "hopeful"
+        },
+        "created_at": "2025-04-19T01:59:00.000Z",
+        "formatted_date": "Apr 19, 2025",
+        "formatted_time": "01:59 AM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "encountering grown adults with mean girl energy is so scary because what is wrong with you",
+        "original_text": "encountering grown adults with mean girl energy is so scary because what is wrong with you",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": -0.29,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.67,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "frustrated"
+        },
+        "created_at": "2025-04-18T20:04:00.000Z",
+        "formatted_date": "Apr 18, 2025",
+        "formatted_time": "08:04 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.20188699999999998,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "you ever listen to a song and remember exactly how life used to be when you first heard it",
+        "original_text": "you ever listen to a song and remember exactly how life used to be when you first heard it?",
+        "prediction": "hate",
+        "confidence": 1.0,
+        "polarity": 0.05,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.88,
+        "tone": {
+            "primary": "nostalgic",
+            "secondary": "reflective"
+        },
+        "created_at": "2025-04-18T20:04:00.000Z",
+        "formatted_date": "Apr 18, 2025",
+        "formatted_time": "08:04 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "PEOPLE ARE GOING TO TALK BADLY ABOUT YOU NO MATTER WHAT SO JUST DO WHAT MAKES YOU HAPPY",
+        "original_text": "PEOPLE. ARE. GOING. TO. TALK. BADLY. ABOUT. YOU. NO. MATTER. WHAT. SO. JUST. DO. WHAT. MAKES. YOU. HAPPY",
+        "prediction": "hate",
+        "confidence": 1.0,
+        "polarity": -0.03,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.91,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-18T20:04:00.000Z",
+        "formatted_date": "Apr 18, 2025",
+        "formatted_time": "08:04 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.01987999999999998,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "did you know muscles are activated when youre crying fitness is my passion",
+        "original_text": "did you know 17 muscles are activated when you're crying? fitness is my passion",
+        "prediction": "anger",
+        "confidence": 1.0,
+        "polarity": 0.03,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.78,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "melancholic"
+        },
+        "created_at": "2025-04-18T12:02:00.000Z",
+        "formatted_date": "Apr 18, 2025",
+        "formatted_time": "12:02 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "if you dont have random bruises on your body with no idea where they came from are you even a girl",
+        "original_text": "if you don't have random bruises on your body with no idea where they came from are you even a girl",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": -0.22799999999999998,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-18T12:02:00.000Z",
+        "formatted_date": "Apr 18, 2025",
+        "formatted_time": "12:02 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.13216,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "the older i get i realize my mom was right but i just didnt like her tone",
+        "original_text": "the older i get i realize my mom was right, but i just didn't like her tone",
+        "prediction": "happiness",
+        "confidence": 1.0,
+        "polarity": -0.07,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.69,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "sarcastic"
+        },
+        "created_at": "2025-04-17T20:30:00.000Z",
+        "formatted_date": "Apr 17, 2025",
+        "formatted_time": "08:30 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.05128333333333332,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "social media needs to stop recommending people i may know i know them and i hate them",
+        "original_text": "social media needs to stop recommending people i may know. i know them and i hate them",
+        "prediction": "empty",
+        "confidence": 1.0,
+        "polarity": -0.29,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.65,
+        "tone": {
+            "primary": "angry",
+            "secondary": "reflective"
+        },
+        "created_at": "2025-04-17T20:30:00.000Z",
+        "formatted_date": "Apr 17, 2025",
+        "formatted_time": "08:30 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.20268266666666665,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.14477333333333334,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "you handled it so well no i didnt i went insane lost my spark distanced myself from everyone and hated myself",
+        "original_text": "\"you handled it so well\" no, i didn't, i went insane, lost my spark, distanced myself from everyone and hated myself",
+        "prediction": "hate",
+        "confidence": 1.0,
+        "polarity": -0.216,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.5,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "angry"
+        },
+        "created_at": "2025-04-17T20:30:00.000Z",
+        "formatted_date": "Apr 17, 2025",
+        "formatted_time": "08:30 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.12308799999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.08792,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i love it when someone shows up for me like i do for them thats rare",
+        "original_text": "i love it when someone shows up for me like i do for them. that's rare",
+        "prediction": "happiness",
+        "confidence": 1.0,
+        "polarity": 0.31,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.61,
+        "tone": {
+            "primary": "grateful",
+            "secondary": "hopeful"
+        },
+        "created_at": "2025-04-17T15:37:00.000Z",
+        "formatted_date": "Apr 17, 2025",
+        "formatted_time": "03:37 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i need a playlist of all the songs i used to love but forgot about",
+        "original_text": "i need a playlist of all the songs i used to love but forgot about",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.21,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "nostalgic",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-17T15:37:00.000Z",
+        "formatted_date": "Apr 17, 2025",
+        "formatted_time": "03:37 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "ill do it if you do it be the most dangerous friendships",
+        "original_text": "\"i'll do it if you do it\" be the most dangerous friendships",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.05,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.93,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-17T12:15:00.000Z",
+        "formatted_date": "Apr 17, 2025",
+        "formatted_time": "12:15 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.03465699999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "little miss automatically goes silent when something hurts her feelings",
+        "original_text": "little miss automatically goes silent when something hurts her feelings",
+        "prediction": "hate",
+        "confidence": 1.0,
+        "polarity": -0.18,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.74,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": null
+        },
+        "created_at": "2025-04-16T21:56:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "09:56 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.123984,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "too young for rushing things but too old for wasting time",
+        "original_text": "too young for rushing things but too old for wasting time",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": -0.14,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.68,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-16T21:56:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "09:56 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.10147899999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "naturally introverted selectively extroverted",
+        "original_text": "naturally introverted, selectively extroverted",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.02,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.95,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-16T21:56:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "09:56 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "first born daughters could be extremely independent but behind the bars were actually are just fragile little girls who need assistance assurance love and care once we love we love beyond compare",
+        "original_text": "first born daughters could be extremely independent but behind the bars we're actually are just fragile little girls who need assistance, assurance, love, and care. once we love, we love beyond compare",
+        "prediction": "happiness",
+        "confidence": 1.0,
+        "polarity": 0.32,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.51,
+        "tone": {
+            "primary": "grateful",
+            "secondary": "hopeful"
+        },
+        "created_at": "2025-04-16T16:23:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "04:23 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i love when i realize im handling a situation better than my old self would have",
+        "original_text": "i love when i realize i'm handling a situation better than my old self would have",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": 0.31,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.6,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-16T16:23:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "04:23 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0.281028
+        }
+    },
+    {
+        "text": "idk why doctors only give stickers to kids like hello i was also brave today",
+        "original_text": "idk why doctors only give stickers to kids? like hello i was also brave today",
+        "prediction": "empty",
+        "confidence": 1.0,
+        "polarity": 0.28,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.66,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-16T13:06:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "01:06 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "why is cleaning out your camera roll like the biggest chore ever",
+        "original_text": "why is cleaning out your camera roll like the biggest chore ever",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.11,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.82,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-16T13:06:00.000Z",
+        "formatted_date": "Apr 16, 2025",
+        "formatted_time": "01:06 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i no longer hate mondays ive matured instead i hate life",
+        "original_text": "i no longer hate mondays, i've matured, instead i hate life",
+        "prediction": "relief",
+        "confidence": 1.0,
+        "polarity": -0.504,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.57,
+        "tone": {
+            "primary": "angry",
+            "secondary": "melancholic"
+        },
+        "created_at": "2025-04-15T23:13:00.000Z",
+        "formatted_date": "Apr 15, 2025",
+        "formatted_time": "11:13 PM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0.29312499999999997,
+            "hopelessness": 0.335,
+            "anxiety": 0,
+            "anger": 0.209375,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "no matter how hard i try i somehow cant get rid of the sad year old girl inside me",
+        "original_text": "no matter how hard i try, i somehow can't get rid of the sad 13 year old girl inside me",
+        "prediction": "empty",
+        "confidence": 1.0,
+        "polarity": -0.3,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.66,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": null
+        },
+        "created_at": "2025-04-15T23:13:00.000Z",
+        "formatted_date": "Apr 15, 2025",
+        "formatted_time": "11:13 PM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0.17524577777777775,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "thats not my girl bestie thats my platonic wife",
+        "original_text": "that's not my girl bestie that's my platonic wife",
+        "prediction": "Stress",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 1.0,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-15T20:51:00.000Z",
+        "formatted_date": "Apr 15, 2025",
+        "formatted_time": "08:51 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": -0.0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "a safe man comes into your life and loves you correctly no secrets no sneaky stuff no half love no other women no inconsistency just you and only you",
+        "original_text": "a safe man comes into your life and loves you correctly. no secrets. no sneaky stuff. no half love. no other women. no inconsistency. just you and only you",
+        "prediction": "empty",
+        "confidence": 1.0,
+        "polarity": -0.055,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.89,
+        "tone": {
+            "primary": "grateful",
+            "secondary": null
+        },
+        "created_at": "2025-04-15T20:51:00.000Z",
+        "formatted_date": "Apr 15, 2025",
+        "formatted_time": "08:51 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "lifes just been so lately",
+        "original_text": "life's just been so ??????????????? lately",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.85,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-15T09:07:00.000Z",
+        "formatted_date": "Apr 15, 2025",
+        "formatted_time": "09:07 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.041999999999999996,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "deleting pictures is so difficult for me i cant even let go of a random screenshot",
+        "original_text": "deleting pictures is so difficult for me. i can't even let go of a random screenshot",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.3,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-15T09:07:00.000Z",
+        "formatted_date": "Apr 15, 2025",
+        "formatted_time": "09:07 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.17518899999999998,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "attachment is not a joke losing your favorite person can mentally destroy you",
+        "original_text": "attachment is not a joke. losing your favorite person can mentally destroy you",
+        "prediction": "hate",
+        "confidence": 1.0,
+        "polarity": 0.1,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.88,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-15T09:07:00.000Z",
+        "formatted_date": "Apr 15, 2025",
+        "formatted_time": "09:07 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "flowers for no reason is always a",
+        "original_text": "flowers for no reason is always a 10/10",
+        "prediction": "Depression",
+        "confidence": 1.0,
+        "polarity": -0.09,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.85,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-14T21:38:00.000Z",
+        "formatted_date": "Apr 14, 2025",
+        "formatted_time": "09:38 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.062159999999999986,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "being kissed in your sleep and pulled closer is such a top tier of affection",
+        "original_text": "being kissed in your sleep and pulled closer is such a top tier of affection",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": 0.28,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.61,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-14T21:38:00.000Z",
+        "formatted_date": "Apr 14, 2025",
+        "formatted_time": "09:38 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "deleting your toxic paragraph to text back ok is top tier self control",
+        "original_text": "deleting your toxic paragraph to text back \"ok\" is top tier self control",
+        "prediction": "Suicidal",
+        "confidence": 1.0,
+        "polarity": 0.13,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.83,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-14T16:58:00.000Z",
+        "formatted_date": "Apr 14, 2025",
+        "formatted_time": "04:58 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "you attract what you fear AAAAHHHH HEALTHY RELATIONSHIP FUTURE STABLE CAREER AND LIFEEEEE",
+        "original_text": "\"you attract what you fear\" AAAAHHHH HEALTHY RELATIONSHIP, FUTURE STABLE CAREER AND LIFEEEEE",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": 0.26,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.66,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-14T16:58:00.000Z",
+        "formatted_date": "Apr 14, 2025",
+        "formatted_time": "04:58 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i hate how fast this app refreshes like bitch i was reading that",
+        "original_text": "i hate how fast this app refreshes like bitch i was reading that",
+        "prediction": "worry",
+        "confidence": 1.0,
+        "polarity": -0.28,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.64,
+        "tone": {
+            "primary": "angry",
+            "secondary": "frustrated"
+        },
+        "created_at": "2025-04-14T09:48:00.000Z",
+        "formatted_date": "Apr 14, 2025",
+        "formatted_time": "09:48 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.192864,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.13776000000000002,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i will not accept a hint i will act dumb until you say it clearly to me",
+        "original_text": "i will not accept a hint, i will act dumb until you say it clearly to me",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.18,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.79,
+        "tone": {
+            "primary": "resigned",
+            "secondary": null
+        },
+        "created_at": "2025-04-14T09:48:00.000Z",
+        "formatted_date": "Apr 14, 2025",
+        "formatted_time": "09:48 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.10711399999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "study so hard until dior is like shein to you",
+        "original_text": "study so hard until dior is like shein to you",
+        "prediction": "relief",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-13T20:53:00.000Z",
+        "formatted_date": "Apr 13, 2025",
+        "formatted_time": "08:53 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "girls hates period but afriad of not having it",
+        "original_text": "girls hates period but afriad of not having it",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": -0.07,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.88,
+        "tone": {
+            "primary": "angry",
+            "secondary": null
+        },
+        "created_at": "2025-04-13T20:53:00.000Z",
+        "formatted_date": "Apr 13, 2025",
+        "formatted_time": "08:53 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.050022,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0.03573,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "youre so quiet thanks im not comfortable around you",
+        "original_text": "\"you're so quiet\" thanks, i'm not comfortable around you",
+        "prediction": "hate",
+        "confidence": 1.0,
+        "polarity": 0.04,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.94,
+        "tone": {
+            "primary": "grateful",
+            "secondary": null
+        },
+        "created_at": "2025-04-13T15:08:00.000Z",
+        "formatted_date": "Apr 13, 2025",
+        "formatted_time": "03:08 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "a toddler grabbing your hand to walk somewhere is one of those things that make you feel good inside no matter what going on",
+        "original_text": "a toddler grabbing your hand to walk somewhere is one of those things that make you feel good inside no matter what going on",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.1,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.65,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-13T15:08:00.000Z",
+        "formatted_date": "Apr 13, 2025",
+        "formatted_time": "03:08 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i used to lie to yall my mom didnt say no i did",
+        "original_text": "i used to lie to y'all.. my mom didn't say no, i did",
+        "prediction": "enthusiasm",
+        "confidence": 1.0,
+        "polarity": 0.07,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.89,
+        "tone": {
+            "primary": "nostalgic",
+            "secondary": null
+        },
+        "created_at": "2025-04-13T11:29:00.000Z",
+        "formatted_date": "Apr 13, 2025",
+        "formatted_time": "11:29 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "why is sleeping at night so hard but sleeping in the morning feels like drifting away on a soft fluffy cloud while Adele sings you a lullaby",
+        "original_text": "why is sleeping at night so hard, but sleeping in the morning feels like drifting away on a soft, fluffy cloud while Adele sings you a lullaby?",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": 0.1,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.72,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-13T11:29:00.000Z",
+        "formatted_date": "Apr 13, 2025",
+        "formatted_time": "11:29 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "you bringing up old shit nah im exposing a pattern",
+        "original_text": "\"you bringing up old shit\" nah, i'm exposing a pattern",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": -0.23,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.64,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T22:13:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "10:13 PM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0.15964899999999999,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "notice how we say girl when excited and man when disappointed",
+        "original_text": "notice how we say \"girl\" when excited and \"man\" when disappointed",
+        "prediction": "Stress",
+        "confidence": 1.0,
+        "polarity": -0.09,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.91,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T22:13:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "10:13 PM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0.063609,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "periods pregnancy menopause while men just live their lives i dont get it",
+        "original_text": "periods, pregnancy, menopause, while men just.. live their lives? i don't get it",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.03,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.93,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T18:40:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "06:40 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "unpopular opinion but busy days are the best days you might be tired and stressed but atleast you were not overthinking and sad all day",
+        "original_text": "unpopular opinion but busy days are the best days, you might be tired and stressed but atleast you were not overthinking and sad all day",
+        "prediction": "happiness",
+        "confidence": 1.0,
+        "polarity": -0.09,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.71,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "reflective"
+        },
+        "created_at": "2025-04-12T18:40:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "06:40 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i miss going to sleep with nothing on my mind",
+        "original_text": "i miss going to sleep with nothing on my mind",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": -0.05,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.92,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T18:40:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "06:40 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.032151,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "lets normalize im willing to work on that instead of thats just how i am",
+        "original_text": "let's normalize \"i'm willing to work on that\" instead of \"that's just how i am\"",
+        "prediction": "Suicidal",
+        "confidence": 1.0,
+        "polarity": 0.05,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.88,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-12T12:30:00.000Z",
+        "formatted_date": "Apr 12, 2025",
+        "formatted_time": "12:30 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "my ultimate fantasy is having a brain that lets me enjoy life instead of making me feel like im at gunpoint over every tiny inconvenience",
+        "original_text": "my ultimate fantasy is having a brain that lets me enjoy life instead of making me feel like i'm at gunpoint over every tiny inconvenience",
+        "prediction": "Depression",
+        "confidence": 1.0,
+        "polarity": 0.17,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-11T12:30:00.000Z",
+        "formatted_date": "Apr 11, 2025",
+        "formatted_time": "12:30 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "does anyone know what to do like in general",
+        "original_text": "does anyone know what to do. like in general",
+        "prediction": "Suicidal",
+        "confidence": 1.0,
+        "polarity": 0.12,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.82,
+        "tone": {
+            "primary": "reflective",
+            "secondary": null
+        },
+        "created_at": "2025-04-11T20:50:00.000Z",
+        "formatted_date": "Apr 11, 2025",
+        "formatted_time": "08:50 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "delete the lol from the end of your sentences and just say what you need to say",
+        "original_text": "delete the \"lol\" from the end of your sentences and just say what you need to say",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.18,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.6,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-11T20:50:00.000Z",
+        "formatted_date": "Apr 11, 2025",
+        "formatted_time": "08:50 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "you ever talk to a man and start feeling immensely sorry for the women in their life",
+        "original_text": "you ever talk to a man and start feeling immensely sorry for the women in their life?????",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.01,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.61,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-11T16:51:00.000Z",
+        "formatted_date": "Apr 11, 2025",
+        "formatted_time": "04:51 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.009751000000000008,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i need to stop stressing and just be a hot girl having fun",
+        "original_text": "i need to stop stressing and just be a hot girl having fun",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": 0.02,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.81,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-11T16:51:00.000Z",
+        "formatted_date": "Apr 11, 2025",
+        "formatted_time": "04:51 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "bro i eat one meal a day at pm dont ask me if im ok",
+        "original_text": "bro i eat one meal a day at 5pm don't ask me if i'm ok",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": 0.19,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.75,
+        "tone": {
+            "primary": "hopeful",
+            "secondary": "grateful"
+        },
+        "created_at": "2025-04-11T22:20:00.000Z",
+        "formatted_date": "Apr 11, 2025",
+        "formatted_time": "10:20 PM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "im convinced different people bring out different versions of you",
+        "original_text": "i'm convinced different people bring out different versions of you",
+        "prediction": "Suicidal",
+        "confidence": 1.0,
+        "polarity": 0.12,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.8,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-11T22:20:00.000Z",
+        "formatted_date": "Apr 11, 2025",
+        "formatted_time": "10:20 PM",
+        "is_insomnia_hr": true,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "cant wait to be the wife who decorates the house for every holiday season",
+        "original_text": "can't wait to be the wife who decorates the house for every holiday season",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": -0.06,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.8,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T21:57:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "09:57 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "even the smalleeeesssssttt things make me happy you wouldnt even know",
+        "original_text": "even the smalleeeesssssttt things make me happy, you wouldn't even know",
+        "prediction": "Suicidal",
+        "confidence": 1.0,
+        "polarity": 0.23099999999999998,
+        "polarity_label": "Positive",
+        "sentiment_confidence": 0.6,
+        "tone": {
+            "primary": "reflective",
+            "secondary": "hopeful"
+        },
+        "created_at": "2025-04-10T21:57:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "09:57 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "the sexual tension between me and disappearing without an explanation",
+        "original_text": "the sexual tension between me and disappearing without an explanation",
+        "prediction": "worry",
+        "confidence": 1.0,
+        "polarity": 0.0,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.59,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T21:57:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "09:57 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "the intimacy of adapting each others vocabularies tones and typings",
+        "original_text": "the intimacy of adapting each other's vocabularies, tones, and typings",
+        "prediction": "relief",
+        "confidence": 1.0,
+        "polarity": -0.03,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.94,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T15:34:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "03:34 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.017499999999999998,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "ngl the age im turning this year sounds serious and i dont like it",
+        "original_text": "ngl the age i'm turning this year sounds serious and i don't like it",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.17,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.83,
+        "tone": {
+            "primary": "instructive",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T15:34:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "03:34 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.11850766666666665,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "some people have no idea how draining they actually are",
+        "original_text": "some people have no idea how draining they actually are",
+        "prediction": "Depression",
+        "confidence": 1.0,
+        "polarity": -0.09,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.85,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T20:53:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "08:53 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.062159999999999986,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i wanna be again and ruin my life differently i have new ideas",
+        "original_text": "i wanna be 14 again and ruin my life differently… i have new ideas",
+        "prediction": "Anxiety",
+        "confidence": 1.0,
+        "polarity": -0.15,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.64,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-04-10T20:53:00.000Z",
+        "formatted_date": "Apr 10, 2025",
+        "formatted_time": "08:53 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.10394809090909088,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    }
+]

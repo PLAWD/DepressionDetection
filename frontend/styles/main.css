@@ -1,0 +1,266 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Main container */
+.main-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Typography */
+h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+h2 {
+    color: #2c3e50;
+    font-size: 18px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+h3 {
+    color: #2c3e50;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.subtitle {
+    color: #5a6a7e;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* Button styles */
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.primary-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.primary-button:hover {
+    background-color: #2980b9;
+}
+
+.end-session-button {
+    background-color: #e74c3c;
+    color: white;
+    margin-top: 30px;
+}
+
+.end-session-button:hover {
+    background-color: #c0392b;
+}
+
+/* Form styles */
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #f0f2f5;
+    border-radius: 25px;
+    padding: 5px 15px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 350px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-box .icon {
+    color: #95a5a6;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Resources section */
+.resources-section {
+    margin-top: 40px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.resource-item {
+    margin-bottom: 15px;
+}
+
+.resource-item h3 {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.resource-item p {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.resources-footer {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #7f8c8d;
+    text-align: center;
+}
+
+/* Disclaimer screen */
+.disclaimer-box {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading animation */
+.loading-container {
+    margin: 30px auto;
+}
+
+.loading-bar-container {
+    background-color: #f0f2f5;
+    height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.loading-bar {
+    background-color: #3498db;
+    height: 100%;
+    position: absolute;
+    width: 30%;
+    animation: loading-animation 1.5s infinite ease-in-out;
+}
+
+.loading-text {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+@keyframes loading-animation {
+    0% {
+        width: 0%;
+        left: 0;
+    }
+    50% {
+        width: 30%;
+    }
+    100% {
+        width: 0%;
+        left: 100%;
+    }
+}
+
+/* Results container */
+.result-container {
+    margin: 30px auto;
+}
+
+#resultText {
+    margin-bottom: 20px;
+}
+
+/* Chart styles */
+#emotionPieChart {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #7f8c8d;
+}
+
+.tweet-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    text-align: left;
+    border-left: 4px solid #3498db;
+}
+
+/* Responsive design */
+@media (max-width: 700px) {
+    .main-container, .disclaimer-box {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+}

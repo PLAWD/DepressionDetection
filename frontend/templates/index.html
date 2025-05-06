@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Social Media Emotion Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('serve_styles', filename='main.css') }}">
+</head>
+<body>
+    <!-- Disclaimer Screen - Only shown if disclaimer not acknowledged -->
+    <div id="screen1" {% if session.get('passed_disclaimer', False) %}class="hidden"{% endif %}>
+        <div class="disclaimer-box">
+            <h2>Disclaimer</h2>
+            <p>
+                The depression awareness system is not intended for medical diagnosis or to replace professional mental health services.
+                Its purpose is to demonstrate the functionality of the algorithm in identifying potential early signs of depression through
+                social media text analysis and to raise awareness about mental health.
+                <br><br>
+                This tool provides users with insights based on observed patterns in text, helping to inform and encourage reflection.
+                However, it is not a substitute for a clinical assessment. If you are experiencing serious symptoms or signs of depression,
+                we strongly encourage you to seek help from a licensed mental health professional.
+            </p>
+            <form action="{{ url_for('acknowledge_disclaimer') }}" method="POST">
+                <button type="submit" class="button primary-button">I Understand</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Detection Screen - Only shown if disclaimer acknowledged -->
+    <div id="screen2" class="{% if not session.get('passed_disclaimer', False) %}hidden{% endif %} main-screen">
+        <div class="main-container">
+            <h1>Social Media Emotion Analysis</h1>
+            <p class="subtitle">Analyze Twitter posts to identify emotional patterns and potential signs of mental health concerns.</p>
+            
+            <form id="detectionForm">
+                <div class="search-box">
+                    <span class="icon">@</span>
+                    <input type="text" name="username" id="username" placeholder="Enter Twitter username..." required>
+                </div>
+                <button type="button" id="analyzeTweetsBtn" class="button primary-button">Analyze Profile</button>
+            </form>
+            
+            <div id="loadingContainer" class="loading-container hidden">
+                <div class="loading-bar-container">
+                    <div class="loading-bar"></div>
+                </div>
+                <p class="loading-text">Analyzing tweets...</p>
+            </div>
+            
+            <div id="resultContainer" class="result-container hidden">
+                <p id="resultText"></p>
+                
+                <!-- Pie Chart Section (clean, transparent) -->
+                <canvas id="emotionPieChart" width="400" height="400"></canvas>
+            </div>
+            
+            <!-- Resources section -->
+            <div class="resources-section">
+                <h2>Mental Health Resources</h2>
+                <div class="resource-item">
+                    <h3>Philippine Mental Health Association</h3>
+                    <p>(02) 8921 4958</p>
+                </div>
+                <div class="resource-item">
+                    <h3>National Center for Mental Health Crisis Hotline</h3>
+                    <p>tel. 1553 / cel. 0917-899-8727</p>
+                </div>
+                <p class="resources-footer">mentalhealth.ph.org · Find more resources online</p>
+            </div>
+        </div>
+            
+        <!-- Tweet examples modal -->
+        <div id="tweetModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3 id="modalTitle">Tweets</h3>
+                <div id="modalTweets" class="modal-tweets-container">
+                    <!-- Tweet examples will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Load Chart.js from CDN first -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Then load our custom scripts -->
+    <script src="{{ url_for('serve_scripts', filename='scripts.js') }}"></script>
+    <script>
+    // Set Chart.js global defaults for dark text on light background
+    if (window.Chart) {
+        Chart.defaults.color = "#333";
+        Chart.defaults.plugins.legend.labels.color = "#333";
+        Chart.defaults.plugins.tooltip.bodyColor = "#333";
+        Chart.defaults.plugins.tooltip.titleColor = "#333";
+    }
+    </script>
+    <script src="/scripts/assessment.js"></script>
+</body>
+</html>
