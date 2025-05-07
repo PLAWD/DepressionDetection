@@ -4,6 +4,8 @@ import re
 import traceback
 import pickle
 import numpy as np  # Add NumPy import
+import requests  # Add requests for direct Twitter API calls
+from datetime import datetime, timedelta
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
 
 # Import TensorFlow components
@@ -15,6 +17,66 @@ from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
 from sentiment_analyzer import analyze_sentiment
 # Import the enhanced version
 from enhanced_sentiment_analyzer import analyze_sentiment_enhanced
+
+# Load Twitter API credentials
+def load_twitter_credentials():
+    try:
+        with open("backend/config/twitter_keys.json", "r") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Error loading Twitter credentials: {str(e)}")
+        return {"bearer_token": ""}
+
+# Twitter API credentials
+TWITTER_CREDENTIALS = load_twitter_credentials()
+TWITTER_BEARER_TOKEN = TWITTER_CREDENTIALS.get("bearer_token", "")
+
+# Twitter API functions
+def get_twitter_headers():
+    return {
+        "Authorization": f"Bearer {TWITTER_BEARER_TOKEN}",
+        "Content-Type": "application/json"
+    }
+
+def get_twitter_user_by_username(username):
+    url = f"https://api.twitter.com/2/users/by/username/{username}"
+    response = requests.get(url, headers=get_twitter_headers())
+    
+    if response.status_code != 200:
+        print(f"Error getting user info: {response.status_code}")
+        print(response.text)
+        return None
+    
+    data = response.json()
+    return data.get("data", {})
+
+def get_user_tweets(user_id, max_results=100):
+    # Calculate date for 2 weeks ago
+    end_time = datetime.now()
+    start_time = end_time - timedelta(days=14)
+    
+    # Format dates for Twitter API
+    start_time_str = start_time.strftime("%Y-%m-%dT%H:%M:%SZ")
+    end_time_str = end_time.strftime("%Y-%m-%dT%H:%M:%SZ")
+    
+    url = f"https://api.twitter.com/2/users/{user_id}/tweets"
+    params = {
+        "max_results": max_results,
+        "start_time": start_time_str,
+        "end_time": end_time_str,
+        "tweet.fields": "created_at,text",
+        "exclude": "retweets,replies"
+    }
+    
+    response = requests.get(url, headers=get_twitter_headers(), params=params)
+    
+    if response.status_code != 200:
+        print(f"Error getting user tweets: {response.status_code}")
+        print(response.text)
+        return []
+    
+    data = response.json()
+    return data.get("data", [])
 
 # Set this to True to use the enhanced analyzer, False to use the original
 USE_ENHANCED_ANALYZER = True
@@ -302,34 +364,68 @@ def analyze_tweets():
         if not username:
             return jsonify({"error": "Username is required"}), 400
         
+        # Remove @ symbol if present
+        if username.startswith('@'):
+            username = username[1:]
+            
         # Dynamically generate filenames based on username
         raw_tweets_file = f"{username}_raw_tweets.json"
         preprocessed_tweets_file = f"{username}_preprocessed_tweets.json"
         labeled_tweets_file = f"{username}_labeled_tweets.json"
         
-        # Add debugging for file path
-        absolute_path = os.path.abspath(raw_tweets_file)
-        print(f"Looking for raw tweets file at: {absolute_path}")
-        
-        # Check if raw tweets file exists
-        if not os.path.exists(raw_tweets_file):
-            print(f"File not found: {absolute_path}")
-            # Check if there's a direct file with just the username
-            alternate_path = f"aqcplod_raw_tweets.json"
-            if username == "aqcplod" and os.path.exists(alternate_path):
-                print(f"Using alternate file: {alternate_path}")
-                raw_tweets_file = alternate_path
-            else:
-                return jsonify({"error": f"No tweet data found for @{username}"}), 404
-        
-        # Load raw tweets with error handling
+        # Try to get tweets from Twitter API
         try:
-            with open(raw_tweets_file, "r", encoding="utf-8") as infile:
-                raw_tweets = json.load(infile)
-            print(f"Successfully loaded {len(raw_tweets)} tweets from {raw_tweets_file}")
+            print(f"Fetching tweets for user @{username} from Twitter API")
+            
+            # First get the user ID
+            user_data = get_twitter_user_by_username(username)
+            if not user_data or "id" not in user_data:
+                return jsonify({"error": f"Twitter user @{username} not found"}), 404
+                
+            user_id = user_data["id"]
+            
+            # Get user's tweets
+            tweets_data = get_user_tweets(user_id)
+            
+            if not tweets_data:
+                # If no tweets found on Twitter, try to use local file as fallback
+                if os.path.exists(raw_tweets_file):
+                    print(f"No recent tweets found on Twitter, using local file: {raw_tweets_file}")
+                    with open(raw_tweets_file, "r", encoding="utf-8") as f:
+                        raw_tweets = json.load(f)
+                else:
+                    return jsonify({"error": f"No tweets found for @{username} in the past 2 weeks"}), 404
+            else:
+                # Format tweets into our expected structure
+                raw_tweets = []
+                for tweet in tweets_data:
+                    raw_tweets.append({
+                        "id": tweet.get("id"),
+                        "text": tweet.get("text"),
+                        "created_at": tweet.get("created_at")
+                    })
+                
+                # Save the raw tweets to file for future use
+                with open(raw_tweets_file, "w", encoding="utf-8") as f:
+                    json.dump(raw_tweets, f, ensure_ascii=False, indent=2)
+                
+                print(f"Successfully saved {len(raw_tweets)} tweets to {raw_tweets_file}")
+                
         except Exception as e:
-            print(f"Error loading tweets file: {str(e)}")
-            return jsonify({"error": f"Failed to load tweets data: {str(e)}"}), 500
+            print(f"Error fetching tweets from Twitter API: {str(e)}")
+            traceback.print_exc()
+            
+            # Try to use local file as fallback if Twitter API fails
+            if os.path.exists(raw_tweets_file):
+                print(f"Using local file as fallback: {raw_tweets_file}")
+                try:
+                    with open(raw_tweets_file, "r", encoding="utf-8") as f:
+                        raw_tweets = json.load(f)
+                except Exception as file_error:
+                    print(f"Error reading local tweets file: {str(file_error)}")
+                    return jsonify({"error": f"Failed to fetch tweets for @{username}"}), 500
+            else:
+                return jsonify({"error": f"Failed to fetch tweets for @{username}: {str(e)}"}), 500
         
         # Process raw tweets into simplified format while preserving original text
         preprocessed_tweets = []
@@ -416,7 +512,6 @@ def analyze_tweets():
             
             if timestamp:
                 try:
-                    from datetime import datetime
                     dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
                     formatted_date = dt.strftime("%b %d, %Y")
                     formatted_time = dt.strftime("%I:%M %p")

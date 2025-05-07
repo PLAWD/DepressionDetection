@@ -13,6 +13,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeButton = document.querySelector('.close-button');
     const chartDebug = document.getElementById('chart-debug');
     
+    // Add new modal elements for user not found error
+    const userNotFoundModal = document.getElementById('userNotFoundModal') || createUserNotFoundModal();
+    const closeUserNotFoundBtn = userNotFoundModal.querySelector('.close-button');
+    
+    // Create user not found modal if it doesn't exist
+    function createUserNotFoundModal() {
+        const modal = document.createElement('div');
+        modal.id = 'userNotFoundModal';
+        modal.className = 'modal hidden';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>User Not Found</h2>
+                <p>The Twitter user you entered does not exist or cannot be found. Please check the username and try again.</p>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        return modal;
+    }
+    
     // Store analysis data
     let currentAnalysisData = null;
     
@@ -29,105 +49,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add event listeners
     if (analyzeTweetsBtn) {
-        analyzeTweetsBtn.addEventListener('click', function() {
-            const username = usernameInput.value.trim();
-            
-            if (!username) {
-                alert('Please enter a Twitter username');
-                return;
+        analyzeTweetsBtn.addEventListener('click', fetchAndAnalyzeTweets);
+    }
+    
+    // Add event listener for Enter key in username input
+    if (usernameInput) {
+        usernameInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                fetchAndAnalyzeTweets();
             }
-            
-            // Show loading animation with improved visibility
-            if (loadingContainer) {
-                // Make loading container visible
-                loadingContainer.classList.remove('hidden');
-                loadingContainer.style.display = 'flex';
-                console.log('Loading container displayed');
-            }
-            if (resultContainer) {
-                resultContainer.classList.add('hidden');
-            }
-            
-            // Make API request with better error handling
-            fetch('/api/tweets', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username: username }),
-            })
-            .then(response => {
-                console.log(`Response status: ${response.status}`);
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        try {
-                            // Try to parse as JSON to get structured error
-                            const error = JSON.parse(text);
-                            throw new Error(error.error || `Server responded with status ${response.status}`);
-                        } catch (e) {
-                            // If not JSON, use the text directly
-                            throw new Error(`Server error (${response.status}): ${text.substring(0, 100)}...`);
-                        }
-                    });
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Received data:", data);
-                
-                if (resultContainer) {
-                    resultContainer.classList.remove('hidden');
-                }
-                
-                // Display a simplified result text
-                if (resultText) {
-                    const username = usernameInput.value.trim();
-                    resultText.innerHTML = `<h3>Analysis complete for <strong>@${username}</strong></h3>`;
-                }
-                
-                // Display the emotion cards first
-                if (data.emotions && Object.keys(data.emotions).length > 0) {
-                    createEmotionCards(data.emotions);
-                }
-                
-                // Display the emotion visualization if data exists
-                if (data.emotions && Object.keys(data.emotions).length > 0) {
-                    console.log('Creating visualization with data:', data.emotions);
-                    renderEmotionChart(data.emotions);
-                } else {
-                    console.warn('No emotion data received from API');
-                }
-                
-                // Store the data for later use
-                currentAnalysisData = data;
-
-                // Save analysis results for assessment
-                if (window.saveAnalysisResults) {
-                    window.saveAnalysisResults(data);
-                }
-
-                // Hide loading bar only after everything is rendered
-                if (loadingContainer) {
-                    loadingContainer.classList.add('hidden');
-                    loadingContainer.style.display = 'none';
-                    console.log('Loading container hidden');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                logDebug(`ERROR: ${error.message}`);
-                if (loadingContainer) {
-                    loadingContainer.classList.add('hidden');
-                    loadingContainer.style.display = 'none';
-                }
-                if (resultContainer) {
-                    resultContainer.classList.remove('hidden');
-                }
-                if (resultText) {
-                    resultText.textContent = 
-                        `Error analyzing tweets: ${error.message || 'Please check if the username exists or try again later.'}`;
-                }
-            });
+        });
+    }
+    
+    // Close button for user not found modal
+    if (closeUserNotFoundBtn) {
+        closeUserNotFoundBtn.addEventListener('click', function() {
+            userNotFoundModal.classList.add('hidden');
         });
     }
     
@@ -139,14 +77,140 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // When clicking outside the modal, close it
+    // When clicking outside any modal, close it
     window.addEventListener('click', function(event) {
+        if (event.target == userNotFoundModal) {
+            userNotFoundModal.classList.add('hidden');
+        }
         if (event.target == tweetModal) {
             if (tweetModal) {
                 tweetModal.classList.add('hidden');
             }
         }
     });
+    
+    // Extract fetch and analyze logic into a separate function for reuse
+    function fetchAndAnalyzeTweets() {
+        const username = usernameInput.value.trim();
+        
+        if (!username) {
+            alert('Please enter a Twitter username');
+            return;
+        }
+        
+        // Show loading animation
+        if (loadingContainer) {
+            loadingContainer.classList.remove('hidden');
+            loadingContainer.style.display = 'flex';
+            console.log('Loading container displayed');
+        }
+        if (resultContainer) {
+            resultContainer.classList.add('hidden');
+        }
+        
+        // Make API request with better error handling
+        fetch('/api/tweets', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: username }),
+        })
+        .then(response => {
+            console.log(`Response status: ${response.status}`);
+            if (!response.ok) {
+                return response.text().then(text => {
+                    try {
+                        // Try to parse as JSON to get structured error
+                        const error = JSON.parse(text);
+                        
+                        // Check if this is a "user not found" error
+                        if (response.status === 404 && error.error && error.error.includes("not found")) {
+                            throw new Error("USER_NOT_FOUND");
+                        } else {
+                            throw new Error(error.error || `Server responded with status ${response.status}`);
+                        }
+                    } catch (e) {
+                        // If not JSON or other error, use the text directly
+                        if (e.message === "USER_NOT_FOUND") {
+                            throw e;
+                        } else {
+                            throw new Error(`Server error (${response.status}): ${text.substring(0, 100)}...`);
+                        }
+                    }
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Received data:", data);
+            
+            if (resultContainer) {
+                resultContainer.classList.remove('hidden');
+            }
+            
+            // Display a simplified result text
+            if (resultText) {
+                const username = usernameInput.value.trim();
+                resultText.innerHTML = `<h3>Analysis complete for <strong>@${username}</strong></h3>`;
+            }
+            
+            // Display the emotion cards first
+            if (data.emotions && Object.keys(data.emotions).length > 0) {
+                createEmotionCards(data.emotions);
+            }
+            
+            // Display the emotion visualization if data exists
+            if (data.emotions && Object.keys(data.emotions).length > 0) {
+                console.log('Creating visualization with data:', data.emotions);
+                renderEmotionChart(data.emotions);
+            } else {
+                console.warn('No emotion data received from API');
+            }
+            
+            // Store the data for later use
+            currentAnalysisData = data;
+
+            // Save analysis results for assessment
+            if (window.saveAnalysisResults) {
+                window.saveAnalysisResults(data);
+            }
+
+            // Hide loading bar only after everything is rendered
+            if (loadingContainer) {
+                loadingContainer.classList.add('hidden');
+                loadingContainer.style.display = 'none';
+                console.log('Loading container hidden');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            logDebug(`ERROR: ${error.message}`);
+            
+            // Hide loading animation
+            if (loadingContainer) {
+                loadingContainer.classList.add('hidden');
+                loadingContainer.style.display = 'none';
+            }
+            
+            // Check for specific error cases
+            if (error.message === "USER_NOT_FOUND") {
+                // Show the user not found modal
+                if (userNotFoundModal) {
+                    userNotFoundModal.classList.remove('hidden');
+                }
+            } else {
+                // Display general error in the results container
+                if (resultContainer) {
+                    resultContainer.classList.remove('hidden');
+                }
+                if (resultText) {
+                    resultText.textContent = 
+                        `Error analyzing tweets: ${error.message || 'Please check if the username exists or try again later.'}`;
+                }
+            }
+        });
+    }
     
     // Format emotion percentages for display
     function formatEmotionPercentages(emotions) {
