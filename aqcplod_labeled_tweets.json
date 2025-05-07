@@ -2,7 +2,7 @@
     {
         "text": "my feelings are hurt and i need time to process them so i can better communicate with you is perfectly valid response i wish we used it more in moments of conflict",
         "original_text": "'my feelings are hurt and i need time to process them so i can better communicate with you' is perfectly valid response & i wish we used it more in moments of conflict",
-        "prediction": "worry",
+        "prediction": "relief",
         "confidence": 1.0,
         "polarity": -0.23,
         "polarity_label": "Negative",
@@ -26,7 +26,7 @@
     {
         "text": "day by day im training my heart to accept disappointments even from people i love",
         "original_text": "day by day, i'm training my heart to accept disappointments even from people i love",
-        "prediction": "happiness",
+        "prediction": "sadness",
         "confidence": 1.0,
         "polarity": 0.28,
         "polarity_label": "Positive",
@@ -50,7 +50,7 @@
     {
         "text": "my mom didnt raise a quitter she raised someone so afraid of failure that they dont even start something",
         "original_text": "my mom didn't raise a quitter, she raised someone so afraid of failure that they don't even start something",
-        "prediction": "empty",
+        "prediction": "Stress",
         "confidence": 1.0,
         "polarity": -0.26,
         "polarity_label": "Negative",
@@ -98,7 +98,7 @@
     {
         "text": "manipulation is when they blame you for your reaction to their toxic behavior but never discuss the disrespect that triggered you",
         "original_text": "manipulation is when they\nblame you for your reaction to\ntheir toxic behavior, but never\ndiscuss the disrespect that\ntriggered you.",
-        "prediction": "relief",
+        "prediction": "Depression",
         "confidence": 1.0,
         "polarity": 0.05,
         "polarity_label": "Neutral",
@@ -122,7 +122,7 @@
     {
         "text": "i cant even describe what im feeling right now all i can say is that it hurts a lot",
         "original_text": "i can't even describe what i'm feeling right now, all i can say is that, it hurts a lot.",
-        "prediction": "relief",
+        "prediction": "neutral",
         "confidence": 1.0,
         "polarity": -0.06,
         "polarity_label": "Neutral",
@@ -146,7 +146,7 @@
     {
         "text": "no matter how many friends i will have i will always remember that circle of friends who made me feel that i belong that would always ask me if i can go in some trip that circle who stays and wait for me when i tie my shoelaces",
         "original_text": "no matter how many friends i will have, i will always remember that circle of friends who made me feel that i belong, that would always ask me if i can go in some trip, that circle who stays and wait for me when i tie my shoelaces.",
-        "prediction": "worry",
+        "prediction": "sadness",
         "confidence": 1.0,
         "polarity": -0.1,
         "polarity_label": "Neutral",
@@ -170,7 +170,7 @@
     {
         "text": "im sick of finding myself at the same place again and again",
         "original_text": "i'm sick of finding myself at the same place again and again.",
-        "prediction": "enthusiasm",
+        "prediction": "happiness",
         "confidence": 1.0,
         "polarity": -0.22,
         "polarity_label": "Negative",
@@ -194,7 +194,7 @@
     {
         "text": "dont beg for replies and attention if someone is ignoring you just maintain the distance and treat them as they treat you",
         "original_text": "don't beg for replies and attention, if someone is ignoring you just maintain the distance and treat them as they treat you.",
-        "prediction": "neutral",
+        "prediction": "Anxiety",
         "confidence": 1.0,
         "polarity": 0.12,
         "polarity_label": "Neutral",
@@ -218,7 +218,7 @@
     {
         "text": "if they knew how much time effort and tears it takes to rebuild they would understand why we have to be careful when choosing who enters our lives and who doesnt sometimes there are people who dont mind breaking our souls and leaving empty spaces that are difficult to fill",
         "original_text": "if they knew how much time, effort, and tears it takes to rebuild, they would understand why we have to be careful when choosing who enters our lives and who doesn't. sometimes there are people who don't mind breaking our souls and leaving empty spaces that are difficult to fill",
-        "prediction": "neutral",
+        "prediction": "happiness",
         "confidence": 1.0,
         "polarity": -0.19,
         "polarity_label": "Negative",
@@ -242,7 +242,7 @@
     {
         "text": "i usually ignore people when im having breakdowns i appreciate those who still stays who still patiently waiting for me to respond to their messages those who always tell me that im not alone those people that can understand my feelings even if im not saying anything",
         "original_text": "i usually ignore people when i'm having breakdowns. i appreciate those who still stays, who still patiently waiting for me to respond to their messages. those who always tell me that i'm not alone. those people that can understand my feelings even if i'm not saying anything.",
-        "prediction": "empty",
+        "prediction": "love",
         "confidence": 1.0,
         "polarity": 0.011000000000000001,
         "polarity_label": "Neutral",
@@ -338,7 +338,7 @@
     {
         "text": "i got rules dont le to me dont use me and if youre tred of me leave me alone",
         "original_text": "i got 3 rules. don't líe to me, don't use me, and if you're tíred of me, leave me alone",
-        "prediction": "neutral",
+        "prediction": "sadness",
         "confidence": 1.0,
         "polarity": -0.09,
         "polarity_label": "Neutral",
@@ -362,7 +362,7 @@
     {
         "text": "how i wish",
         "original_text": "how i wish",
-        "prediction": "relief",
+        "prediction": "Suicidal",
         "confidence": 1.0,
         "polarity": 0.12,
         "polarity_label": "Neutral",
@@ -410,7 +410,7 @@
     {
         "text": "im not the type of person to give up on someone yes sometimes i get really mad and upset so i need a minute to cool off but Ill never abandon you i dont leave people and i think thats why it hurts so bad when people leave me",
         "original_text": "i'm not the type of person to give up on someone. yes, sometimes i get really mad and upset so i need a minute to cool off but I'll never abandon you. i don't leave people. and i think that's why it hurts so bad when people leave me.",
-        "prediction": "Stress",
+        "prediction": "Depression",
         "confidence": 1.0,
         "polarity": -0.6839999999999999,
         "polarity_label": "Negative",
@@ -434,7 +434,7 @@
     {
         "text": "i hate when people cant see the wrong in their actions but see the wrong in yours",
         "original_text": "i hate when people can't see the wrong in their actions, but see the wrong in yours.",
-        "prediction": "worry",
+        "prediction": "Stress",
         "confidence": 1.0,
         "polarity": 0.0,
         "polarity_label": "Neutral",
@@ -458,7 +458,7 @@
     {
         "text": "no offense but if someone is excited about something and you make them feel stupid for being excited about it you are the worse type of person",
         "original_text": "no offense but if someone is excited about something and you make them feel stupid for being excited about it you are the worse type of person",
-        "prediction": "Suicidal",
+        "prediction": "neutral",
         "confidence": 1.0,
         "polarity": -0.276,
         "polarity_label": "Negative",
@@ -482,7 +482,7 @@
     {
         "text": "nothing hurts more than seeing myself again in the same situation after getting better for a while",
         "original_text": "nothing hurts more than seeing myself again in the same situation after getting better for a while",
-        "prediction": "Stress",
+        "prediction": "enthusiasm",
         "confidence": 1.0,
         "polarity": 0.27,
         "polarity_label": "Positive",
@@ -506,7 +506,7 @@
     {
         "text": "its not that deep is insane because these are my feelings not yours",
         "original_text": "\"it's not that deep\" is insane because these are my feelings not yours",
-        "prediction": "Stress",
+        "prediction": "love",
         "confidence": 1.0,
         "polarity": -0.264,
         "polarity_label": "Negative",
@@ -530,7 +530,7 @@
     {
         "text": "can we just admit that we all lost a bond with someone this year that we wanted to last forever",
         "original_text": "can we just admit that we all lost a bond with someone this year that we wanted to last forever",
-        "prediction": "Depression",
+        "prediction": "Anxiety",
         "confidence": 1.0,
         "polarity": -0.04,
         "polarity_label": "Neutral",
@@ -554,7 +554,7 @@
     {
         "text": "sometimes no matter how nice you are how kind you are how caring you are and how loving you are it just isnt enough for some people",
         "original_text": "sometimes, no matter how nice you are. how kind you are. how caring you are and how loving you are, it just isn't enough for some people",
-        "prediction": "empty",
+        "prediction": "Stress",
         "confidence": 1.0,
         "polarity": -0.1,
         "polarity_label": "Neutral",
@@ -578,7 +578,7 @@
     {
         "text": "i think one of the healthiest things ive ever learned is that you should allow others to reintroduce themselves to you give people space to become who they are without assuming you know who they are just bc youve been friends or family for years",
         "original_text": "i think one of the healthiest things i've ever learned is that you should allow others to reintroduce themselves to you. give people space to become who they are without assuming you know who they are just bc you've been friends or family for years",
-        "prediction": "relief",
+        "prediction": "anger",
         "confidence": 1.0,
         "polarity": 0.18,
         "polarity_label": "Positive",
@@ -602,7 +602,7 @@
     {
         "text": "i would just like a little credit for the fact that im killing myself trying",
         "original_text": "i would just like a little credit for the fact that i'm killing myself trying.",
-        "prediction": "love",
+        "prediction": "sadness",
         "confidence": 1.0,
         "polarity": -0.04,
         "polarity_label": "Neutral",
@@ -626,7 +626,7 @@
     {
         "text": "the lack of interest i have in everyone and everything nowadays is insane",
         "original_text": "the lack of interest i have in everyone and everything nowadays is insane",
-        "prediction": "relief",
+        "prediction": "happiness",
         "confidence": 1.0,
         "polarity": -0.28,
         "polarity_label": "Negative",
@@ -650,7 +650,7 @@
     {
         "text": "one thing i absolutely love and adore about myself is no matter how bad ive been treated no matter how im feeling no matter what ive been through or what im going through i still have a heart of gold and endless love to give thats one thing no one can ever take from me",
         "original_text": "one thing i absolutely love and adore about myself is, no matter how bad i've been treated, no matter how i'm feeling, no matter what i've been through or what i'm going through, i still have a heart of gold and endless love to give. that's one thing no one can ever take from me.",
-        "prediction": "sadness",
+        "prediction": "Depression",
         "confidence": 1.0,
         "polarity": -0.1,
         "polarity_label": "Neutral",
@@ -674,7 +674,7 @@
     {
         "text": "im teaching myself to not exaggerate my places in peoples lives no matter how good my intentions no matter how much they mean to me im learning that sometimes you dont mean to people what they mean to you thats okay",
         "original_text": "i'm teaching myself to not exaggerate my places in peoples lives. no matter how good my intentions, no matter how much they mean to me. i'm learning that sometimes you don't mean to people what they mean to you & that's okay.",
-        "prediction": "happiness",
+        "prediction": "Suicidal",
         "confidence": 1.0,
         "polarity": 0.0495,
         "polarity_label": "Neutral",
@@ -698,7 +698,7 @@
     {
         "text": "DONT overshare just because someone is being nice to you you idiot",
         "original_text": "DON'T overshare just because someone is being nice to you. you idiot",
-        "prediction": "Stress",
+        "prediction": "hate",
         "confidence": 1.0,
         "polarity": -0.06,
         "polarity_label": "Neutral",
@@ -722,7 +722,7 @@
     {
         "text": "i dont cry over people i cry over the way i get treated because i dont deserve that",
         "original_text": "i don't cry over people, i cry over the way i get treated because i don't deserve that",
-        "prediction": "neutral",
+        "prediction": "Suicidal",
         "confidence": 1.0,
         "polarity": 0.095,
         "polarity_label": "Neutral",
@@ -746,7 +746,7 @@
     {
         "text": "to be treated well without asking for it hits different",
         "original_text": "to be treated well without asking for it, hits different",
-        "prediction": "neutral",
+        "prediction": "sadness",
         "confidence": 1.0,
         "polarity": 0.08,
         "polarity_label": "Neutral",
@@ -770,7 +770,7 @@
     {
         "text": "hearing im proud of you when youre having a hard time really does hit different",
         "original_text": "hearing \"i'm proud of you\" when you're having a hard time really does hit different",
-        "prediction": "happiness",
+        "prediction": "Anxiety",
         "confidence": 1.0,
         "polarity": 0.16,
         "polarity_label": "Positive",
@@ -794,7 +794,7 @@
     {
         "text": "people be abusing that soft spot you got for them until its no longer there",
         "original_text": "people be abusing that soft spot you got for them, until it's no longer there",
-        "prediction": "love",
+        "prediction": "relief",
         "confidence": 1.0,
         "polarity": -0.20400000000000001,
         "polarity_label": "Negative",
@@ -818,7 +818,7 @@
     {
         "text": "i stopped looking so deeply into people when i realized that they dont even go that far into themselves",
         "original_text": "i stopped looking so deeply into people when i realized that they don't even go that far into themselves",
-        "prediction": "love",
+        "prediction": "enthusiasm",
         "confidence": 1.0,
         "polarity": -0.06,
         "polarity_label": "Neutral",
@@ -842,7 +842,7 @@
     {
         "text": "are you okay no from the bottom of my heart im tired",
         "original_text": "\"are you okay?\" no, from the bottom of my heart, i'm tired.",
-        "prediction": "hate",
+        "prediction": "enthusiasm",
         "confidence": 1.0,
         "polarity": -0.192,
         "polarity_label": "Negative",
@@ -866,7 +866,7 @@
     {
         "text": "i am a strong person but every once in a while i would like someone to hold my hand and tell me things are going to be OK",
         "original_text": "i am a strong person. but every once in a while i would like someone to hold my hand and tell me things are going to be OK",
-        "prediction": "Suicidal",
+        "prediction": "Depression",
         "confidence": 1.0,
         "polarity": 0.37,
         "polarity_label": "Positive",
@@ -890,7 +890,7 @@
     {
         "text": "it didnt kill me but a part of me died that day",
         "original_text": "it didn't kill me, but a part of me died that day.",
-        "prediction": "happiness",
+        "prediction": "Depression",
         "confidence": 1.0,
         "polarity": -0.16,
         "polarity_label": "Negative",
@@ -914,7 +914,7 @@
     {
         "text": "maybe im not that strong but im trying im really trying",
         "original_text": "maybe i'm not that strong, but i'm trying, i'm really trying.",
-        "prediction": "love",
+        "prediction": "neutral",
         "confidence": 1.0,
         "polarity": -0.055,
         "polarity_label": "Neutral",
@@ -938,7 +938,7 @@
     {
         "text": "god please make my heart strong enough to handle every struggle",
         "original_text": "god, please make my heart strong enough to handle every struggle.",
-        "prediction": "Depression",
+        "prediction": "hate",
         "confidence": 1.0,
         "polarity": 0.24,
         "polarity_label": "Positive",
@@ -962,7 +962,7 @@
     {
         "text": "i love being spoiled but not with gift or money just time attention and efforts",
         "original_text": "i love being spoiled, but not with gift or money, just time attention and efforts",
-        "prediction": "empty",
+        "prediction": "Suicidal",
         "confidence": 1.0,
         "polarity": 0.06,
         "polarity_label": "Neutral",
@@ -986,7 +986,7 @@
     {
         "text": "i dont know whats going on in my life but im slowly losing interest in everything",
         "original_text": "i don't know what's going on in my life, but i'm slowly losing interest in everything.\"",
-        "prediction": "hate",
+        "prediction": "enthusiasm",
         "confidence": 1.0,
         "polarity": -0.01,
         "polarity_label": "Neutral",
@@ -1010,7 +1010,7 @@
     {
         "text": "i dont cheat and not because i cant but because i dont want to be a reason someone stops believing in love i dont want to be the reason someone stay awake all night crying im not saying im perfect but i just realized that at this age cheating is immature and disgusting",
         "original_text": "i don't cheat and not because i can't, but because i don't want to be a reason someone stops believing in love. i don't want to be the reason someone stay awake all night crying. i'm not saying i'm perfect, but i just realized that at this age cheating is immature and disgusting.",
-        "prediction": "anger",
+        "prediction": "sadness",
         "confidence": 1.0,
         "polarity": -0.21839999999999998,
         "polarity_label": "Negative",
@@ -1034,7 +1034,7 @@
     {
         "text": "if i ever lose my battle to my mental health know that i fought know that i tried",
         "original_text": "if i ever lose my battle to my mental health know that i fought. know\nthat i tried.",
-        "prediction": "love",
+        "prediction": "enthusiasm",
         "confidence": 1.0,
         "polarity": -0.25,
         "polarity_label": "Negative",
@@ -1058,7 +1058,7 @@
     {
         "text": "when their only excuse for their actions was im just going through a lot rn but when i was going through a lot i never treated them that bad",
         "original_text": "when their only excuse for their actions was \"i'm just going through a lot rn\" but when i was going through a lot, i never treated them that bad",
-        "prediction": "sadness",
+        "prediction": "Anxiety",
         "confidence": 1.0,
         "polarity": -0.3,
         "polarity_label": "Negative",
@@ -1082,7 +1082,7 @@
     {
         "text": "This user is tired of pretending that everything is okay",
         "original_text": "ⓘ This user is tired of pretending that everything is okay.",
-        "prediction": "enthusiasm",
+        "prediction": "sadness",
         "confidence": 1.0,
         "polarity": -0.01,
         "polarity_label": "Neutral",
@@ -1106,7 +1106,7 @@
     {
         "text": "This user is physically and mentally drained",
         "original_text": "ⓘ This user is physically and mentally drained.",
-        "prediction": "neutral",
+        "prediction": "hate",
         "confidence": 1.0,
         "polarity": -0.12,
         "polarity_label": "Negative",
@@ -1130,7 +1130,7 @@
     {
         "text": "This user wants somebody who understands",
         "original_text": "ⓘ This user wants somebody who understands.",
-        "prediction": "anger",
+        "prediction": "neutral",
         "confidence": 1.0,
         "polarity": 0.04,
         "polarity_label": "Neutral",
@@ -1154,7 +1154,7 @@
     {
         "text": "This user needs a long break from everything",
         "original_text": "ⓘ This user needs a long break from everything",
-        "prediction": "Depression",
+        "prediction": "empty",
         "confidence": 1.0,
         "polarity": -0.01,
         "polarity_label": "Neutral",
@@ -1178,7 +1178,7 @@
     {
         "text": "This user is tired of their never ending thoughts",
         "original_text": "ⓘ This user is tired of their never ending thoughts.",
-        "prediction": "worry",
+        "prediction": "neutral",
         "confidence": 1.0,
         "polarity": -0.22799999999999998,
         "polarity_label": "Negative",
@@ -1202,7 +1202,7 @@
     {
         "text": "This user doesnt know what to do with their life anymore",
         "original_text": "ⓘ This user doesn't know what to do with their life anymore",
-        "prediction": "Stress",
+        "prediction": "happiness",
         "confidence": 1.0,
         "polarity": 0.0,
         "polarity_label": "Neutral",
@@ -1226,7 +1226,7 @@
     {
         "text": "This user is tired of being the one who always understands",
         "original_text": "ⓘ This user is tired of being the one who always understands.",
-        "prediction": "anger",
+        "prediction": "Suicidal",
         "confidence": 1.0,
         "polarity": -0.19,
         "polarity_label": "Negative",
@@ -1250,7 +1250,7 @@
     {
         "text": "This user wants to escape from reality",
         "original_text": "ⓘ This user wants to escape from reality.",
-        "prediction": "enthusiasm",
+        "prediction": "love",
         "confidence": 1.0,
         "polarity": 0.09,
         "polarity_label": "Neutral",
