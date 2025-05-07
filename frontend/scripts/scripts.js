@@ -37,9 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Show loading animation
+            // Show loading animation with improved visibility
             if (loadingContainer) {
+                // Make loading container visible
                 loadingContainer.classList.remove('hidden');
+                loadingContainer.style.display = 'flex';
+                console.log('Loading container displayed');
             }
             if (resultContainer) {
                 resultContainer.classList.add('hidden');
@@ -72,10 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 console.log("Received data:", data);
                 
-                // Process successful response
-                if (loadingContainer) {
-                    loadingContainer.classList.add('hidden');
-                }
                 if (resultContainer) {
                     resultContainer.classList.remove('hidden');
                 }
@@ -106,12 +105,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (window.saveAnalysisResults) {
                     window.saveAnalysisResults(data);
                 }
+
+                // Hide loading bar only after everything is rendered
+                if (loadingContainer) {
+                    loadingContainer.classList.add('hidden');
+                    loadingContainer.style.display = 'none';
+                    console.log('Loading container hidden');
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
                 logDebug(`ERROR: ${error.message}`);
                 if (loadingContainer) {
                     loadingContainer.classList.add('hidden');
+                    loadingContainer.style.display = 'none';
                 }
                 if (resultContainer) {
                     resultContainer.classList.remove('hidden');
@@ -254,13 +261,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const labels = Object.keys(emotionData);
         const values = Object.values(emotionData);
 
-        // Define a better color palette for visibility
-        const backgroundColors = [
-            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-            '#FF9F40', '#C9CBCF', '#8844FF', '#22CCDD', '#FFAA33',
-            '#66BBFF', '#DD66AA', '#44EEBB', '#FFDD66', '#AA88FF',
-            '#33DDAA', '#FF8866', '#77AAFF', '#DDAA77'
-        ];
+        // Hardcoded emotion color map (case-insensitive)
+        const emotionColorMap = {
+            'neutral': '#bdbdbd',
+            'love': '#ff69b4',
+            'happiness': '#ffe066',
+            'sadness': '#4f8ad1',
+            'relief': '#a3e635',
+            'hate': '#7c2d12',
+            'anger': '#ef4444',
+            'enthusiasm': '#fbbf24',
+            'empty': '#a1a1aa',
+            'worry': '#f59e42',
+            'anxiety': '#6366f1',
+            'depression': '#374151',
+            'suicidal': '#000000',
+            'stress': '#f87171'
+        };
+        const backgroundColors = Object.keys(emotionData).map(label =>
+            emotionColorMap[label.toLowerCase()] || '#888888'
+        );
 
         emotionPieChart = new Chart(ctx, {
             type: 'pie',
@@ -268,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: labels,
                 datasets: [{
                     data: values,
-                    backgroundColor: backgroundColors.slice(0, labels.length),
+                    backgroundColor: backgroundColors,
                     borderWidth: 1,
                     borderColor: '#fff'
                 }]
@@ -311,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Create custom legend outside the chart
-        createCustomLegend(labels, backgroundColors.slice(0, labels.length), values);
+        createCustomLegend(labels, backgroundColors, values);
         
         // Use the dedicated assessment.js functionality
         if (window.createAssessButton) {
@@ -729,26 +749,24 @@ document.addEventListener('DOMContentLoaded', function() {
             .sort((a, b) => b[1] - a[1])
             .slice(0, 6); // Limit to top 6 emotions to prevent overwhelm
         
-        // Define emotion color map (ensure consistent with chart colors)
+        // Use the same hardcoded color map for cards
         const emotionColorMap = {
-            'Anxiety': '#7FFF00',
-            'Depression': '#4B0082',
-            'Stress': '#FF4500',
-            'Suicidal': '#000000',
-            'anger': '#FF0000',
-            'boredom': '#808080',
-            'empty': '#E0E0E0',
-            'enthusiasm': '#FFA500',
-            'happiness': '#FFFF00',
-            'hate': '#8B0000',
-            'love': '#FF69B4',
-            'neutral': '#D3D3D3',
-            'relief': '#ADD8E6',
-            'sadness': '#0000FF',
-            'surprise': '#9932CC',
-            'worry': '#008080'
+            'neutral': '#bdbdbd',
+            'love': '#ff69b4',
+            'happiness': '#ffe066',
+            'sadness': '#4f8ad1',
+            'relief': '#a3e635',
+            'hate': '#7c2d12',
+            'anger': '#ef4444',
+            'enthusiasm': '#fbbf24',
+            'empty': '#a1a1aa',
+            'worry': '#f59e42',
+            'anxiety': '#6366f1',
+            'depression': '#374151',
+            'suicidal': '#000000',
+            'stress': '#f87171'
         };
-        
+
         // Create a card for each emotion
         sortedEmotions.forEach(([emotion, percentage]) => {
             const card = document.createElement('div');
@@ -766,7 +784,7 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
             
             // Get color from map or fallback to a default
-            const emotionColor = emotionColorMap[emotion] || '#333';
+            const emotionColor = emotionColorMap[emotion.toLowerCase()] || '#333';
             card.style.borderTop = `4px solid ${emotionColor}`;
             
             // Hover effect

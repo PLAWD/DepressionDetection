@@ -43,7 +43,7 @@ def serve_images(filename):
     return send_from_directory('frontend/pics', filename)
 
 # Load the models and tokenizer
-BILSTM_MODEL_PATH = "backend/models/bilsm-svm.keras"
+BILSTM_MODEL_PATH = "backend/models/combined_bilstm.keras"
 SVM_MODEL_PATH = "backend/models/svm_model.pkl"
 TOKENIZER_PATH = "backend/models/tokenizer.json"
 MAX_SEQ_LEN = 100
@@ -79,6 +79,24 @@ tokenizer = tokenizer_from_json(tokenizer_json)
 # Define emotion labels for the new models
 LABELS = ['neutral', 'love', 'happiness', 'sadness', 'relief', 'hate', 'anger',
          'enthusiasm', 'empty', 'worry', 'Anxiety', 'Depression', 'Suicidal', 'Stress']
+
+# Assign a color to each emotion label for chart visualization
+EMOTION_COLORS = {
+    'neutral': '#bdbdbd',
+    'love': '#ff69b4',
+    'happiness': '#ffe066',
+    'sadness': '#4f8ad1',
+    'relief': '#a3e635',
+    'hate': '#7c2d12',
+    'anger': '#ef4444',
+    'enthusiasm': '#fbbf24',
+    'empty': '#a1a1aa',
+    'worry': '#f59e42',
+    'Anxiety': '#6366f1',
+    'Depression': '#374151',
+    'Suicidal': '#000000',
+    'Stress': '#f87171'
+}
 
 # Define a function to clean text
 def clean_text(text):
@@ -124,25 +142,21 @@ def predict_emotion(text_sequences):
             if hasattr(svm_model, 'classes_'):
                 print(f"SVM classes: {svm_model.classes_}")
                 
-            # Get raw predictions before converting to class indices
+            # Get raw predictions
             raw_predictions = svm_model.predict(features)
             print(f"Raw prediction distribution: {np.unique(raw_predictions, return_counts=True)}")
             
-            # Test with random predictions to see if everything's neutral or more varied
-            # Comment this out after diagnosing the issue
+            # If all predictions are neutral, log a warning but don't modify the predictions
             if all(pred == 0 for pred in raw_predictions):
-                print("WARNING: All predictions are neutral. Trying randomized distribution for testing:")
-                # Use a more varied distribution for testing (temporary)
-                raw_predictions = np.random.randint(0, len(LABELS), size=len(safe_sequences))
-                print(f"Randomized prediction distribution: {np.unique(raw_predictions, return_counts=True)}")
+                print("WARNING: All predictions are neutral. This might indicate a model issue.")
             
             predictions = raw_predictions
             
         except Exception as e:
             print(f"SVM prediction failed: {str(e)}")
-            # Fallback with more varied distribution
-            print("Using fallback varied prediction distribution")
-            predictions = np.random.randint(0, len(LABELS), size=len(safe_sequences))
+            # Fallback to neutral predictions (0) instead of random
+            print("Using neutral fallback predictions due to SVM failure")
+            predictions = np.zeros(len(safe_sequences), dtype=int)
         
         # Convert predictions to one-hot encoding format with default confidence of 1.0
         result = []
@@ -165,15 +179,11 @@ def predict_emotion(text_sequences):
         print(f"Error in predict_emotion: {str(e)}")
         traceback.print_exc()
         
-        # Return a more varied fallback prediction for testing
+        # Use consistent neutral fallback instead of varied predictions
         fallback = np.zeros((len(text_sequences), len(LABELS)))
-        # Distribute predictions across different emotions instead of all neutral
-        for i in range(len(text_sequences)):
-            # Use modulo to cycle through different emotions
-            emotion_index = (i % (len(LABELS) - 1)) + 1  # Skip neutral (0)
-            fallback[i, emotion_index] = 1.0
+        fallback[:, 0] = 1.0  # All neutral (index 0)
         
-        print("Using varied fallback predictions due to error")
+        print("Using neutral fallback predictions due to error")
         return fallback
 
 # Routes
@@ -518,7 +528,8 @@ def analyze_tweets():
             "polarity": round(avg_polarity, 2),
             "polarity_label": avg_polarity_label,
             "tone_counts": tone_percentages,
-            "emotion_dimensions": avg_emotion_dimensions
+            "emotion_dimensions": avg_emotion_dimensions,
+            "emotion_colors": EMOTION_COLORS  # Add color mapping for frontend
         })
         
     except Exception as e:
