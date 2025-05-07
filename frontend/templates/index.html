@@ -3,6 +3,17 @@
 <head>
     <title>Depression Detection Tool</title>
     <link rel="stylesheet" href="{{ url_for('serve_styles', filename='main.css') }}">
+    <!-- Updated Chart.js script and configuration -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // Set only one set of Chart.js global defaults to avoid conflicts
+    if (window.Chart) {
+        Chart.defaults.color = "#333";
+        Chart.defaults.plugins.tooltip.backgroundColor = "rgba(0, 0, 0, 0.7)";
+        Chart.defaults.plugins.tooltip.bodyColor = "#fff";
+        Chart.defaults.plugins.tooltip.titleColor = "#fff";
+    }
+    </script>
 </head>
 <body>
     <!-- Disclaimer Screen - Only shown if disclaimer not acknowledged -->
@@ -40,11 +51,19 @@
             <p class="loading-text">Analyzing tweets...</p>
         </div>
         
+        <!-- Updated result container with proper structure -->
         <div id="resultContainer" class="result-container hidden">
             <p id="resultText"></p>
             
-            <!-- Pie Chart Section (clean, transparent) -->
-            <canvas id="emotionPieChart" width="400" height="400" style="background: transparent !important; box-shadow: none; border: none;"></canvas>
+            <div class="visualization-container">
+                <!-- Chart container with proper styling -->
+                <div id="chart-container" style="position: relative; width: 400px; height: 400px; margin: 0 auto;">
+                    <canvas id="emotionPieChart" width="400" height="400"></canvas>
+                </div>
+                
+                <!-- Legend container with proper styling -->
+                <div class="legend-container" style="margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center;"></div>
+            </div>
         </div>
         
         <!-- Tweet examples modal -->
@@ -63,25 +82,24 @@
             <p><a href="tel:+63289214958">Philippine Mental Health Organization<br>(02) 8921 4958</a></p>
             <p><a href="tel:+639178998727">National Mental Health Center<br>tel. 1553 / cel. 0917-899-8727</a></p>
         </div>
-        
-        <!-- End button for main page -->
-        <button id="mainEndButton" class="button end-button" onclick="location.href='/'">End</button>
     </div>
     
-    <!-- Load Chart.js from CDN first -->
+    <!-- Load scripts in proper order: Chart.js first, then assessment.js, then main scripts.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Then load our custom scripts -->
-    <script src="{{ url_for('serve_scripts', filename='scripts.js') }}"></script>
     <script>
-    // Set Chart.js global defaults for white legend/label text
+    // Set only one set of Chart.js global defaults to avoid conflicts
     if (window.Chart) {
-        Chart.defaults.color = "#fff";
-        Chart.defaults.plugins.legend.labels.color = "#fff";
+        Chart.defaults.color = "#333";
+        Chart.defaults.plugins.tooltip.backgroundColor = "rgba(0, 0, 0, 0.7)";
         Chart.defaults.plugins.tooltip.bodyColor = "#fff";
         Chart.defaults.plugins.tooltip.titleColor = "#fff";
     }
     </script>
-    <script src="/scripts/assessment.js"></script>
+
+    <!-- Load assessment.js before main scripts -->
+    <script src="{{ url_for('serve_scripts', filename='assessment.js') }}"></script>
+
+    <!-- Then load our main scripts -->
+    <script src="{{ url_for('serve_scripts', filename='scripts.js') }}"></script>
 </body>
 </html>

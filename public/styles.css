@@ -62,3 +62,16 @@ input, button {
 .close-button:hover {
     color: #000;
 }
+
+/* Legend text styling for better visibility */
+.legend-item, .legend-label, .legend-text {
+    color: #333 !important;
+    font-weight: 500;
+}
+
+.legend-item {
+    margin: 5px 8px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
