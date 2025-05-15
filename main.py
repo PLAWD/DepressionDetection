@@ -18,6 +18,9 @@ from sentiment_analyzer import analyze_sentiment
 # Import the enhanced version
 from enhanced_sentiment_analyzer import analyze_sentiment_enhanced
 
+# Import the reports module
+from backend.reports import AnalysisReport, get_report_list, get_report_by_id, delete_report
+
 # Load Twitter API credentials
 def load_twitter_credentials():
     try:
@@ -103,6 +106,11 @@ def serve_scripts(filename):
 @app.route('/pics/<path:filename>')
 def serve_images(filename):
     return send_from_directory('frontend/pics', filename)
+
+# Add reports directory as a static folder
+app.add_url_rule('/reports/<path:filename>', 
+                 endpoint='reports', 
+                 view_func=lambda filename: send_from_directory('reports', filename))
 
 # Load the models and tokenizer
 BILSTM_MODEL_PATH = "backend/models/combined_bilstm.keras"
@@ -715,6 +723,145 @@ def assess_depression():
         traceback.print_exc()
         return jsonify({"error": f"Assessment failed: {str(e)}"}), 500
 
+# Add new endpoints for report generation and management
+@app.route('/api/reports/generate', methods=['POST'])
+def generate_report():
+    try:
+        if not session.get('passed_disclaimer', False):
+            return jsonify({"error": "Please acknowledge the disclaimer first"}), 403
+
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "Invalid request format. JSON expected."}), 400
+
+        username = data.get('username', '').strip()
+        analysis_data = data.get('analysis_data', {})
+        report_format = data.get('format', 'html')
+
+        if not username or not analysis_data:
+            return jsonify({"error": "Username and analysis data are required"}), 400
+
+        # Log report generation attempt
+        print(f"Starting report generation for @{username} in {report_format} format")
+
+        # Remove unnecessary data that might cause memory issues
+        if 'results' in analysis_data and len(analysis_data['results']) > 1000:
+            analysis_data['results'] = analysis_data['results'][:1000]
+            print(f"Trimmed results to first 1000 entries to avoid memory issues")
+
+        # Generate report (no threading)
+        report = AnalysisReport(username, analysis_data, clean_resources=True)
+        if report_format == 'pdf':
+            filepath = report.generate_pdf_report()
+        elif report_format == 'json':
+            filepath = report.generate_json_report()
+        else:
+            filepath = report.generate_html_report()
+
+        # Clean up matplotlib and temp files
+        import matplotlib.pyplot as plt
+        plt.close('all')
+        import gc
+        gc.collect()
+
+        filename = os.path.basename(filepath)
+        report_url = url_for('reports', filename=filename)
+        print(f"Report generation completed successfully: {filepath}")
+
+        return jsonify({
+            "success": True,
+            "report_id": report.report_id,
+            "format": report_format,
+            "report_url": report_url
+        })
+
+    except Exception as e:
+        print(f"Error generating report: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Report generation failed: {str(e)}"}), 500
+
+@app.route('/api/reports/list', methods=['GET'])
+def list_reports():
+    try:
+        # Check if disclaimer has been acknowledged
+        if not session.get('passed_disclaimer', False):
+            return jsonify({"error": "Please acknowledge the disclaimer first"}), 403
+        
+        # Get username filter if provided
+        username = request.args.get('username', '')
+        
+        # Get list of reports
+        reports = get_report_list()
+        
+        # Filter by username if provided
+        if username:
+            reports = [r for r in reports if r['username'] == username]
+        
+        # Add URLs to reports
+        for report in reports:
+            filename = os.path.basename(report['filepath'])
+            report['url'] = url_for('reports', filename=filename)
+        
+        return jsonify({
+            "success": True,
+            "reports": reports
+        })
+        
+    except Exception as e:
+        print(f"Error listing reports: {str(e)}")
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to list reports: {str(e)}"}), 500
+
+@app.route('/api/reports/<report_id>', methods=['GET'])
+def get_report(report_id):
+    try:
+        # Check if disclaimer has been acknowledged
+        if not session.get('passed_disclaimer', False):
+            return jsonify({"error": "Please acknowledge the disclaimer first"}), 403
+        
+        # Get report
+        report = get_report_by_id(report_id)
+        if not report:
+            return jsonify({"error": "Report not found"}), 404
+        
+        # Add URL to report
+        filename = os.path.basename(report['filepath'])
+        report['url'] = url_for('reports', filename=filename)
+        
+        return jsonify({
+            "success": True,
+            "report": report
+        })
+        
+    except Exception as e:
+        print(f"Error getting report: {str(e)}")
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to get report: {str(e)}"}), 500
+
+@app.route('/api/reports/<report_id>', methods=['DELETE'])
+def delete_report_endpoint(report_id):
+    try:
+        # Check if disclaimer has been acknowledged
+        if not session.get('passed_disclaimer', False):
+            return jsonify({"error": "Please acknowledge the disclaimer first"}), 403
+        
+        # Delete report
+        success = delete_report(report_id)
+        if not success:
+            return jsonify({"error": "Failed to delete report"}), 500
+        
+        return jsonify({
+            "success": True,
+            "message": "Report deleted successfully"
+        })
+        
+    except Exception as e:
+        print(f"Error deleting report: {str(e)}")
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to delete report: {str(e)}"}), 500
+
 # Run the app
 if __name__ == "__main__":
+    # Ensure the root route is only "/" and not empty string
     app.run(debug=True, port=5000)

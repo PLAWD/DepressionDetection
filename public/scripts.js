@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const response = await fetch('/api/tweets', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ username: username })
             });
@@ -70,11 +70,61 @@ document.addEventListener('DOMContentLoaded', function() {
             currentAnalysisData.total_tweets = Object.values(data.tweets_by_label || {})
                 .reduce((sum, tweets) => sum + tweets.length, 0);
             
-            // Display simple header instead of long emotion string
+            // Set a simple message instead of the long paragraph
             resultText.innerHTML = `Analysis complete for <strong>@${username}</strong>`;
             
-            // Create emotion cards instead of text list
-            createEmotionCards(data.emotion_counts || data.emotions || {});
+            // Create and render emotion cards if available
+            if (data.emotion_cards && data.emotion_cards.length > 0) {
+                const emotionCardsContainer = document.createElement('div');
+                emotionCardsContainer.className = 'emotion-cards-container';
+                
+                // Create header with username in the title
+                const cardsHeader = document.createElement('div');
+                cardsHeader.className = 'emotion-cards-header';
+                cardsHeader.innerHTML = `
+                    <div class="emotion-cards-title">
+                        <h3>@${username}'s Emotions</h3>
+                    </div>
+                    <div class="emotion-chart-container">
+                        <div class="chart-label">Full Emotion Distribution</div>
+                    </div>
+                `;
+                emotionCardsContainer.appendChild(cardsHeader);
+                
+                // Create section for the cards
+                const cardsSection = document.createElement('div');
+                cardsSection.className = 'emotion-cards-section';
+                cardsSection.innerHTML = '<h4>Emotion Cards:</h4>';
+                
+                // Only display the top 5 emotions
+                const topEmotions = data.emotion_cards.slice(0, 5);
+                
+                // Create each card
+                topEmotions.forEach(card => {
+                    const emotionCard = document.createElement('div');
+                    emotionCard.className = 'emotion-card';
+                    
+                    // Transform the emotion label for display
+                    const displayEmotion = getDisplayLabel(card.emotion);
+                    
+                    emotionCard.innerHTML = `
+                        <div class="emotion-card-content">
+                            <div class="emotion-emoji">${card.emoji}</div>
+                            <div class="emotion-details">
+                                <div class="emotion-name">${displayEmotion} — ${card.percentage}%</div>
+                                <div class="emotion-description">"${card.description}"</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    cardsSection.appendChild(emotionCard);
+                });
+                
+                emotionCardsContainer.appendChild(cardsSection);
+                
+                // Insert cards before the chart
+                resultContainer.insertBefore(emotionCardsContainer, resultContainer.firstChild);
+            }
             
             resultContainer.classList.remove('hidden');
             
@@ -89,123 +139,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Create visual emotion cards
-    function createEmotionCards(emotions) {
-        // Find or create container for emotion cards
-        let cardsContainer = document.getElementById('emotion-cards-container');
-        
-        if (!cardsContainer) {
-            cardsContainer = document.createElement('div');
-            cardsContainer.id = 'emotion-cards-container';
-            cardsContainer.style.display = 'flex';
-            cardsContainer.style.flexWrap = 'wrap';
-            cardsContainer.style.justifyContent = 'center';
-            cardsContainer.style.gap = '15px';
-            cardsContainer.style.marginTop = '20px';
-            cardsContainer.style.marginBottom = '20px';
-            
-            // Insert after result text
-            resultText.parentNode.insertBefore(cardsContainer, resultText.nextSibling);
-        } else {
-            cardsContainer.innerHTML = ''; // Clear existing cards
-        }
-        
-        if (!emotions || Object.keys(emotions).length === 0) {
-            const noEmotionsMessage = document.createElement('div');
-            noEmotionsMessage.textContent = 'No emotions detected';
-            noEmotionsMessage.style.padding = '15px';
-            cardsContainer.appendChild(noEmotionsMessage);
-            return;
-        }
-        
-        // Sort emotions by percentage (highest first)
-        const sortedEmotions = Object.entries(emotions)
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 6); // Limit to top 6 emotions to prevent overwhelm
-        
-        // Define emotion color map (ensure consistent with chart colors)
-        const emotionColorMap = {
-            'anxiety': '#7FFF00',
-            'depression': '#4B0082',
-            'stress': '#FF4500',
-            'suicidal': '#000000',
-            'anger': '#FF0000',
-            'boredom': '#808080',
-            'empty': '#E0E0E0',
-            'enthusiasm': '#FFA500',
-            'happiness': '#FFFF00',
-            'hate': '#8B0000',
-            'love': '#FF69B4',
-            'neutral': '#D3D3D3',
-            'relief': '#ADD8E6',
-            'sadness': '#0000FF',
-            'surprise': '#9932CC',
-            'worry': '#008080'
-        };
-        
-        // Create a card for each emotion
-        sortedEmotions.forEach(([emotion, percentage]) => {
-            const card = document.createElement('div');
-            card.className = 'emotion-card';
-            
-            // Normalize emotion name for color lookup
-            const emotionLower = emotion.toLowerCase();
-            
-            // Set card styling
-            card.style.backgroundColor = '#fff';
-            card.style.borderRadius = '8px';
-            card.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.15)';
-            card.style.padding = '15px';
-            card.style.width = '140px';
-            card.style.textAlign = 'center';
-            card.style.position = 'relative';
-            card.style.cursor = 'pointer';
-            card.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
-            card.style.borderTop = `4px solid ${emotionColorMap[emotionLower] || '#333'}`;
-            
-            // Hover effect
-            card.onmouseover = function() {
-                this.style.transform = 'translateY(-5px)';
-                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-            };
-            
-            card.onmouseout = function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.15)';
-            };
-            
-            // Make card clickable to show tweets
-            card.onclick = function() {
-                const tweets = currentAnalysisData.tweets_by_label[emotion] || [];
-                showTweetsInModal(emotion, tweets);
-            };
-            
-            // Create card content
-            const percentageElement = document.createElement('div');
-            percentageElement.textContent = `${Math.round(percentage)}%`;
-            percentageElement.style.fontSize = '32px';
-            percentageElement.style.fontWeight = 'bold';
-            percentageElement.style.color = '#333';
-            percentageElement.style.marginBottom = '5px';
-            
-            const emotionElement = document.createElement('div');
-            emotionElement.textContent = emotion.charAt(0).toUpperCase() + emotion.slice(1);
-            emotionElement.style.fontSize = '16px';
-            emotionElement.style.color = '#555';
-            
-            // Assemble card
-            card.appendChild(percentageElement);
-            card.appendChild(emotionElement);
-            cardsContainer.appendChild(card);
-        });
-    }
-
     // Format emotion percentages for display
     function formatEmotionPercentages(emotions) {
         if (!emotions || Object.keys(emotions).length === 0) {
             return "No emotions detected";
         }
         
+        // We're keeping this function for other uses, but won't display the formatted string
+        // in the long paragraph format anymore
         const entries = Object.entries(emotions)
             .sort((a, b) => b[1] - a[1]) // Sort by percentage (highest first)
             .map(([emotion, percentage]) => {
@@ -217,56 +158,53 @@ document.addEventListener('DOMContentLoaded', function() {
         return entries.join(", ");
     }
     
+    // Define vibrant colors for emotions
+    const EMOTION_COLORS = {
+        'neutral': '#bdbdbd',
+        'love': '#ff69b4',
+        'happiness': '#ffe066',
+        'sadness': '#4f8ad1',
+        'relief': '#a3e635',
+        'hate': '#7c2d12',
+        'anger': '#ef4444',
+        'enthusiasm': '#fbbf24',
+        'empty': '#a1a1aa',
+        'worry': '#f59e42',
+        'Anxiety': '#6366f1',
+        'Depressive': '#374151', // Make sure this is 'Depressive'
+        'Suicidal': '#000000',
+        'Stress': '#f87171'
+    };
+
     // Create and display the emotion chart
     function createEmotionChart(data) {
         // Get data for chart
         const emotionCounts = data.emotion_counts || {};
+        const simplifiedEmotions = data.emotions || {}; // The 3 main emotions for the simplified chart
         const tweetsByLabel = data.tweets_by_label || {};
         
+        // Decide which data to use (detailed or simplified)
         // For this implementation, we'll use the detailed emotion_counts
         const chartData = emotionCounts;
         
-        // Create arrays for chart
-        const labels = Object.keys(chartData);
-        const values = Object.values(chartData);
-        
-        // Define vibrant colors for emotions
-        const colors = [
-            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-            '#FF9F40', '#8AC926', '#1982C4', '#6A4C93', '#F94144',
-            '#F3722C', '#F8961E', '#F9844A', '#F9C74F', '#90BE6D',
-            '#43AA8B', '#577590', '#277DA1', '#EF476F'
-        ];
-        
-        // Define emotion-specific colors
-        const emotionColorMap = {
-            'anxiety': '#7FFF00',    // Light Green
-            'depression': '#4B0082', // Indigo/Dark Purple
-            'stress': '#FF4500',     // Orange-Red
-            'suicidal': '#000000',   // Black
-            'anger': '#FF0000',      // Red
-            'boredom': '#808080',    // Gray
-            'empty': '#E0E0E0',      // Light Gray (changed from white for visibility)
-            'enthusiasm': '#FFA500', // Orange
-            'happiness': '#FFFF00',  // Yellow
-            'hate': '#8B0000',       // Dark Red
-            'love': '#FF69B4',       // Hot Pink
-            'neutral': '#D3D3D3',    // Light Gray
-            'relief': '#ADD8E6',     // Light Blue
-            'sadness': '#0000FF',    // Blue
-            'surprise': '#9932CC',   // Purple
-            'worry': '#008080'       // Teal
-        };
-        
-        // Map emotion labels to their specific colors (with more consistent fallback)
-        const chartColors = labels.map(label => {
-            // Case-insensitive emotion matching
-            const emotion = label.toLowerCase();
-            // Use a deterministic fallback color instead of random
-            const color = emotionColorMap[emotion] || colors[labels.indexOf(label) % colors.length];
-            console.log(`Emotion: ${emotion}, Color: ${color}`);
-            return color;
+        // Transform the labels to display labels while keeping the values
+        const transformedChartData = {};
+        Object.entries(chartData).forEach(([label, value]) => {
+            transformedChartData[getDisplayLabel(label)] = value;
         });
+        
+        // Create arrays for chart with transformed labels
+        const labels = Object.keys(transformedChartData);
+        const values = Object.values(transformedChartData);
+        
+        // Also create a mapping from display label back to original label for data lookup
+        const displayToOriginalLabel = {};
+        Object.keys(chartData).forEach(originalLabel => {
+            displayToOriginalLabel[getDisplayLabel(originalLabel)] = originalLabel;
+        });
+        
+        // Use EMOTION_COLORS for color assignment
+        const colors = labels.map(label => EMOTION_COLORS[label] || '#FF6384');
         
         // Get a reference to the chart canvas
         const ctx = document.getElementById('emotionChart').getContext('2d');
@@ -283,13 +221,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: labels,
                 datasets: [{
                     data: values,
-                    backgroundColor: chartColors,
+                    backgroundColor: colors,
                     borderWidth: 2,
-                    // Better borders for light backgrounds
-                    borderColor: chartColors.map(color =>
-                        color === '#FFFF00' || color === '#E0E0E0' || color === '#ADD8E6' ||
-                        color === '#7FFF00' || color === '#D3D3D3' ? '#666666' : '#333333'
-                    ),
+                    borderColor: '#1e1929',
                     hoverOffset: 15
                 }]
             },
@@ -301,42 +235,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         display: false,
                         position: 'top',
                         labels: {
-                            // Update for lighter background
-                            color: '#333333',
+                            color: 'white',
                             font: {
                                 family: 'monospace'
-                            },
-                            generateLabels: function(chart) {
-                                const data = chart.data;
-                                return data.labels.map((label, i) => {
-                                    return {
-                                        text: label,
-                                        fillStyle: chartColors[i],
-                                        strokeStyle: chartColors[i],
-                                        lineWidth: 0,
-                                        hidden: false,
-                                        index: i
-                                    };
-                                });
                             }
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(50, 50, 50, 0.8)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
                         callbacks: {
                             label: function(context) {
-                                return context.label + ': ' + context.raw + '%';
+                                const displayLabel = getDisplayLabel(context.label);
+                                return displayLabel + ': ' + context.raw + '%';
                             }
-                        }
-                    }
-                },
-                // Force Chart.js to use custom colors
-                elements: {
-                    arc: {
-                        backgroundColor: function(context) {
-                            return chartColors[context.dataIndex];
                         }
                     }
                 },
@@ -347,53 +257,55 @@ document.addEventListener('DOMContentLoaded', function() {
                 onClick: (event, elements) => {
                     if (elements.length > 0) {
                         const clickedIndex = elements[0].index;
-                        const clickedLabel = labels[clickedIndex];
-                        const tweets = tweetsByLabel[clickedLabel] || [];
-                        showTweetsInModal(clickedLabel, tweets);
+                        const clickedDisplayLabel = labels[clickedIndex];
+                        // Look up the original label to get the right tweets
+                        const originalLabel = displayToOriginalLabel[clickedDisplayLabel];
+                        const tweets = tweetsByLabel[originalLabel] || [];
+                        showTweetsInModal(clickedDisplayLabel, tweets);
                     }
                 }
             }
         });
         
-        // Create the legend
-        createLegend(labels, chartColors);
+        // Create the legend with transformed labels
+        createLegend(labels, colors, displayToOriginalLabel);
     }
     
     // Create a custom legend for the chart
-    function createLegend(labels, colors) {
+    function createLegend(labels, colors, displayToOriginalLabel) {
         const legendContainer = document.querySelector('.legend-container');
-        if (!legendContainer) {
-            console.error('Legend container not found');
-            return;
-        }
-        
         legendContainer.innerHTML = '';
-        legendContainer.style.color = '#000'; // Changed to black (#000)
         
-        labels.forEach((label, index) => {
+        labels.forEach((displayLabel, index) => {
             const item = document.createElement('div');
             item.className = 'legend-item';
-            item.style.color = '#000'; // Changed to black (#000)
             item.onclick = function() {
-                const tweets = currentAnalysisData.tweets_by_label[label] || [];
-                showTweetsInModal(label, tweets);
+                // Look up the original label to get the correct tweets
+                const originalLabel = displayToOriginalLabel[displayLabel];
+                const tweets = currentAnalysisData.tweets_by_label[originalLabel] || [];
+                showTweetsInModal(displayLabel, tweets);
             };
             
             const colorBox = document.createElement('span');
             colorBox.className = 'legend-color';
             colorBox.style.backgroundColor = colors[index % colors.length];
-            colorBox.style.border = '1px solid #666'; // Add border for light colors
             
             const labelText = document.createElement('span');
             labelText.className = 'legend-text';
-            labelText.textContent = label;
-            labelText.style.color = '#000'; // Changed to black (#000)
-            labelText.style.fontWeight = '600'; // Added to make text more visible
+            labelText.textContent = displayLabel;
             
             item.appendChild(colorBox);
             item.appendChild(labelText);
             legendContainer.appendChild(item);
         });
+    }
+    
+    // Helper function to convert backend labels to display labels
+    function getDisplayLabel(label) {
+        if (label === 'Depression') {
+            return 'Depressive';
+        }
+        return label;
     }
     
     // Show tweets in a modal with summary
@@ -475,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const commonWords = findCommonWords(tweets);
         
         // Generate summary
-        let summary = `Found ${tweetCount} tweets expressing ${emotion.toLowerCase()}. `;
+        let summary = `Found ${tweetCount} tweets expressing ${getDisplayLabel(emotion).toLowerCase()}. `;
         summary += `Average tweet length is ${averageLength} characters. `;
         
         if (commonWords.length > 0) {
@@ -515,5 +427,21 @@ document.addEventListener('DOMContentLoaded', function() {
             .map(([word]) => word);
         
         return sortedWords;
+    }
+
+    // Example: Rendering the Depression Indicators Breakdown table
+    function renderDepressionIndicatorsBreakdown(emotionCounts) {
+        const breakdownTable = document.getElementById('depressionIndicatorsBreakdown');
+        breakdownTable.innerHTML = '';
+
+        Object.entries(emotionCounts).forEach(([label, value]) => {
+            const row = document.createElement('tr');
+            // Use getDisplayLabel to show "Depressive" instead of "Depression"
+            row.innerHTML = `
+                <td class="breakdown-label">${getDisplayLabel(label)}</td>
+                <td class="breakdown-value">${value}%</td>
+            `;
+            breakdownTable.appendChild(row);
+        });
     }
 });

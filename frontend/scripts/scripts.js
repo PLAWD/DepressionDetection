@@ -170,10 +170,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Store the data for later use
             currentAnalysisData = data;
+            window.currentAnalysisData = data; // Make available globally
 
             // Save analysis results for assessment
             if (window.saveAnalysisResults) {
                 window.saveAnalysisResults(data);
+            }
+            
+            // Add report buttons after analysis is complete
+            if (window.addReportButton) {
+                window.addReportButton();
             }
 
             // Hide loading bar only after everything is rendered
@@ -270,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const labelText = document.createElement('span');
             labelText.style.color = '#333';
             labelText.style.fontWeight = '600';
-            labelText.textContent = `${label}: ${values[index]}%`;
+            labelText.textContent = `${formatEmotionLabel(label)}: ${values[index]}%`;
             
             item.appendChild(colorBox);
             item.appendChild(labelText);
@@ -291,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             item.innerHTML = `
                 <span class="legend-color" style="background-color: ${colors[index]}"></span>
-                <span class="legend-label">${label}: ${values[index]}%</span>
+                <span class="legend-label">${formatEmotionLabel(label)}: ${values[index]}%</span>
             `;
             
             legendContainer.appendChild(item);
@@ -323,6 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const ctx = canvas.getContext('2d');
         const labels = Object.keys(emotionData);
+        const displayLabels = labels.map(formatEmotionLabel); // Map labels for display
         const values = Object.values(emotionData);
 
         // Hardcoded emotion color map (case-insensitive)
@@ -349,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
         emotionPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: labels,
+                labels: displayLabels, // Use display-formatted labels
                 datasets: [{
                     data: values,
                     backgroundColor: backgroundColors,
@@ -378,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 onClick: (event, elements) => {
                     if (elements.length > 0) {
                         const index = elements[0].index;
-                        const label = labels[index];
+                        const label = labels[index]; // Use original label for data lookup
                         const tweets = currentAnalysisData && currentAnalysisData.tweets_by_label
                             ? currentAnalysisData.tweets_by_label[label] || []
                             : [];
@@ -501,6 +508,30 @@ document.addEventListener('DOMContentLoaded', function() {
             ? `The user shows significant indicators of depression. Depression indicators: ${depressionScore.toFixed(1)}%, Distress level: ${(distressLevel*10).toFixed(1)}/10, Hopelessness: ${(hopelessnessLevel*10).toFixed(1)}/10, Overall sentiment: ${polarity.toFixed(2)}.`
             : `The user doesn't show significant indicators of depression. Depression indicators: ${depressionScore.toFixed(1)}%, Distress level: ${(distressLevel*10).toFixed(1)}/10, Hopelessness: ${(hopelessnessLevel*10).toFixed(1)}/10, Overall sentiment: ${polarity.toFixed(2)}.`;
         
+        // Store assessment result globally for reports
+        window.assessmentResult = {
+            assessment: assessment,
+            details: details,
+            depression_percentage: depressionScore,
+            distress_level: distressLevel,
+            hopelessness_level: hopelessnessLevel,
+            polarity: polarity
+        };
+        
+        // IMPORTANT: Also store assessment directly in currentAnalysisData
+        // This ensures it's included when generating reports
+        currentAnalysisData.assessment = assessment;
+        currentAnalysisData.details = details;
+        currentAnalysisData.assessmentResult = window.assessmentResult;
+        
+        // Make assessment available to reports module if the function exists
+        if (window.saveAssessmentResult) {
+            window.saveAssessmentResult(window.assessmentResult);
+            console.log("Assessment saved for reports:", window.assessmentResult);
+        } else {
+            console.warn("saveAssessmentResult function not available");
+        }
+        
         // Display the assessment
         showAssessmentResult(assessment, details);
     }
@@ -508,7 +539,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show tweets in a modal with summary
     function showTweetsInModal(label, tweets) {
         if (modalTitle) {
-            modalTitle.textContent = `${label} Tweets`;
+            modalTitle.textContent = `${formatEmotionLabel(label)} Tweets`;
         }
         if (modalTweets) {
             modalTweets.innerHTML = '';
@@ -589,6 +620,19 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             
             tweetsSection.appendChild(tweetsToggle);
+            
+            // Extract date range information
+            let earliestDate = null;
+            let latestDate = null;
+            
+            // Create date range info element
+            const dateRangeInfo = document.createElement('div');
+            dateRangeInfo.className = 'date-range-info';
+            dateRangeInfo.style.fontSize = '13px';
+            dateRangeInfo.style.color = '#666';
+            dateRangeInfo.style.margin = '10px 0';
+            dateRangeInfo.style.fontStyle = 'italic';
+            tweetsSection.appendChild(dateRangeInfo);
             
             const tweetsList = document.createElement('div');
             tweetsList.id = 'tweets-list';
@@ -677,6 +721,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     analysisDiv.appendChild(toneDiv);
                     
                     tweetDiv.appendChild(analysisDiv);
+                    
+                    // Parse dates to find earliest and latest
+                    if (details && details.created_at) {
+                        try {
+                            const tweetDate = new Date(details.created_at);
+                            if (!earliestDate || tweetDate < earliestDate) {
+                                earliestDate = tweetDate;
+                            }
+                            if (!latestDate || tweetDate > latestDate) {
+                                latestDate = tweetDate;
+                            }
+                        } catch (e) {
+                            console.error('Error parsing tweet date:', e);
+                        }
+                    }
                 } else {
                     // Fallback if details not available
                     tweetDiv.textContent = tweet;
@@ -686,6 +745,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 tweetsList.appendChild(tweetDiv);
             });
+            
+            // Update date range info after processing all tweets
+            if (earliestDate && latestDate) {
+                const formatDate = (date) => {
+                    return date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                };
+                
+                const dateRangeText = `Tweets from ${formatDate(earliestDate)} to ${formatDate(latestDate)}`;
+                dateRangeInfo.textContent = dateRangeText;
+                
+                // Store date range in currentAnalysisData for reports
+                if (!currentAnalysisData.dateRange) {
+                    currentAnalysisData.dateRange = {
+                        earliest: earliestDate.toISOString(),
+                        latest: latestDate.toISOString(),
+                        formattedRange: dateRangeText
+                    };
+                }
+            } else {
+                dateRangeInfo.textContent = "Date range not available";
+            }
             
             tweetsSection.appendChild(tweetsList);
             if (modalTweets) {
@@ -724,7 +808,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const commonWords = findCommonWords(tweets);
         
         // Generate summary
-        let summary = `Found ${tweetCount} tweets expressing ${emotion.toLowerCase()}. `;
+        let summary = `Found ${tweetCount} tweets expressing ${formatEmotionLabel(emotion).toLowerCase()}. `;
         summary += `Average tweet length is ${averageLength} characters. `;
         
         if (commonWords.length > 0) {
@@ -768,6 +852,15 @@ document.addEventListener('DOMContentLoaded', function() {
             .map(([word]) => word);
         
         return sortedWords;
+    }
+    
+    // Helper function to format emotion labels for display only
+    function formatEmotionLabel(label) {
+        // Change "Depression" to "Depressive" for display purposes only
+        if (label === 'Depression') {
+            return 'Depressive';
+        }
+        return label;
     }
     
     // Create emotion cards for visual display
@@ -879,7 +972,7 @@ document.addEventListener('DOMContentLoaded', function() {
             percentageElement.style.marginBottom = '5px';
             
             const emotionElement = document.createElement('div');
-            emotionElement.textContent = emotion.charAt(0).toUpperCase() + emotion.slice(1);
+            emotionElement.textContent = formatEmotionLabel(emotion);
             emotionElement.style.fontSize = '14px';
             emotionElement.style.color = '#555';
             

@@ -13,3 +13,4 @@ requests
 Jinja2
 Werkzeug
 textblob
+fpdf

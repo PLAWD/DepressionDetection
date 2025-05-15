@@ -205,7 +205,7 @@ function showAssessment(assessment, data) {
         const imageContainer = document.createElement('div');
         imageContainer.style.textAlign = 'center';
         imageContainer.style.marginBottom = '20px';
-        
+
         const image = document.createElement('img');
         image.src = '/pics/thumbsup.png';
         image.alt = 'Positive mental health';
@@ -213,9 +213,109 @@ function showAssessment(assessment, data) {
         image.style.height = 'auto';
         image.style.maxHeight = '200px';
         image.style.borderRadius = '8px';
-        
+
         imageContainer.appendChild(image);
         content.appendChild(imageContainer);
+
+        // --- Motivational Quote Section ---
+        // Heading
+        const quoteHeading = document.createElement('h3');
+        quoteHeading.textContent = "You're doing great!";
+        quoteHeading.style.textAlign = 'center';
+        quoteHeading.style.color = '#28a745';
+        quoteHeading.style.marginBottom = '10px';
+        content.appendChild(quoteHeading);
+
+        // Fetch and display a random motivational quote
+        fetch('/motivational_quotes.json')
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to load quotes');
+                return res.json();
+            })
+            .then(json => {
+                let quotes = [];
+                // Accept both array and object with motivationalMessages
+                if (Array.isArray(json)) {
+                    quotes = json;
+                } else if (json && Array.isArray(json.motivationalMessages)) {
+                    quotes = json.motivationalMessages;
+                }
+                if (quotes.length > 0) {
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.textContent = randomQuote;
+                    quoteDiv.style.fontStyle = 'italic';
+                    quoteDiv.style.textAlign = 'center';
+                    quoteDiv.style.color = '#333';
+                    quoteDiv.style.marginBottom = '20px';
+                    quoteDiv.style.fontSize = '1.1em';
+                    content.appendChild(quoteDiv);
+                }
+            })
+            .catch(() => {
+                // fallback if fetch fails, use hardcoded quotes
+                const fallbackQuotes = [
+                    "You're making incredible progress, even when you don't feel it!",
+                    "Today's efforts are tomorrow's achievements. Keep going!",
+                    "Remember why you started, and be proud of how far you've come.",
+                    "Your dedication is inspiring - don't underestimate your impact.",
+                    "Small steps still move you forward. Celebrate every win!",
+                    "You've overcome challenges before, and you'll overcome this one too.",
+                    "Your resilience is your superpower. You've got this!",
+                    "Behind every success is countless hours of determination. Yours is showing.",
+                    "You're stronger than you think and braver than you believe.",
+                    "Your hard work is planting seeds for future success.",
+                    "Even on tough days, you're still making progress. Be kind to yourself.",
+                    "Your journey is unique - don't compare your chapter 1 to someone else's chapter 20.",
+                    "The fact that you're trying already puts you ahead of those who aren't.",
+                    "Success isn't always visible right away, but your efforts are never wasted.",
+                    "You have the power to turn obstacles into opportunities.",
+                    "Believe in yourself as much as others believe in you.",
+                    "Every expert was once a beginner. Keep learning and growing.",
+                    "Your potential is endless - you're just scratching the surface.",
+                    "Challenges are just opportunities to prove how badly you want something.",
+                    "You're not meant to blend in; your uniqueness is your strength.",
+                    "Progress isn't always linear, but you're still moving forward.",
+                    "The difference between ordinary and extraordinary is that little 'extra' you give.",
+                    "Your determination today is creating your success story for tomorrow.",
+                    "When you feel like giving up, remember why you started.",
+                    "Don't wait for opportunity - create it with your actions today.",
+                    "Your mindset determines your outcomes. Keep thinking positively!",
+                    "Your courage to continue is what distinguishes you.",
+                    "Difficult roads often lead to beautiful destinations. Keep going!",
+                    "Success is the sum of small efforts repeated day in and day out.",
+                    "You're not just surviving challenges - you're mastering them.",
+                    "The most rewarding things in life are often the most challenging.",
+                    "Your persistence is a measure of your belief in yourself.",
+                    "Each step forward is a step away from where you were before.",
+                    "You've survived 100% of your worst days so far. That's impressive!",
+                    "Your effort doesn't need to be perfect, it just needs to be persistent.",
+                    "Focus on progress, not perfection. You're doing great!",
+                    "The path to success is to take massive, determined action.",
+                    "Your future self is thanking you for not giving up today.",
+                    "Every accomplishment starts with the decision to try.",
+                    "Great things never came from comfort zones. Keep pushing boundaries!",
+                    "When you feel like quitting, think about why you started.",
+                    "Your work ethic today will determine your success tomorrow.",
+                    "Believe you can, and you're halfway there.",
+                    "Don't count the days, make the days count.",
+                    "You are exactly where you need to be right now.",
+                    "Your only limit is the one you set for yourself.",
+                    "Dream big, work hard, stay focused.",
+                    "The hardest part is starting. You've already begun!",
+                    "Take pride in how far you've come and have faith in how far you can go.",
+                    "Your positive attitude is your greatest asset. Keep shining!"
+                ];
+                const randomQuote = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+                const fallback = document.createElement('div');
+                fallback.textContent = randomQuote;
+                fallback.style.fontStyle = 'italic';
+                fallback.style.textAlign = 'center';
+                fallback.style.color = '#333';
+                fallback.style.marginBottom = '20px';
+                fallback.style.fontSize = '1.1em';
+                content.appendChild(fallback);
+            });
     }
     
     // Add overview paragraph with threshold explanation
@@ -278,7 +378,12 @@ function showAssessment(assessment, data) {
         const row = document.createElement('tr');
         
         const indicatorCell = document.createElement('td');
-        indicatorCell.textContent = indicator.charAt(0).toUpperCase() + indicator.slice(1);
+        // Show "Depressive" instead of "Depression"
+        let displayName = indicator.charAt(0).toUpperCase() + indicator.slice(1);
+        if (displayName.toLowerCase() === 'depression') {
+            displayName = 'Depressive';
+        }
+        indicatorCell.textContent = displayName;
         indicatorCell.style.padding = '8px 12px';
         indicatorCell.style.borderBottom = '1px solid #dee2e6';
         
