@@ -794,3 +794,40 @@ h3 {
 .assess-button:hover {
     background-color: #ffb000;
 }
+
+/* Custom styles for error modals */
+#privateAccountModal .modal-content,
+#userNotFoundModal .modal-content {
+    background-color: #5e7ce2; /* Brand blue color */
+    color: white;
+    border: 1px solid #4961dc;
+    box-shadow: 0 4px 20px rgba(94, 124, 226, 0.5);
+    backdrop-filter: none;
+}
+
+#privateAccountModal h2,
+#userNotFoundModal h2 {
+    color: white;
+    margin-top: 0;
+    font-size: 22px;
+}
+
+#privateAccountModal p,
+#userNotFoundModal p {
+    color: white !important;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+#privateAccountModal .close-button,
+#userNotFoundModal .close-button {
+    color: white;
+    opacity: 0.8;
+}
+
+#privateAccountModal .close-button:hover,
+#userNotFoundModal .close-button:hover {
+    opacity: 1;
+}
+
+}
