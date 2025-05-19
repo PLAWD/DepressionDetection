@@ -1,5 +1,125 @@
 [
     {
+        "text": "not to sound like a slut but id carry the extra weight when the days are too heavy for you",
+        "original_text": "not to sound like a slut, but i’d carry the extra weight when the days are too heavy for you",
+        "prediction": "love",
+        "confidence": 1.0,
+        "polarity": -0.144,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.74,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-05-15T14:27:15.000Z",
+        "formatted_date": "May 15, 2025",
+        "formatted_time": "02:27 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.08529266666666666,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "pleaseeeee dont say anything hurtful to me out of emotion i will remember every single word verbatim and never ever ever eveeeer forget it",
+        "original_text": "pleaseeeee don’t say anything hurtful to me out of emotion. i will remember every single word verbatim and never ever ever eveeeer forget it",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": -0.252,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.68,
+        "tone": {
+            "primary": "instructive",
+            "secondary": "reflective"
+        },
+        "created_at": "2025-05-15T14:27:05.000Z",
+        "formatted_date": "May 15, 2025",
+        "formatted_time": "02:27 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.14620599999999997,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "practicing detachment while craving connection is brutal",
+        "original_text": "practicing detachment while craving connection is brutal",
+        "prediction": "neutral",
+        "confidence": 1.0,
+        "polarity": -0.36,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.56,
+        "tone": {
+            "primary": "melancholic",
+            "secondary": "frustrated"
+        },
+        "created_at": "2025-05-15T14:26:32.000Z",
+        "formatted_date": "May 15, 2025",
+        "formatted_time": "02:26 PM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.253729,
+            "hopelessness": 0.289976,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "me wants to be spoiled also me wont accept anything because i feel extremely bad if anyone spends any amount of money on me",
+        "original_text": "me: *wants to be spoiled*\n\nalso me: *won’t accept anything because i feel extremely bad if anyone spends any amount of money on me*",
+        "prediction": "sadness",
+        "confidence": 1.0,
+        "polarity": -0.14,
+        "polarity_label": "Negative",
+        "sentiment_confidence": 0.85,
+        "tone": {
+            "primary": "resigned",
+            "secondary": null
+        },
+        "created_at": "2025-05-15T11:22:20.000Z",
+        "formatted_date": "May 15, 2025",
+        "formatted_time": "11:22 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0.096824,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
+        "text": "i even procrastinate things i actually want to do",
+        "original_text": "i even procrastinate things i actually want to do",
+        "prediction": "hate",
+        "confidence": 1.0,
+        "polarity": 0.02,
+        "polarity_label": "Neutral",
+        "sentiment_confidence": 0.96,
+        "tone": {
+            "primary": "neutral",
+            "secondary": null
+        },
+        "created_at": "2025-05-15T11:22:12.000Z",
+        "formatted_date": "May 15, 2025",
+        "formatted_time": "11:22 AM",
+        "is_insomnia_hr": false,
+        "emotion_dimensions": {
+            "distress": 0,
+            "hopelessness": 0,
+            "anxiety": 0,
+            "anger": 0,
+            "resilience": 0
+        }
+    },
+    {
         "text": "i go back and forth from healed and unstable all day",
         "original_text": "i go back and forth from healed and unstable all day",
         "prediction": "neutral",
@@ -1984,7 +2104,7 @@
         "formatted_time": "02:59 PM",
         "is_insomnia_hr": false,
         "emotion_dimensions": {
-            "distress": 0.18473,
+            "distress": 0.18472999999999998,
             "hopelessness": 0,
             "anxiety": 0,
             "anger": 0,

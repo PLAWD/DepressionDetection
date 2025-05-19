@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const userNotFoundModal = document.getElementById('userNotFoundModal') || createUserNotFoundModal();
     const closeUserNotFoundBtn = userNotFoundModal.querySelector('.close-button');
     
+    // Add new modal for private accounts
+    const privateAccountModal = document.getElementById('privateAccountModal') || createPrivateAccountModal();
+    const closePrivateAccountBtn = privateAccountModal.querySelector('.close-button');
+    
     // Create user not found modal if it doesn't exist
     function createUserNotFoundModal() {
         const modal = document.createElement('div');
@@ -27,6 +31,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="close-button">&times;</span>
                 <h2>User Not Found</h2>
                 <p>The Twitter user you entered does not exist or cannot be found. Please check the username and try again.</p>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        return modal;
+    }
+    
+    // Create private account modal if it doesn't exist
+    function createPrivateAccountModal() {
+        const modal = document.createElement('div');
+        modal.id = 'privateAccountModal';
+        modal.className = 'modal hidden';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Private Account</h2>
+                <p>This Twitter account is private. Cannot analyze tweets from private accounts.</p>
             </div>
         `;
         document.body.appendChild(modal);
@@ -69,6 +89,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Close button for private account modal
+    if (closePrivateAccountBtn) {
+        closePrivateAccountBtn.addEventListener('click', function() {
+            privateAccountModal.classList.add('hidden');
+        });
+    }
+    
     if (closeButton) {
         closeButton.addEventListener('click', function() {
             if (tweetModal) {
@@ -81,6 +108,9 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('click', function(event) {
         if (event.target == userNotFoundModal) {
             userNotFoundModal.classList.add('hidden');
+        }
+        if (event.target == privateAccountModal) {
+            privateAccountModal.classList.add('hidden');
         }
         if (event.target == tweetModal) {
             if (tweetModal) {
@@ -119,24 +149,23 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => {
             console.log(`Response status: ${response.status}`);
             if (!response.ok) {
-                return response.text().then(text => {
-                    try {
-                        // Try to parse as JSON to get structured error
-                        const error = JSON.parse(text);
-                        
-                        // Check if this is a "user not found" error
-                        if (response.status === 404 && error.error && error.error.includes("not found")) {
-                            throw new Error("USER_NOT_FOUND");
-                        } else {
-                            throw new Error(error.error || `Server responded with status ${response.status}`);
-                        }
-                    } catch (e) {
-                        // If not JSON or other error, use the text directly
-                        if (e.message === "USER_NOT_FOUND") {
-                            throw e;
-                        } else {
-                            throw new Error(`Server error (${response.status}): ${text.substring(0, 100)}...`);
-                        }
+                return response.json().then(error => {
+                    // Check if this is a display_modal response
+                    if (error.display_modal) {
+                        throw new Error("DISPLAY_MODAL:" + JSON.stringify(error));
+                    }
+                    // Check if this is a "user not found" error
+                    if (response.status === 404 && error.error && error.error.includes("not found")) {
+                        throw new Error("USER_NOT_FOUND");
+                    } else {
+                        throw new Error(error.error || `Server responded with status ${response.status}`);
+                    }
+                }).catch(e => {
+                    // If can't parse as JSON, rethrow the original error
+                    if (e.message.startsWith("DISPLAY_MODAL:") || e.message === "USER_NOT_FOUND") {
+                        throw e;
+                    } else {
+                        throw new Error(`Server error (${response.status}): Could not parse response`);
                     }
                 });
             }
@@ -205,7 +234,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (userNotFoundModal) {
                     userNotFoundModal.classList.remove('hidden');
                 }
-            } else {
+            } 
+            else if (error.message.startsWith("DISPLAY_MODAL:")) {
+                try {
+                    // Parse the error data
+                    const errorData = JSON.parse(error.message.substring("DISPLAY_MODAL:".length));
+                    
+                    // Update private account modal with custom message
+                    if (privateAccountModal) {
+                        const modalTitle = privateAccountModal.querySelector('h2');
+                        const modalMessage = privateAccountModal.querySelector('p');
+                        
+                        if (modalTitle && errorData.modal_title) {
+                            modalTitle.textContent = errorData.modal_title;
+                        }
+                        
+                        if (modalMessage && errorData.modal_message) {
+                            modalMessage.textContent = errorData.modal_message;
+                        }
+                        
+                        // Show the modal
+                        privateAccountModal.classList.remove('hidden');
+                    }
+                } catch (e) {
+                    console.error("Error parsing modal data:", e);
+                    // Fallback to general error display
+                    if (resultContainer) {
+                        resultContainer.classList.remove('hidden');
+                    }
+                    if (resultText) {
+                        resultText.textContent = `Error: ${error.message}`;
+                    }
+                }
+            }
+            else {
                 // Display general error in the results container
                 if (resultContainer) {
                     resultContainer.classList.remove('hidden');

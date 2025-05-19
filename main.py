@@ -43,7 +43,11 @@ def get_twitter_headers():
 
 def get_twitter_user_by_username(username):
     url = f"https://api.twitter.com/2/users/by/username/{username}"
-    response = requests.get(url, headers=get_twitter_headers())
+    # Add user.fields parameter to get the protected status
+    params = {
+        "user.fields": "protected,public_metrics"
+    }
+    response = requests.get(url, headers=get_twitter_headers(), params=params)
     
     if response.status_code != 200:
         print(f"Error getting user info: {response.status_code}")
@@ -389,6 +393,17 @@ def analyze_tweets():
             user_data = get_twitter_user_by_username(username)
             if not user_data or "id" not in user_data:
                 return jsonify({"error": f"Twitter user @{username} not found"}), 404
+                
+            # Check if the account is protected/private
+            if user_data.get("protected", False):
+                print(f"User @{username} has a private/protected account")
+                return jsonify({
+                    "error": f"@{username} has a private account",
+                    "display_modal": True,
+                    "modal_title": "Private Account",
+                    "modal_message": f"@{username} has a private account. Cannot analyze tweets from private accounts.",
+                    "modal_type": "error"
+                }), 403
                 
             user_id = user_data["id"]
             
