@@ -114,6 +114,22 @@ class AnalysisReport:
 
                 # Improved logic: require at least 2 strong indicators for "Has signs"
                 strong_indicators = 0
+                
+                # Check if depression percentage is very high (direct indicator)
+                if depression_percentage >= 50:
+                    # If depression percentage is very high, directly classify as having signs
+                    self.assessment = "Has signs of depression"
+                    self.assessment_details = (
+                        f"The user shows significant indicators of depression with a high depression score. "
+                        f"Depression indicators: {round(depression_percentage, 1)}%, "
+                        f"Distress level: {round(distress_level*10, 1)}/10, "
+                        f"Hopelessness: {round(hopelessness_level*10, 1)}/10, "
+                        f"Overall sentiment: {round(polarity, 2)}."
+                    )
+                    print(f"High depression percentage detected: {depression_percentage}%. Directly classified as having signs.")
+                    return
+                
+                # Otherwise, continue with multi-indicator assessment
                 if depression_percentage >= 15:
                     strong_indicators += 1
                 if distress_level >= 0.6 and hopelessness_level >= 0.5:
